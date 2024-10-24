@@ -1,0 +1,17 @@
+{
+  "name": "social_soothe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "if-env TYPE=backend && (cd backend && npm install) || (cd frontend && npm install)",
+    "backend": "node ./backend/server.js",
+    "frontend": "cd frontend && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "if-env": "^1.0.4"
+  }
+}
