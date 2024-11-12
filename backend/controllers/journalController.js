@@ -3,13 +3,6 @@ const bcrypt = require('bcryptjs');
 const passport = require("passport");
 
 async function displayJournals(req, res) {
-    //const { email }  = req.user;
-
-    //THIS IS A TEST VALUE
-    //const email = 'user@example.com'
-
-    console.log("displaying journals")
-
     try {
         const { email } = req.params
         const journals = await db.getAllJournals(email);
@@ -53,10 +46,39 @@ async function getSelectedJournal(req, res) {
 
 }
 
+async function deleteJournal(req, res) {
+    try {
+        const id  = req.params.id
+        await db.deleteJournal(id);
+        res.json("Succesfully deleted journal")
+    } catch (err) {
+        console.log("error....", err)
+        res.status(500).json({ message: 'Error deleting journal' });
+    }
+
+}
+
+async function editJournalPost(req, res) {
+
+    try {
+        const {id, title, content} = req.body
+        await db.updateJournal(id, title, content);
+        res.json("successfully updated journal")
+
+    } catch (err) {
+        console.log("error....", err)
+        res.status(500).json({ message: 'Error updating journal' });
+    }
+
+}
+
+
 module.exports = {
     displayJournals,
     createJournalPost,
-    getSelectedJournal
+    getSelectedJournal,
+    deleteJournal,
+    editJournalPost
 
 
 }

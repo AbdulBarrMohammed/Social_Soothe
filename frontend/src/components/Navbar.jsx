@@ -3,9 +3,13 @@ import { pageDataLeft } from "./pageData"
 import { pageDataRight } from "./pageData"
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { useCookies } from "react-cookie"
 
 export function Navbar() {
     let user;
+    const [cookies, setCookie, removeCookie] = useCookies(null)
+    const authToken = cookies.AuthToken
+    const userEmail = cookies.Email
 
     function handleLogout() {
         console.log("logged out")
@@ -33,17 +37,29 @@ export function Navbar() {
             </div>
 
             <ul className="flex gap-5 cursor-pointer text-white">
-                {pageDataRight.map((page) => {
-                    return (
-                        <li key={page.path} className='hover:font-bold transition duration-300 ease-in-out'>
-                            <Link to={page.path}>
-                                {page.name}
-                            </Link>
-                        </li>
-                    );
-                })}
-                {user &&
+                {!authToken &&
+                    pageDataRight.map((page) => {
+                        return (
+                            <li key={page.path} className='hover:font-bold transition duration-300 ease-in-out'>
+                                <Link to={page.path}>
+                                    {page.name}
+                                </Link>
+                            </li>
+
+                        );
+
+                    })
+
+                }
+
+                {authToken &&
                     <button onClick={handleLogout}>Log out</button>
+                }
+
+                {authToken &&
+                                <Link to={"/journals"}>
+                                    Dashboard
+                                </Link>
                 }
 
             </ul>

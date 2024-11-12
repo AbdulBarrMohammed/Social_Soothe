@@ -8,7 +8,7 @@ export function LayoutLoggedIn () {
     return (
         <div className="flex flex-col">
             <NavbarLoggedIn/>
-            <Outlet />
+            <Outlet className="h-screen"/>
 
         </div>
     )

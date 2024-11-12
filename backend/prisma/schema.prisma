@@ -43,8 +43,18 @@ model Flower {
   id String @id @default(uuid())
   author User @relation(fields: [authorId], references: [id])
   authorId String
-  name String
+  dateCreated DateTime @default(now())
+  updatedAt DateTime @default(now())
   color String
-
+  questionOne String
+  questionTwo String
+  questionThree String
+  questionFour String
+  questionFive String
+  questionSix String
+  questionSeven String
+  x Int
+  y Int
+  done Boolean
 
 }

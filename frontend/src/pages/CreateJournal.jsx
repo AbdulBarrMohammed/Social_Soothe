@@ -15,7 +15,6 @@ export function CreateJournal() {
     const navigate = useNavigate()
 
     async function handleJournalSubmit(e) {
-        console.log("submitting jounral")
         e.preventDefault()
         /* Submits new journal entry to MongoDB */
 
@@ -58,12 +57,12 @@ export function CreateJournal() {
         {authToken &&
 
              moodModal &&
-                <div className=" inset-0 bg-modalBg backdrop-blur-sm z-30 flex items-center justify-center h-screen">
+                <div className=" inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
 
                     <div className="bg-white px-10 py-5 rounded-2xl flex flex-col gap-8">
 
                         <div className="flex gap-16">
-                            <button onClick={() => navigate(-1)}>Back</button>
+                            <button onClick={() => navigate(-1)} className="font-bold text-2xl"> &times; </button>
                             <p className="text-center font-bold text-xl">{`How did this social interaction make you feel?:  ${mood}`}</p>
 
                         </div>
@@ -96,7 +95,7 @@ export function CreateJournal() {
                                 </div>
 
                         </div>
-                        <button className="bg-[#EE7B30] text-white  p-5 rounded-full text-sm font-bold shadow-md"onClick={submitModal}>Submit</button>
+                        <button className="bg-[#4470AD] text-white  p-5 rounded-full text-sm font-bold shadow-md"onClick={submitModal}>Submit</button>
 
                     </div>
 

@@ -18,10 +18,8 @@ export function Journals() {
 
     const getData = async () => {
         try {
-            console.log('running...')
             const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
             const data = await res.json();
-            console.log(data)
             setJournals(data)
             //setJournals(prevArray => [...prevArray, data[0]])
         } catch(err) {
@@ -35,15 +33,15 @@ export function Journals() {
 
 
     return (
-        <>
+        <div className="bg-[#CCDBEE] h-screen">
             {!authToken &&  <LogIn/>}
             {authToken &&
-                <div className="flex flex-col bg-[#CCDBEE] h-screen pb-10">
+                <div className="flex flex-col bg-[#CCDBEE] justify-center items-center">
 
                     <h1 className="text-2xl py-10 font-bold text-center">Journal Entries</h1>
 
-                    <div className="flex justify-center">
-                        <div className="flex flex-wrap gap-5">
+                    <div className="flex justify-center items-center">
+                        <div className="flex flex-wrap gap-10 justify-center items-center pb-10">
 
                             {journals.map((journal) => {
                                     return (
@@ -51,7 +49,7 @@ export function Journals() {
                                     )
                                 })
                             }
-                            <Link to={`/createJournal`} className="flex flex-col rounded-3xl cursor-pointer bg-[#eeeeee] p-5 items-center justify-center">
+                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-20 w-20 cursor-pointer bg-[#eeeeee] p-5 items-center justify-center">
                                 <img src="../src/assets/plus.svg" className="h-10"/>
                             </Link>
 
@@ -65,7 +63,7 @@ export function Journals() {
 
             }
 
-        </>
+        </div>
 
 
 

@@ -25,6 +25,8 @@ export function SelectedJournal() {
                 const data = await res.json();
                 console.log(data)
                 setJournal(data)
+                setTitle(data.title)
+                setContent(data.content)
                 //setJournals(data)
                 //setJournals(prevArray => [...prevArray, data[0]])
             } catch(err) {
@@ -35,9 +37,17 @@ export function SelectedJournal() {
     }, [id])
 
 
-    function removeJournal() {
+    async function removeJournal() {
         if (confirm("Are you sure you want to delete?")) {
-            deleteJournal(id);
+            try {
+                console.log("new title", title)
+                const res = await fetch(`http://localhost:8000/journals/journal/delete/${id}`)
+                const data = await res.json();
+                console.log(data)
+            } catch(err) {
+                console.log(err)
+            }
+
             navigate("/journals");
           }
 
@@ -54,17 +64,15 @@ export function SelectedJournal() {
 
     async function handleEditJournalSubmit(e) {
         e.preventDefault();
-        console.log(title)
-        console.log(content)
-        const updatedJournal = {
-            title: title,
-            mood: journal.mood,
-            content: content,
-            dateCreated: new Date(),
-            author: journal.author,
+        try {
+            const response = await fetch(`http://localhost:8000/journals/journal/update/${id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({id, title, content})
+            })
+        } catch(err) {
+            console.log(err)
         }
-        await updateJournal(journal._id, updatedJournal)
-        //setFormModal(false)
         navigate("/journals")
 
     }

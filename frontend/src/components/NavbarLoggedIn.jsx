@@ -10,7 +10,7 @@ export function NavbarLoggedIn() {
                     {pageDataLoggedIn.map((page) => {
                         return (
 
-                                <Link to={page.path} className='text-lg flex items-center hover:bg-[#D1CCC9] rounded-xl transition duration-300 ease-in-out'>
+                                <Link to={page.path} className='text-lg flex items-center hover:bg-[#99AFD7] rounded-xl transition duration-300 ease-in-out'>
                                     <div className='flex gap-2 px-10 py-2 items-center'>
                                         <img src={page.img} className='h-7'/>
                                         <li className='font-semibold text-base'>

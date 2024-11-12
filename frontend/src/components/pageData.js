@@ -15,8 +15,8 @@ export const pageDataLoggedIn = [
         img: "../src/assets/journal.svg"
     },
     {
-        name: "Challenge",
-        path: "/challenge",
+        name: "Social Tree",
+        path: "/socialInteractions",
         img: "../src/assets/gamepad.svg"
     },
     {
