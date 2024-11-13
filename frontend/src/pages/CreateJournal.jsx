@@ -57,7 +57,7 @@ export function CreateJournal() {
         {authToken &&
 
              moodModal &&
-                <div className=" inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
+                <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
 
                     <div className="bg-white px-10 py-5 rounded-2xl flex flex-col gap-8">
 

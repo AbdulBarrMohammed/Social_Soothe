@@ -102,13 +102,25 @@ async function editFlowerPost(req, res) {
 
 }
 
+async function editFlowerPostColor(req, res) {
+    try {
+        const {currId, color, done} = req.body
+        await db.updateFlowerColor(currId, color, done);
+        res.json("successfully updated flower done and color")
+    } catch (err) {
+        console.log("error....", err)
+        res.status(500).json({ message: 'Error updating flower done and color' });
+    }
+}
+
 
 module.exports = {
     displayFlowers,
     createFlowerPost,
     getSelectedFlower,
     deleteFlower,
-    editFlowerPost
+    editFlowerPost,
+    editFlowerPostColor
 
 
 }

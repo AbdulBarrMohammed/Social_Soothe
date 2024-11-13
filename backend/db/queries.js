@@ -212,6 +212,21 @@ async function updateFlower(id, color, questionOne,
 
 }
 
+async function updateFlowerColor(currId, color, done) {
+  const updateFlower = await prisma.flower.update({
+    where: {
+      id: currId
+    },
+    data: {
+        color: color,
+        done: done
+    }
+  });
+
+  return updateFlower
+
+}
+
 
 async function getAllPositions(req, res) {
   const pos = await prisma.flower.findMany({
@@ -240,7 +255,8 @@ module.exports = {
     deleteFlower,
     updateFlower,
     getAllFlowers,
-    getAllPositions
+    getAllPositions,
+    updateFlowerColor
 
     // other database functions
   };

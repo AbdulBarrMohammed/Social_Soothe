@@ -15,7 +15,7 @@ import { BreatheIntro } from './pages/BreatheIntro';
 import { Breathe } from './pages/Breathe';
 import { SocialInteractions } from './pages/SocialInteractions';
 import { CreateFlower } from './pages/createFlower';
-import { SelectedFlower } from './pages/SelectedFlower';
+import { ExplainEvent } from './pages/ExplainEvent';
 import { EditFlower } from './pages/EditFlower';
 
 
@@ -37,7 +37,7 @@ function App() {
             <Route path="/breathe/:start/:middle/:end" element={<Breathe/>}/>
             <Route path="/createFlower" element={<CreateFlower/>}/>
             <Route path="/socialInteractions" element={<SocialInteractions/>}/>
-            <Route path="/selectedFlower/:id" element={<SelectedFlower/>}/>
+            <Route path="/explainEvent/:id" element={<ExplainEvent/>}/>
             <Route path="/editFlower/:id" element={<EditFlower/>}/>
 
           </Route>

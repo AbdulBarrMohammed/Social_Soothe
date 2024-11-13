@@ -76,8 +76,8 @@ export function CreateFlower() {
     async function submitAnswers() {
 
         //add flower to database
-        const x = Math.random() * 75;
-        const y = Math.random() * 75;
+        const x = Math.random() * 130;
+        const y = Math.random() * 130;
         const response = await fetch(`http://localhost:8000/flowers/create`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

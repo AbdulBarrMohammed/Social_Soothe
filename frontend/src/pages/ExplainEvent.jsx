@@ -1,3 +1,4 @@
+
 import { useParams } from "react-router-dom"
 import { useState } from "react";
 import { useCookies } from "react-cookie";
@@ -6,7 +7,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export function EditFlower() {
+export function ExplainEvent() {
+
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
@@ -29,7 +31,6 @@ export function EditFlower() {
 
 
     const navigate = useNavigate()
-
 
     useEffect(() => {
 
@@ -79,40 +80,18 @@ export function EditFlower() {
     }
 
 
+
     return (
         <div className="bg-[#CCDBEE] h-screen">
             <form className="flex flex-col gap-5 p-10">
                 <div>
-                    <p className="font-bold">{questions[0]}</p>
-                    <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionOne(e.target.value)} value={questionOne} maxLength={500}/>
-                </div>
-                <div>
-                    <p className="font-bold">{questions[1]}</p>
-                    <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionTwo(e.target.value)} value={questionTwo} maxLength={500}/>
-                </div>
-                <div>
-                    <p className="font-bold">{questions[2]}</p>
-                    <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionThree(e.target.value)} value={questionThree} maxLength={500}/>
-                </div>
-                <div>
-                    <p className="font-bold">{questions[3]}</p>
-                    <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionFour(e.target.value)} value={questionFour} maxLength={500}/>
-                </div>
-                <div>
-                    <p className="font-bold">{questions[4]}</p>
-                    <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionFive(e.target.value)} value={questionFive} maxLength={500}/>
-                </div>
-                <div>
-                    <p className="font-bold">{questions[5]}</p>
-                    <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionSix(e.target.value)} value={questionSix} maxLength={500}/>
+                    <p className="font-bold">{questions[6]}</p>
+                    <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionSeven(e.target.value)} value={questionSeven} maxLength={500}/>
                 </div>
 
                 <button onClick={handleSubmit}>Exit</button>
 
-
             </form>
         </div>
-
     )
-
 }
