@@ -239,6 +239,26 @@ async function getAllPositions(req, res) {
   return pos;
 }
 
+async function getSearchQuery(email, query) {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email
+    }
+  })
+  const results = await prisma.journal.findMany({
+    where: {
+      authorId: user.id,
+      OR: [
+        { mood: { contains: query, mode: 'insensitive' } },
+        { title: { contains: query, mode: 'insensitive' } },
+      ],
+    },
+  });
+
+  return results
+
+}
+
 
 
 module.exports = {
@@ -256,7 +276,8 @@ module.exports = {
     updateFlower,
     getAllFlowers,
     getAllPositions,
-    updateFlowerColor
+    updateFlowerColor,
+    getSearchQuery
 
     // other database functions
   };

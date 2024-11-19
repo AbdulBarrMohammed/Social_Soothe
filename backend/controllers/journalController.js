@@ -72,13 +72,26 @@ async function editJournalPost(req, res) {
 
 }
 
+async function searchGet(req, res) {
+    try {
+        const { query, email } = req.params
+        const journal = await db.getSearchQuery(email, query);
+        res.json(journal)
+    } catch (err) {
+        console.log("error....", err)
+        res.status(500).json({ message: 'Error searching flower' });
+    }
+}
+
+
 
 module.exports = {
     displayJournals,
     createJournalPost,
     getSelectedJournal,
     deleteJournal,
-    editJournalPost
+    editJournalPost,
+    searchGet
 
 
 }

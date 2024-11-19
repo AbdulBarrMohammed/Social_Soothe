@@ -14,10 +14,8 @@ import { SelectedJournal } from './pages/SelectedJournal';
 import { BreatheIntro } from './pages/BreatheIntro';
 import { Breathe } from './pages/Breathe';
 import { SocialInteractions } from './pages/SocialInteractions';
-import { CreateFlower } from './pages/createFlower';
-import { ExplainEvent } from './pages/ExplainEvent';
 import { EditFlower } from './pages/EditFlower';
-
+import { Affirmations } from './pages/Affirmations';
 
 function App() {
 
@@ -35,10 +33,9 @@ function App() {
             <Route path="/selectedJournal/:id" element={<SelectedJournal/>}/>
             <Route path="/breatheIntro" element={<BreatheIntro/>}/>
             <Route path="/breathe/:start/:middle/:end" element={<Breathe/>}/>
-            <Route path="/createFlower" element={<CreateFlower/>}/>
             <Route path="/socialInteractions" element={<SocialInteractions/>}/>
-            <Route path="/explainEvent/:id" element={<ExplainEvent/>}/>
             <Route path="/editFlower/:id" element={<EditFlower/>}/>
+            <Route path="/affirmations" element={<Affirmations/>}/>
 
           </Route>
         </Route>

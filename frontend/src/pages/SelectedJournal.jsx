@@ -80,7 +80,7 @@ export function SelectedJournal() {
 
     return (
         <div className="p-10 h-screen bg-[#CCDBEE]">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
                 <header className="flex justify-between">
                     <div className="flex gap-5 items-center">
                         <h1 className="text-3xl font-bold">{journal.title}</h1>
@@ -98,6 +98,10 @@ export function SelectedJournal() {
                         </div>
                     </div>
                 </header>
+                <div className="flex items-center gap-3">
+                    <h1 className="text-2xl font-bold">You felt: </h1>
+                    <h1 className="text-2xl">{journal.mood}</h1>
+                </div>
                 <div className="text-xl">
                     {journal.content}
                 </div>

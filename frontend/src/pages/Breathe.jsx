@@ -14,7 +14,7 @@ export function Breathe() {
     const [isActive, setIsActive] = useState(false);
 
     // number to keep track of how many times the timer goes
-    const [turn, seTurn] = useState(0);
+    const [turn, setTurn] = useState(0);
     const [breathe, setBreathe] = useState("Breathe in...");
     const [description, setDescription] = useState("")
     const [rounds, setRounds] = useState(1)
@@ -40,11 +40,6 @@ export function Breathe() {
 
     const [key, setKey] = useState(0); // To re-render the timer
 
-    /*
-    if (startNum == 3) {
-        //3-3-3
-    } */
-
     const restart = () => {
             if (turn == 2 || turn == 5 || turn == 8) {
                 breatheInAudio.play()
@@ -64,7 +59,7 @@ export function Breathe() {
                 setCounter(endNum)
             }
             setIsActive(true);
-            setGo(turn + 1);
+            setTurn(turn + 1);
             // Increment the key to re-render the timer
             setKey((prevKey) => prevKey + 1);
 
@@ -74,7 +69,7 @@ export function Breathe() {
         const clear = () => {
             setIsActive(false);
             setCounter(startNum);
-            setGo(0);
+            setTurn(0);
             setBreathe("Breathe in...")
             setRounds(1)
             setKey((prevKey) => prevKey + 1);
@@ -84,7 +79,7 @@ export function Breathe() {
             // end of breathing exercise
             if (turn == 11) {
                 setIsActive(false);
-                setGo(0);
+                setTurn(0);
                 setKey(0)
                 setCounter(startNum)
                 setRounds(1)
@@ -125,13 +120,13 @@ export function Breathe() {
 
         const start = () => {
             //first check if the exercise is the 3-3-3 pattern
-            console.log(go, "this is the go value")
+            console.log(turn, "this is the go value")
             if (startNum == 3) {
 
-                if (counter == endNum && (go == 1 || go == 4 || go == 7 || go == 10)) {
+                if (counter == endNum && (turn == 1 || turn == 4 || turn == 7 || turn == 10)) {
                     console.log("hold")
                 }
-                else if (counter == startNum && (go == 2 || go == 5 || go == 8 || go == 11)) {
+                else if (counter == startNum && (turn == 2 || turn == 5 || turn == 8 || turn == 11)) {
                     exhaleAudio.play()
                 }
                 else {

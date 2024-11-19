@@ -84,7 +84,7 @@ export function Landing() {
 
 
             <div className='flex gap-20 items-center justify-center max-w-2xl'  data-aos="fade-up">
-              <img src={"../src/assets/undraw_gardening_re_e658.svg"} className='w-1/3' />
+              <img src={"../src/assets/undraw_gardening_re_e658.svg"} className='h-20' />
               <div className='flex flex-col gap-5'>
                 <h2 className='text-3xl'>Grow gradually</h2>
                 <p className='text-2xl'>Each step will gradually have you socially interact more, with each level, social interactions will require more talking
@@ -108,9 +108,6 @@ export function Landing() {
 
         {/* Social Soothe article section*/}
         <ArticleCard />
-
-
-
 
         <footer className='bg-[#99AFD7] flex flex-col justify-center items-center px-10 py-20 gap-10 w-full'>
           <div className='flex justify-around'>

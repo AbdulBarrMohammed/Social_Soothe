@@ -15,6 +15,7 @@ export function Journals() {
     const userEmail = cookies.Email
     const [journals, setJournals] = useState([])
     const [user, setUser] = useState({})
+    const [searchQuery, setSearchQuery] = useState("");
 
     const getData = async () => {
         try {
@@ -31,14 +32,38 @@ export function Journals() {
         getData()
     },[])
 
+    async function onSearch(event) {
+        event.preventDefault()
+        console.log("current curry", searchQuery)
+        try {
+            const res = await fetch(`http://localhost:8000/search/${searchQuery}/${userEmail}`)
+            const data = await res.json();
+            console.log('query data', data)
+            setJournals(data)
+            //setJournals(prevArray => [...prevArray, data[0]])
+        } catch(err) {
+            console.log(err)
+        }
+
+    }
+
 
     return (
         <div className="bg-[#CCDBEE] h-screen">
             {!authToken &&  <LogIn/>}
             {authToken &&
-                <div className="flex flex-col bg-[#CCDBEE] justify-center items-center">
+                <div className="flex flex-col items-center bg-[#CCDBEE]">
 
-                    <h1 className="text-2xl py-10 font-bold text-center">Journal Entries</h1>
+                    <div className="flex items-center gap-10">
+                        <h1 className="text-2xl py-10 font-bold text-center w-80">Journal Entries</h1>
+                        <form onSubmit={onSearch} className="w-full">
+                            <input
+                                value={searchQuery}
+                                onChange={(event) => setSearchQuery(event.target.value)}
+                                className="h-10 w-full rounded-3xl p-5" placeholder="Search journal title..."/>
+
+                        </form>
+                    </div>
 
                     <div className="flex justify-center items-center">
                         <div className="flex flex-wrap gap-10 justify-center items-center pb-10">
