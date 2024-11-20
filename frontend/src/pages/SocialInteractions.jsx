@@ -23,6 +23,7 @@ export function SocialInteractions() {
     const [questionSevenModal, setQuestionSevenModal] = useState(false);
     const [color, setColor] = useState("");
     const [showConfetti, setShowConfetti] = useState(false);
+    const [currCoins, setCurrCoins] = useState(-1);
 
     //create flower
     const [showQuestion, setShowQuestions] = useState(false)
@@ -71,15 +72,40 @@ export function SocialInteractions() {
         loadFlower()
     }, [currId])
 
+    const getCoins = async () => {
+        try {
+            const res = await fetch(`http://localhost:8000/user/${email}`)
+            const data = await res.json();
+            setCurrCoins(data.coins)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getCoins()
+    },[])
+
 
     function handleClick(id) {
         setCurrId(id)
         setOpenModal(true)
     }
 
-    function handleComplete(e) {
+    async function handleComplete(e) {
         setDone(e.target.checked)
         if (e.target.checked == true) {
+            //add 10 coins to user coins
+            let coins = currCoins + 5
+            try {
+                const response = await fetch(`http://localhost:8000/user/update`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({coins, email})
+                })
+            } catch(err) {
+                console.log(err)
+            }
             setShowConfetti(true)
             setTimeout(() => {
                 setShowConfetti(false);

@@ -4,12 +4,30 @@ import { pageDataRight } from "./pageData"
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCookies } from "react-cookie"
+import { useState } from "react"
 
 export function Navbar() {
     let user;
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const userEmail = cookies.Email
+    const [userInfo, setUserInfo] = useState([]);
+    const [coins, setCoins] = useState(-1);
+
+
+    const getCoins = async () => {
+        try {
+            const res = await fetch(`http://localhost:8000/user/${userEmail}`)
+            const data = await res.json();
+            setCoins(data.coins)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getCoins()
+    },[])
 
     function handleLogout() {
         console.log("logged out")
@@ -53,7 +71,13 @@ export function Navbar() {
                 }
 
                 {authToken &&
-                    <button onClick={handleLogout}>Log out</button>
+                    <div className="flex gap-5">
+                        <p className="flex items-center justify-center gap-2"><img src={'../src/assets/dollar.png'} className="h-5"/> {coins}</p>
+                        <button onClick={handleLogout}>Log out</button>
+
+
+                    </div>
+
                 }
 
                 {authToken &&

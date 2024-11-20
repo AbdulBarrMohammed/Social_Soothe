@@ -30,8 +30,8 @@ async function signUpPost(req, res, next) {
 
           // Store hashedPassword in DB
           try {
-              console.log(email);
-              const signUp = await db.insertNewUser(email, hashedPassword, gender);
+              const coins = 0;
+              const signUp = await db.insertNewUser(email, hashedPassword, gender, coins);
               const token = jwt.sign({ email }, 'secret', {expiresIn: '1hr' })
 
               res.json({ email, token })
@@ -71,9 +71,36 @@ async function logInPost(req, res) {
 
 }
 
+async function getUserInfo(req, res) {
+    try {
+      const email  = req.params.email
+      const user = await db.getUser(email);
+      console.log("user info for coins", user)
+      res.json(user)
+    } catch (err) {
+        console.log("error....", err)
+        res.status(500).json({ message: 'Error fetching flowers' });
+    }
+
+}
+
+async function updateCoin(req, res) {
+  try {
+    const { coins, email } = req.body
+    const updatedCoins = await db.updateCoin(coins, email);
+    console.log("updated coins", updatedCoins)
+    res.json(updatedCoins)
+  } catch (err) {
+      console.log("error....", err)
+      res.status(500).json({ message: 'Error fetching flowers' });
+  }
+
+}
 module.exports = {
   signUpPost,
-  logInPost
+  logInPost,
+  getUserInfo,
+  updateCoin
 
 
 }

@@ -21,8 +21,8 @@ export function Journals() {
         try {
             const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
             const data = await res.json();
+
             setJournals(data)
-            //setJournals(prevArray => [...prevArray, data[0]])
         } catch(err) {
             console.log(err)
         }
@@ -63,6 +63,9 @@ export function Journals() {
                                 className="h-10 w-full rounded-3xl p-5" placeholder="Search journal title..."/>
 
                         </form>
+                        <Link to={`/createJournal`} className="flex flex-col rounded-full h-16 w-16 cursor-pointer p-5 bg-[#eeeeee] items-center justify-center">
+                                <img src="../src/assets/plus.svg" className="h-5"/>
+                        </Link>
                     </div>
 
                     <div className="flex justify-center items-center">
@@ -74,11 +77,6 @@ export function Journals() {
                                     )
                                 })
                             }
-                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-20 w-20 cursor-pointer bg-[#eeeeee] p-5 items-center justify-center">
-                                <img src="../src/assets/plus.svg" className="h-10"/>
-                            </Link>
-
-
 
                         </div>
 

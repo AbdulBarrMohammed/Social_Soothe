@@ -25,6 +25,12 @@ export const pageDataLoggedIn = [
         img: "../src/assets/heart.svg"
     },
 
+    {
+        name: "Awards",
+        path: "/awards",
+        img: "../src/assets/heart.svg"
+    },
+
 ]
 
 export const pageDataLeft = [

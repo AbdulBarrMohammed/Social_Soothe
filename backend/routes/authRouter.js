@@ -6,6 +6,10 @@ const router = Router();
 
 router.post("/signup", authController.signUpPost);
 router.post("/login", authController.logInPost);
+router.get("/user/:email", authController.getUserInfo);
+router.post("/user/update", authController.updateCoin);
+
+//update user info
 
 
 module.exports = router;

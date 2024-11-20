@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCookies } from "react-cookie"
+import { useEffect } from "react"
 
 export function CreateJournal() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -11,8 +12,23 @@ export function CreateJournal() {
     const [mood, setMood] = useState('happy')
     const [moodModal, setMoodModal] = useState(true);
     const [formModal, setFormModal] = useState(false);
+    const [currCoins, setCurrCoins] = useState(-1);
 
     const navigate = useNavigate()
+
+    const getCoins = async () => {
+        try {
+            const res = await fetch(`http://localhost:8000/user/${email}`)
+            const data = await res.json();
+            setCurrCoins(data.coins)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getCoins()
+    },[])
 
     async function handleJournalSubmit(e) {
         e.preventDefault()
@@ -28,18 +44,31 @@ export function CreateJournal() {
             body: JSON.stringify({email, title, content, mood})
 
          })
-         console.log('Response received:', response);
          if (response.ok) { // Ensure response is successful
             const data = await response.json();
             console.log('Journal created successfully:', data);
             // Navigate back to journals page after successful creation
-            navigate('/journals');
           } else {
             // Handle error
             console.error("Failed to create journal entry");
           }
 
+          let coins = currCoins + 2
+          try {
+              const response = await fetch(`http://localhost:8000/user/update`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({coins, email})
+              })
+          } catch(err) {
+              console.log(err)
+        }
+
+        navigate('/journals');
+        window.location.reload();
+
     }
+
 
     function submitModal() {
         /*open mood modal and keep form modal closed */
@@ -47,10 +76,6 @@ export function CreateJournal() {
         setMoodModal(false)
 
     }
-
-
-
-
 
     return (
         <>

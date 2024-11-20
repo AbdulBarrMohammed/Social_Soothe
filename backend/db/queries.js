@@ -20,12 +20,13 @@ async function getAllJournals(email) {
 
 
 // USERS
-async function insertNewUser(email, hashedPassword, gender) {
+async function insertNewUser(email, hashedPassword, gender, coins) {
     return prisma.user.create({
       data: {
         email,
         password: hashedPassword,
         gender,
+        coins,
       },
   });
 
@@ -259,6 +260,28 @@ async function getSearchQuery(email, query) {
 
 }
 
+async function getUser(email) {
+  const user = await prisma.user.findUnique({
+    where: { email: email }
+  });
+  return user;
+
+}
+
+async function updateCoin(coins, email) {
+  const user = await prisma.user.update({
+    where: { email: email
+    },
+    data: {
+      coins: coins
+    }
+  });
+
+  return user;
+
+
+}
+
 
 
 module.exports = {
@@ -277,7 +300,9 @@ module.exports = {
     getAllFlowers,
     getAllPositions,
     updateFlowerColor,
-    getSearchQuery
+    getSearchQuery,
+    getUser,
+    updateCoin
 
     // other database functions
   };
