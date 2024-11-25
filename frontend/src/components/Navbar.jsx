@@ -7,12 +7,12 @@ import { useCookies } from "react-cookie"
 import { useState } from "react"
 
 export function Navbar() {
-    let user;
+
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const userEmail = cookies.Email
     const [userInfo, setUserInfo] = useState([]);
-    const [coins, setCoins] = useState(-1);
+    const [coins, setCoins] = useState(0);
 
 
     const getCoins = async () => {
@@ -31,6 +31,8 @@ export function Navbar() {
 
     function handleLogout() {
         console.log("logged out")
+        removeCookie("Email");
+        removeCookie("AuthToken")
         naviagte("/")
     }
 
@@ -72,10 +74,8 @@ export function Navbar() {
 
                 {authToken &&
                     <div className="flex gap-5">
-                        <p className="flex items-center justify-center gap-2"><img src={'../src/assets/dollar.png'} className="h-5"/> {coins}</p>
+                        <p className="flex items-center justify-center gap-2"><img src={'../src/assets/leaf.png'} className="h-5"/> {coins}</p>
                         <button onClick={handleLogout}>Log out</button>
-
-
                     </div>
 
                 }

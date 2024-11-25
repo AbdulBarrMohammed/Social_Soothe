@@ -5,6 +5,7 @@ const cors = require("cors")
 const authRouter = require("./routes/authRouter");
 const journalRouter = require("./routes/journalRouter")
 const flowerRouter = require("./routes/flowerRoutes")
+const soundRouter = require("./routes/soundRouter")
 
 app.use(cors())
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", authRouter);
 app.use("/", journalRouter)
 app.use("/", flowerRouter)
+app.use("/", soundRouter)
 
 module.exports = app;
 

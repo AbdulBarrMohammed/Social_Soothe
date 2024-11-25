@@ -10,6 +10,7 @@ import { handleColorChange } from "./questionsData";
 import { deleteFlower } from "./questionsData";
 import { addQuestionSeven } from "./questionsData";
 import ReactConfetti from 'react-confetti';
+import { LogIn } from "../components/Login";
 
 export function SocialInteractions() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -44,7 +45,11 @@ export function SocialInteractions() {
         try {
             const res = await fetch(`http://localhost:8000/tree/flowers/${email}`)
             const data = await res.json();
-            setFlowers(data)
+            console.log("current data -> ", data)
+            if (data) {
+                setFlowers(data)
+            }
+
         } catch(err) {
             console.log(err)
         }
@@ -189,7 +194,7 @@ export function SocialInteractions() {
                             </div>
                         </div>
                 }
-                    <div className="flex flex-col items-center pt-10 px-10 gap-1 bg-[#CCDBEE] h-screen">
+                    <div className="flex flex-col items-center pt-10 px-10 gap-1 bg-[#ACC8EA] h-screen">
                     {authToken &&
                         <>
                             <div className=" h-96 w-4/5 relative">
@@ -207,7 +212,7 @@ export function SocialInteractions() {
                                         })
                                     }
                             </div>
-                            <img src="../src/assets/bark.png" className="h-60 mb-10"/>
+                            <img src="../src/assets/rb_1364.png" className="h-60 mb-10"/>
                         </>
                     }
                         <div onClick={showQuestions} className="absolute top-48 right-10 rounded-full h-20 w-20 cursor-pointer bg-[#eeeeee] p-5 items-center justify-center">

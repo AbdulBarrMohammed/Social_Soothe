@@ -7,7 +7,7 @@ export const pageDataLoggedIn = [
     {
         name: "Breathe exercise",
         path: "/breatheIntro",
-        img: "../src/assets/heart.svg"
+        img: "../src/assets/tailwind.svg"
     },
     {
         name: "Journals",
@@ -17,18 +17,17 @@ export const pageDataLoggedIn = [
     {
         name: "Social Tree",
         path: "/socialInteractions",
-        img: "../src/assets/gamepad.svg"
+        img: "../src/assets/tree-outline.svg"
     },
     {
         name: "Daily Affirmation",
         path: "/affirmations",
         img: "../src/assets/heart.svg"
     },
-
     {
         name: "Awards",
-        path: "/awards",
-        img: "../src/assets/heart.svg"
+        path: "/awards/Sounds",
+        img: "../src/assets/trophy-award.svg"
     },
 
 ]

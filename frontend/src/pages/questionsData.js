@@ -71,7 +71,7 @@ export async function handleColorChange(done, currId, setOpenModal) {
     let color = ""
         try {
             if (done) {
-                color = "#5BA803"; // Assign the color directly to a variable
+                color = "#059033"; // Assign the color directly to a variable
             } else {
                 color = "#808080";
             }

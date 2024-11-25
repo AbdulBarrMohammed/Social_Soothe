@@ -17,6 +17,8 @@ import { SocialInteractions } from './pages/SocialInteractions';
 import { EditFlower } from './pages/EditFlower';
 import { Affirmations } from './pages/Affirmations';
 import { Awards } from './pages/Awards';
+import { LayoutAwards } from './components/LayoutAwards';
+
 
 function App() {
 
@@ -37,7 +39,13 @@ function App() {
             <Route path="/socialInteractions" element={<SocialInteractions/>}/>
             <Route path="/editFlower/:id" element={<EditFlower/>}/>
             <Route path="/affirmations" element={<Affirmations/>}/>
-            <Route path="/awards" element={<Awards/>}/>
+
+            <Route element={<LayoutAwards/>}>
+              <Route path="/awards/:type" element={<Awards/>}/>
+
+            </Route>
+
+
 
           </Route>
         </Route>

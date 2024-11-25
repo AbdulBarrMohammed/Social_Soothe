@@ -29,14 +29,29 @@ export function LogIn() {
     console.log("login data below")
     console.log(data)
 
-
-    setCookie('Email', data.email)
-    setCookie('AuthToken', data.token)
-    if (!data.detail) {
-        navigate("/journals")
+    if (data.detail == "User does not exist") {
+      console.log("user does not exist")
+      navigate("/login");
+    }
+    else {
+      navigate("/journals")
+      setCookie('Email', data.email)
+      setCookie('AuthToken', data.token)
     }
 
-    //window.location.reload()
+
+
+
+    //setCookie('Email', data.email)
+    //setCookie('AuthToken', data.token)
+
+    //if (!data.detail) {
+
+    //    navigate("/journals")
+        window.location.reload()
+   // }
+
+
 
     //navigate("/journals")
 

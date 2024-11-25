@@ -31,7 +31,11 @@ async function signUpPost(req, res, next) {
           // Store hashedPassword in DB
           try {
               const coins = 0;
-              const signUp = await db.insertNewUser(email, hashedPassword, gender, coins);
+              const currColor = 'blue'
+              const currFont = 'Roboto'
+              const currSound = 'none'
+              const currBackgroundImg = 'none'
+              const signUp = await db.insertNewUser(email, hashedPassword, gender, coins, currColor, currFont, currSound, currBackgroundImg);
               const token = jwt.sign({ email }, 'secret', {expiresIn: '1hr' })
 
               res.json({ email, token })
@@ -70,6 +74,8 @@ async function logInPost(req, res) {
   }
 
 }
+
+
 
 async function getUserInfo(req, res) {
     try {

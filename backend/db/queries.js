@@ -20,13 +20,17 @@ async function getAllJournals(email) {
 
 
 // USERS
-async function insertNewUser(email, hashedPassword, gender, coins) {
+async function insertNewUser(email, hashedPassword, gender, coins, currColor, currFont, currSound, currBackgroundImg) {
     return prisma.user.create({
       data: {
         email,
         password: hashedPassword,
         gender,
         coins,
+        currColor,
+        currFont,
+        currSound,
+        currBackgroundImg
       },
   });
 
@@ -116,6 +120,10 @@ async function deleteJournal( id ) {
 
 
 async function getAllFlowers(email) {
+    if (!email) {
+      console.error("User ID is null or undefined");
+      return [];
+  }
   const user = await prisma.user.findUnique({
     where: {
       email: email
@@ -283,6 +291,63 @@ async function updateCoin(coins, email) {
 }
 
 
+//Sounds
+async function getAllSounds(email) {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email
+    }
+  })
+
+  const sounds = await prisma.sounds.findMany({
+    where: {
+      authorId: user.id,
+    }
+  })
+  return sounds;
+
+}
+
+async function insertNewSound(email, name, src) {
+  const user = await prisma.user.findUnique({
+    where: { email: email }
+  });
+
+  const newSound = await prisma.sounds.create({
+    data: {
+      name,
+      src,
+      author: {
+        connect: { id: user.id }
+      }
+    }
+  });
+}
+
+async function getSound(id) {
+  const selectedSound = await prisma.sounds.findUnique({
+    where: { id: id }
+  });
+
+  return selectedSound;
+
+}
+
+async function deleteSound( id ) {
+  const deleteSound = await prisma.sounds.delete({
+  where: {
+    id: id
+  },
+})
+
+return deleteSound;
+}
+
+async function getSearchQuerySound(email, query) {
+
+}
+
+
 
 module.exports = {
     getAllJournals,
@@ -302,7 +367,13 @@ module.exports = {
     updateFlowerColor,
     getSearchQuery,
     getUser,
-    updateCoin
+    updateCoin,
+
+    getAllSounds,
+    insertNewSound,
+    getSound,
+    deleteSound,
+    getSearchQuerySound
 
     // other database functions
   };

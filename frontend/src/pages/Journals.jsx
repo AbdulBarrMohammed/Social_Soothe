@@ -49,19 +49,18 @@ export function Journals() {
 
 
     return (
-        <div className="bg-[#CCDBEE] h-screen">
+        <div className="bg-[#ACC8EA] h-screen">
             {!authToken &&  <LogIn/>}
             {authToken &&
-                <div className="flex flex-col items-center bg-[#CCDBEE]">
+                <div className="flex flex-col items-center bg-[#ACC8EA]">
 
                     <div className="flex items-center gap-10">
                         <h1 className="text-2xl py-10 font-bold text-center w-80">Journal Entries</h1>
                         <form onSubmit={onSearch} className="w-full">
-                            <input
+                        <input
                                 value={searchQuery}
                                 onChange={(event) => setSearchQuery(event.target.value)}
                                 className="h-10 w-full rounded-3xl p-5" placeholder="Search journal title..."/>
-
                         </form>
                         <Link to={`/createJournal`} className="flex flex-col rounded-full h-16 w-16 cursor-pointer p-5 bg-[#eeeeee] items-center justify-center">
                                 <img src="../src/assets/plus.svg" className="h-5"/>

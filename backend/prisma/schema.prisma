@@ -23,7 +23,14 @@ model User {
   Journals Journal[]
   tree Flower[]
   coins Int
-  awards Awards[]
+  fonts Fonts[]
+  sounds Sounds[]
+  currColor String
+  backgroundImg BackgroundImgs[]
+  colorScheme ColorSchemes[]
+  currBackgroundImg String
+  currSound String
+  currFont String
 
 
 }
@@ -62,9 +69,34 @@ model Flower {
 
 }
 
-model Awards {
+
+model Sounds {
   id String @id @default(uuid())
-  type String
+  name String
+  src String
+  author User @relation(fields: [authorId], references: [id])
+  authorId String
+}
+
+model Fonts {
+  id String @id @default(uuid())
+  name String
+  author User @relation(fields: [authorId], references: [id])
+  authorId String
+
+}
+
+model BackgroundImgs {
+  id String @id @default(uuid())
+  name String
+  src String
+  author User @relation(fields: [authorId], references: [id])
+  authorId String
+
+}
+
+model ColorSchemes {
+  id String @id @default(uuid())
   name String
   author User @relation(fields: [authorId], references: [id])
   authorId String

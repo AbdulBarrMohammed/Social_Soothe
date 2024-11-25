@@ -165,7 +165,7 @@ export function Breathe() {
   }, [counter, isActive]);
 
   return (
-    <div className="flex bg-[#CCDBEE] h-screen justify-center pt-10 gap-10">
+    <div className="flex bg-[#ACC8EA] h-screen justify-center pt-10 gap-10">
 
         <div className="flex flex-col items-center gap-5 ">
             <div>
@@ -176,7 +176,7 @@ export function Breathe() {
                 onComplete={handleComplete}
                 isPlaying={isActive}
                 duration={counter}
-                colors={"#6888BE"}
+                colors={"#4470AD"}
                 size={350}
                 >
                 {renderTime}
@@ -187,9 +187,11 @@ export function Breathe() {
             </div>
             <div className="flex gap-5">
 
-                <button className="bg-[#6888BE] p-3 rounded-2xl text-white shadow-md" onClick={clear}>Restart</button>
-                <button className="bg-[#6888BE] p-3 rounded-2xl text-white shadow-md" onClick={start}>Start</button>
-                <button className="bg-[#6888BE] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Pause</button>
+                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={clear}>Restart</button>
+                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={start}>Start</button>
+                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Pause</button>
+                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Sounds</button>
+
             </div>
         </div>
         <div>
