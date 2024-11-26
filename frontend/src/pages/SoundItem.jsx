@@ -75,16 +75,6 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
                         <img src={'../src/assets/leaf.png'} className="h-5"/>
 
                     </div>
-                    {/*
-                        <button onClick={handleSoundClick}>
-                        Choose sound
-                    </button>
-
-                    */}
-
-
-
-
                 </div>
             </div>
         </>

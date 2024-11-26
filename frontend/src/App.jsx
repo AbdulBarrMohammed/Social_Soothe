@@ -43,7 +43,6 @@ function App() {
             <Route path="/affirmations" element={<Affirmations/>}/>
             <Route path="/userSounds" element={<UserSounds/>}/>
             <Route path="/settings" element={<Settings/>}/>
-
             <Route element={<LayoutAwards/>}>
               <Route path="/awards/:type" element={<Awards/>}/>
 

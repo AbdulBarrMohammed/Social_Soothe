@@ -23,12 +23,10 @@ export function SelectedJournal() {
                 console.log(id);
                 const res = await fetch(`http://localhost:8000/journals/journal/${id}`)
                 const data = await res.json();
-                console.log(data)
+                console.log("here is a data -> ", data)
                 setJournal(data)
                 setTitle(data.title)
                 setContent(data.content)
-                //setJournals(data)
-                //setJournals(prevArray => [...prevArray, data[0]])
             } catch(err) {
                 console.log(err)
             }
@@ -43,7 +41,7 @@ export function SelectedJournal() {
                 console.log("new title", title)
                 const res = await fetch(`http://localhost:8000/journals/journal/delete/${id}`)
                 const data = await res.json();
-                console.log(data)
+                const newData = data
             } catch(err) {
                 console.log(err)
             }
