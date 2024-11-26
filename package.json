@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "git-filter-repo": "^0.0.30",
     "if-env": "^1.0.4"
   }
 }
