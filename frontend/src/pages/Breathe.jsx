@@ -1,7 +1,9 @@
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { breatheInfo } from "./breatheData";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export function Breathe() {
 
@@ -9,6 +11,10 @@ export function Breathe() {
     const startNum = parseInt(params.start);
     const middleNum = parseInt(params.middle);
     const endNum = parseInt(params.end);
+
+    const [cookies, setCookie, removeCookie] = useCookies(null)
+    const authToken = cookies.AuthToken
+    const email = cookies.Email
 
     const [counter, setCounter] = useState(startNum);
     const [isActive, setIsActive] = useState(false);
@@ -20,10 +26,22 @@ export function Breathe() {
     const [rounds, setRounds] = useState(1)
 
     const [title, setTitle] = useState("");
+    const [bgSound, setBgSound] = useState("");
 
 
-    const breatheInAudio = new Audio("../../src/assets/breathe-in.wav")
-    const exhaleAudio = new Audio("../../src/assets/exhale.wav")
+    const breatheInAudio = useRef(new Audio("../../src/assets/breathe-in.wav"))
+    const exhaleAudio = useRef(new Audio("../../src/assets/exhale.wav"))
+    const currBgSound = useRef(null);
+
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        // Update the bg sound reference when bgSound changes
+        if (bgSound) {
+            currBgSound.current = new Audio(bgSound);
+        }
+    }, [bgSound]);
 
     useEffect(() => {
         if (endNum === 3) {
@@ -36,13 +54,33 @@ export function Breathe() {
             setTitle(breatheInfo[2].title);
             setDescription(breatheInfo[2].info)
         }
+
+
     }, [endNum]);
+
+
+    const getCurrSound = async () => {
+        try {
+            const res = await fetch(`http://localhost:8000/user/${email}`)
+            const data = await res.json();
+            setBgSound(data.currSound)
+            console.log('current data', data.currSound)
+
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getCurrSound()
+    }, [])
 
     const [key, setKey] = useState(0); // To re-render the timer
 
     const restart = () => {
+        currBgSound.current.play()
             if (turn == 2 || turn == 5 || turn == 8) {
-                breatheInAudio.play()
+                breatheInAudio.current.play()
                 setRounds(rounds + 1)
                 setBreathe("Breathe in...")
                 setCounter(startNum)
@@ -54,7 +92,7 @@ export function Breathe() {
                 setCounter(middleNum)
             }
             else if (turn == 1 || turn == 4 || turn == 7 || turn == 10) {
-                exhaleAudio.play()
+                exhaleAudio.current.play()
                 setBreathe("exhale...")
                 setCounter(endNum)
             }
@@ -95,8 +133,10 @@ export function Breathe() {
 
         const pause = () => {
             setIsActive(false)
-            breatheInAudio.pause()
-            exhaleAudio.pause()
+            currBgSound.current.pause()
+            breatheInAudio.current.pause()
+            exhaleAudio.current.pause()
+
         }
 
         const renderTime = ({ remainingTime }) => {
@@ -117,6 +157,10 @@ export function Breathe() {
             );
         };
 
+        const openSoundOptions = () => {
+            navigate("/userSounds");
+        }
+
 
         const start = () => {
             //first check if the exercise is the 3-3-3 pattern
@@ -130,7 +174,7 @@ export function Breathe() {
                     exhaleAudio.play()
                 }
                 else {
-                    breatheInAudio.play()
+                    breatheInAudio.current.play()
                 }
 
 
@@ -138,10 +182,10 @@ export function Breathe() {
             else {
                 //before checking check if the exercise is in the breathing stage which should have counter of start number
                 if (counter == startNum) {
-                    breatheInAudio.play()
+                    breatheInAudio.current.play()
                 }
                 else if (counter == endNum) {
-                    exhaleAudio.play()
+                    exhaleAudio.current.play()
                 }
 
             }
@@ -163,6 +207,14 @@ export function Breathe() {
 
     return () => clearInterval(timer);
   }, [counter, isActive]);
+
+
+  function openPlayBgSound() {
+
+    console.log("The current bg sound playing is: ", currBgSound)
+    currBgSound.current.play()
+
+  }
 
   return (
     <div className="flex bg-[#ACC8EA] h-screen justify-center pt-10 gap-10">
@@ -190,7 +242,7 @@ export function Breathe() {
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={clear}>Restart</button>
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={start}>Start</button>
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Pause</button>
-                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Sounds</button>
+                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound}>Play background sounds</button>
 
             </div>
         </div>
@@ -201,6 +253,7 @@ export function Breathe() {
         <div className="flex flex-col w-1/3 gap-5">
             <h2 className="font-bold text-3xl">{title}</h2>
             <p>{description}</p>
+            <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={openSoundOptions}>Sounds</button>
         </div>
 
     </div>

@@ -102,11 +102,28 @@ async function updateCoin(req, res) {
   }
 
 }
+
+
+async function updateSound(req, res) {
+  try {
+    const { sound, email } = req.body
+    const updatedSound = await db.updateSound(sound, email);
+    console.log("updated sound", updateSound)
+    res.json(updatedSound)
+  } catch (err) {
+      console.log("error....", err)
+      res.status(500).json({ message: 'Error fetching sound' });
+  }
+
+}
+
+
 module.exports = {
   signUpPost,
   logInPost,
   getUserInfo,
-  updateCoin
+  updateCoin,
+  updateSound
 
 
 }

@@ -98,6 +98,11 @@ model BackgroundImgs {
 model ColorSchemes {
   id String @id @default(uuid())
   name String
+  dark String
+  semiDark String
+  medium String
+  light String
+  lightest String
   author User @relation(fields: [authorId], references: [id])
   authorId String
 

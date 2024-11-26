@@ -18,6 +18,8 @@ import { EditFlower } from './pages/EditFlower';
 import { Affirmations } from './pages/Affirmations';
 import { Awards } from './pages/Awards';
 import { LayoutAwards } from './components/LayoutAwards';
+import { UserSounds } from './pages/UserSounds';
+import { Settings } from './pages/Settings';
 
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
             <Route path="/socialInteractions" element={<SocialInteractions/>}/>
             <Route path="/editFlower/:id" element={<EditFlower/>}/>
             <Route path="/affirmations" element={<Affirmations/>}/>
+            <Route path="/userSounds" element={<UserSounds/>}/>
+            <Route path="/settings" element={<Settings/>}/>
 
             <Route element={<LayoutAwards/>}>
               <Route path="/awards/:type" element={<Awards/>}/>

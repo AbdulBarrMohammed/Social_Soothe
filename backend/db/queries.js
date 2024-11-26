@@ -343,10 +343,26 @@ async function deleteSound( id ) {
 return deleteSound;
 }
 
+
+
 async function getSearchQuerySound(email, query) {
 
 }
 
+
+async function updateSound(sound, email) {
+  const user = await prisma.user.update({
+    where: { email: email
+    },
+    data: {
+      currSound: sound
+    }
+  });
+
+  return user;
+
+
+}
 
 
 module.exports = {
@@ -373,7 +389,8 @@ module.exports = {
     insertNewSound,
     getSound,
     deleteSound,
-    getSearchQuerySound
+    getSearchQuerySound,
+    updateSound
 
     // other database functions
   };

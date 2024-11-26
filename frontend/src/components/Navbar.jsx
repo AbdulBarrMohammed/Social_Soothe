@@ -86,6 +86,12 @@ export function Navbar() {
                                 </Link>
                 }
 
+                {authToken &&
+                                <Link to={"/settings"}>
+                                    <img src={"../src/assets/cog.svg"} className="h-5"/>
+                                </Link>
+                }
+
             </ul>
 
         </div>

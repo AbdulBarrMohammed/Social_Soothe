@@ -24,6 +24,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
     }, [currAudioIndex]);
 
 
+
     const getCoins = async () => {
         try {
             const res = await fetch(`http://localhost:8000/user/${email}`)
@@ -151,12 +152,8 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
                         Buy
                     </button>
 
-
                 </div>
-
-
             </div>
-
         </div>
 
     )
