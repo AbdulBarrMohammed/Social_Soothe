@@ -1,0 +1,2 @@
+frontend/src/assets/sounds/cold-snowfall-ambience-5-minutes-sound-effect-164512.wav filter=lfs diff=lfs merge=lfs -text
+frontend/src/assets/sounds/indoor-hard-rain-sound-4.wav filter=lfs diff=lfs merge=lfs -text
