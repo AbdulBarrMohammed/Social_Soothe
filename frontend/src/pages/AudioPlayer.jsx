@@ -10,6 +10,8 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
     const [currCoins, setCurrCoins] = useState(0);
     const [sounds, setSounds] = useState([]);
 
+    const [test, setTest] = useState("");
+
     const [isPlaying, setIsPlaying] = useState(false);
     const playPic =  "../../src/assets/play.svg"
     const pausePic = "../../src/assets/pause.svg"
@@ -126,7 +128,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
                 console.log(err)
             }
         }
-        //window.location.reload();
+
 
     }
 

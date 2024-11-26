@@ -69,9 +69,6 @@ export function UserSounds() {
             alert("You did not pick a selection")
         }
 
-
-
-
         navigate(-1)
 
     }
