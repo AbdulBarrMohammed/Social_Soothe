@@ -16,9 +16,6 @@ export function AwardNavbar() {
                     <Link to={"/awards/Fonts"} className="border border-[#6C6D74] p-2 rounded-lg">
                         Fonts
                     </Link>
-                    <Link to={"/awards/Backgrounds"} className="border border-[#6C6D74] p-2 rounded-lg">
-                        background images
-                    </Link>
                 </div>
             </div>
         </div>
