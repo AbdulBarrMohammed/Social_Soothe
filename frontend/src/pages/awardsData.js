@@ -145,7 +145,8 @@ dark String
         light: '#D7CBB3',
         lightest: '#EEE6D6',
         price: 85
-    }
+    },
+
 ];
 
 

@@ -74,8 +74,7 @@ export function Awards() {
                         {colors.map((color, index) => {
                                 return (
 
-                                        <Color color={color} index={index} currColorIndex={currColorIndex}
-                                            setCurrColorIndex={setCurrColorIndex}/>
+                                        <Color color={color}/>
 
                                     )
                                 })

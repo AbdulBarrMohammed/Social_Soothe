@@ -14,6 +14,46 @@ export function Navbar() {
     const [userInfo, setUserInfo] = useState([]);
     const [coins, setCoins] = useState(0);
 
+    //const [bgColor, setBgColor] = useState("");
+    const [colors, setColors] = useState([]);
+    const [darkBg, setDarkBg] = useState("");
+    //let darkBg = ''
+
+    const getData = async () => {
+        try {
+            const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor == 'Blue') {
+                setDarkBg("#233C67")
+            }
+
+            else {
+                setColors(dataColors)
+                console.log("Current colors ", dataColors);
+
+                    dataColors.map((c) => {
+                        console.log("colors ->", c)
+                        if (c.name === dataColor.currColor) {
+                            console.log("We have found a bg color ", dataColor.currColor)
+                            setDarkBg(c.dark)
+                        }
+
+                    })
+
+            }
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getData()
+    },[])
+
 
     const getCoins = async () => {
         try {
@@ -39,7 +79,7 @@ export function Navbar() {
     //text-[#44423F]
 
     return (
-        <div className="flex justify-between p-2 px-5 items-center bg-[#233C67] fixed top-0 left-0 right-0 z-50">
+        <div className="flex justify-between p-2 px-5 items-center fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: darkBg }}>
             <div className='flex gap-12 items-center'>
                 <Link to={"/"}><h1 className='text-2xl font-bold text-white'>Social<span className='text-3xl'>.</span>Soothe</h1> </Link>
                 <ul className="flex gap-5 cursor-pointer text-white">

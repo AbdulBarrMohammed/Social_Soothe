@@ -17,10 +17,44 @@ export function Journals() {
     const [user, setUser] = useState({})
     const [searchQuery, setSearchQuery] = useState("");
 
+    //const [bgColor, setBgColor] = useState("");
+    const [colors, setColors] = useState([]);
+    const [lightestBg, setLightestBg] = useState("");
+    //let darkBg = ''
+
     const getData = async () => {
         try {
             const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
             const data = await res.json();
+
+            const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor == 'Blue') {
+                setLightestBg("#ACC8EA")
+            }
+            else {
+                setColors(dataColors)
+                console.log("Current colors ", dataColors);
+
+                    dataColors.map((c) => {
+                        console.log("colors ->", c)
+                        if (c.name === dataColor.currColor) {
+                            console.log("We have found a bg color ", dataColor.currColor)
+                            setLightestBg(c.lightest)
+                        }
+
+                })
+
+            }
+
+
+
+
+
 
             setJournals(data)
         } catch(err) {
@@ -49,10 +83,10 @@ export function Journals() {
 
 
     return (
-        <div className="bg-[#ACC8EA] h-screen">
+        <div className=" h-screen" style={{ backgroundColor: lightestBg }}>
             {!authToken &&  <LogIn/>}
             {authToken &&
-                <div className="flex flex-col items-center bg-[#ACC8EA]">
+                <div className="flex flex-col items-center" style={{ backgroundColor: lightestBg }}>
 
                     <div className="flex items-center gap-10">
                         <h1 className="text-2xl py-10 font-bold text-center w-80">Journal Entries</h1>

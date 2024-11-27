@@ -118,12 +118,26 @@ async function updateSound(req, res) {
 }
 
 
+async function updateColor(req, res) {
+  try {
+    const { color, email } = req.body
+    const updatedColor = await db.updateColor(color, email);
+    console.log("updated color", updateColor)
+    res.json(updatedColor)
+  } catch (err) {
+      console.log("error....", err)
+      res.status(500).json({ message: 'Error fetching color' });
+  }
+
+}
+
 module.exports = {
   signUpPost,
   logInPost,
   getUserInfo,
   updateCoin,
-  updateSound
+  updateSound,
+  updateColor
 
 
 }

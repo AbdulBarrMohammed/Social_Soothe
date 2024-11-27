@@ -9,7 +9,7 @@ router.post("/login", authController.logInPost);
 router.get("/user/:email", authController.getUserInfo);
 router.post("/user/update", authController.updateCoin);
 router.post("/user/sound/update", authController.updateSound);
-
+router.post("/user/color/update", authController.updateColor);
 
 //update user info
 

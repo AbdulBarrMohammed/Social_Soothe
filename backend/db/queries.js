@@ -349,13 +349,80 @@ async function getSearchQuerySound(email, query) {
 
 }
 
-
 async function updateSound(sound, email) {
   const user = await prisma.user.update({
     where: { email: email
     },
     data: {
       currSound: sound
+    }
+  });
+
+  return user;
+
+
+}
+
+
+//Colors
+async function getAllColors(email) {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email
+    }
+  })
+
+  const colors = await prisma.colorSchemes.findMany({
+    where: {
+      authorId: user.id,
+    }
+  })
+  return colors;
+
+}
+
+async function insertNewColor(email, name, dark, semiDark, medium, light, lightest) {
+  const user = await prisma.user.findUnique({
+    where: { email: email }
+  });
+
+  const newColor = await prisma.colorSchemes.create({
+    data: {
+      name,
+      dark,
+      semiDark,
+      medium,
+      light,
+      lightest,
+      author: {
+        connect: { id: user.id }
+      }
+    }
+  });
+}
+
+async function getColor(color, email, id) {
+
+}
+
+
+async function deleteColor( id ) {
+  const deleteColor = await prisma.colorSchemes.delete({
+  where: {
+    id: id
+  },
+})
+
+return deleteColor;
+}
+
+
+async function updateColor(color, email) {
+  const user = await prisma.user.update({
+    where: { email: email
+    },
+    data: {
+      currColor: color
     }
   });
 
@@ -390,7 +457,14 @@ module.exports = {
     getSound,
     deleteSound,
     getSearchQuerySound,
-    updateSound
+    updateSound,
+
+    getAllColors,
+    insertNewColor,
+    getColor,
+    deleteColor,
+    updateColor
+
 
     // other database functions
   };

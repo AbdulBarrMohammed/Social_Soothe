@@ -1,29 +1,56 @@
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import { useState } from "react";
 
+export function Color({color}) {
+    const [cookies, setCookie, removeCookie] = useCookies(null)
+    const authToken = cookies.AuthToken
+    const email = cookies.Email
+    const [currCoins, setCurrCoins] = useState(0);
+    const [colors, setColors] = useState([]);
 
-export function Color({color, index, currColorIndex, setCurrColorIndex}) {
+    const getAllData = async () => {
+        try {
 
+            //user color data
+            const resColor = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColor.json();
+            setColors(dataColors)
+
+            //user coins data
+            const resCoins = await fetch(`http://localhost:8000/user/${email}`)
+            const dataCoins = await resCoins.json();
+            setCurrCoins(dataCoins.coins)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getAllData()
+    },[])
 
      async function buyBtn() {
-            if (sounds) {
-                sounds.map((soundObj) => {
-                    if (audioSrc.title == soundObj.name) {
-                        alert("You already brought this item");
+            // if colors exists
+            if (colors) {
+                colors.map((colorObj) => {
+                    // if a color object has the same name as the color user wants to get, alert user that they already brought color
+                    if (colorObj.name == color.name) {
+                        alert("You already brought this color");
                         window.location.reload();
-
                     }
 
                 })
             }
-
-            const currPrice = audioSrc.price
+            // grab price of color purchased
+            const currPrice = color.price
 
             if (currPrice > currCoins) {
-                console.log("You do not have enough leafs")
-                console.log(currPrice, currCoins)
+                alert("You do not have enough leafs")
             }
             else {
                 //subract price from current leafs
-                const coins = Number(currCoins) - Number(audioSrc.price)
+                const coins = Number(currCoins) - Number(currPrice)
 
                 //add new leaf price to database
                 try {
@@ -33,19 +60,26 @@ export function Color({color, index, currColorIndex, setCurrColorIndex}) {
                     body: JSON.stringify({coins, email})
                     })
 
-                    const name = audioSrc.title
-                    const src = audioSrc.wavSound
-                    const responseSound = await fetch(`http://localhost:8000/sounds/create`, {
+                    // add purchased color information to backend database
+                    const name = color.name
+                    const dark = color.dark
+                    const semiDark = color.semiDark
+                    const medium = color.medium
+                    const light = color.light
+                    const lightest = color.lightest
+
+                    const responseColor = await fetch(`http://localhost:8000/colors/create`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({email, name, src})
+                    body: JSON.stringify({email, name, dark, semiDark, medium, light, lightest})
                     })
+
+                    console.log('response ', responseColor)
 
                 } catch(err) {
                     console.log(err)
                 }
             }
-
 
         }
 
@@ -61,14 +95,6 @@ export function Color({color, index, currColorIndex, setCurrColorIndex}) {
                     <div className="h-10 w-10" style={{ backgroundColor: color.medium }}></div>
                     <div className="h-10 w-10" style={{ backgroundColor: color.light }}></div>
                     <div className="h-10 w-10" style={{ backgroundColor: color.lightest }}></div>
-
-                    {/* <div className="h-10 w-10 bg-[#7444AD]"></div>
-                    <div className="h-10 w-10 bg-[#8A68BE]"></div>
-                    <div className="h-10 w-10 bg-[#B499D7]"></div>
-                    <div className="h-10 w-10 bg-[#E2CCEE]"></div>
-                    <div className="h-10 w-10 bg-[#422367]"></div>*/}
-
-
 
                 </div>
                 <div className="flex gap-4 items-center">
