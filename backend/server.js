@@ -6,6 +6,7 @@ const authRouter = require("./routes/authRouter");
 const journalRouter = require("./routes/journalRouter")
 const flowerRouter = require("./routes/flowerRoutes")
 const soundRouter = require("./routes/soundRouter")
+const colorRouter = require("./routes/colorRouter")
 
 app.use(cors())
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use("/", authRouter);
 app.use("/", journalRouter)
 app.use("/", flowerRouter)
 app.use("/", soundRouter)
+app.use("/", colorRouter)
 
 module.exports = app;
 
