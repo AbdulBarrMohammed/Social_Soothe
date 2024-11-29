@@ -49,8 +49,6 @@ export function UserSounds() {
 
 
     async function handleDone() {
-        console.log("You have changed the sound too", chosenSound)
-        console.log("The sound src is", currSoundSrc)
         //update curr user sound
         if (currSoundSrc) {
             const sound = currSoundSrc

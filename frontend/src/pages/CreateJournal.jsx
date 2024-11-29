@@ -16,6 +16,7 @@ export function CreateJournal() {
 
     const navigate = useNavigate()
 
+    // get user coin amount
     const getCoins = async () => {
         try {
             const res = await fetch(`http://localhost:8000/user/${email}`)
@@ -32,7 +33,7 @@ export function CreateJournal() {
 
     async function handleJournalSubmit(e) {
         e.preventDefault()
-        /* Submits new journal entry to MongoDB */
+
 
         //close mood modal
         setFormModal(false)
@@ -44,15 +45,8 @@ export function CreateJournal() {
             body: JSON.stringify({email, title, content, mood})
 
          })
-         if (response.ok) { // Ensure response is successful
-            const data = await response.json();
-            console.log('Journal created successfully:', data);
-            // Navigate back to journals page after successful creation
-          } else {
-            // Handle error
-            console.error("Failed to create journal entry");
-          }
 
+          // add two to current coin amount
           let coins = currCoins + 2
           try {
               const response = await fetch(`http://localhost:8000/user/update`, {
@@ -64,9 +58,9 @@ export function CreateJournal() {
               console.log(err)
         }
 
+        //navigate back to journals
         navigate('/journals');
         window.location.reload();
-
     }
 
 
@@ -128,7 +122,6 @@ export function CreateJournal() {
 
 
             }
-
 
             { formModal &&
             <div className="flex flex-col p-10">

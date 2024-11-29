@@ -9,7 +9,6 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
-    const [sounds, setSounds] = useState([]);
 
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -27,10 +26,11 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
 
     function handlePlay() {
 
+        //check if current audio exists
         if (audioRef.current) {
             audioRef.current.play();
             setIsPlaying(true);
-            setCurrAudioIndex(index); // Set the current audio index to this component's index
+            setCurrAudioIndex(index); // settting the current audio index to this component's index
         }
     }
 

@@ -27,7 +27,7 @@ export function NavbarLoggedIn() {
             const dataColors = await resColors.json();
 
             if (dataColor.currColor == 'Blue') {
-                setSemiBg("#6888BE")
+                setSemiBg("#4470AD")
             }
 
             else {

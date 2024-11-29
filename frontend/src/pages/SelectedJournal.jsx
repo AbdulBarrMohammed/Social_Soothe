@@ -15,15 +15,12 @@ export function SelectedJournal() {
     let id = params.id
 
 
-
     useEffect(() => {
 
         async function loadJournal() {
             try {
-                console.log(id);
                 const res = await fetch(`http://localhost:8000/journals/journal/${id}`)
                 const data = await res.json();
-                console.log("here is a data -> ", data)
                 setJournal(data)
                 setTitle(data.title)
                 setContent(data.content)
@@ -38,10 +35,8 @@ export function SelectedJournal() {
     async function removeJournal() {
         if (confirm("Are you sure you want to delete?")) {
             try {
-                console.log("new title", title)
                 const res = await fetch(`http://localhost:8000/journals/journal/delete/${id}`)
                 const data = await res.json();
-                const newData = data
             } catch(err) {
                 console.log(err)
             }

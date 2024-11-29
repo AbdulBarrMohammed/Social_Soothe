@@ -26,19 +26,15 @@ export function EditFlower() {
     const [color, setColor] = useState("")
     const [done, setDone] = useState(false)
 
-
-
     const navigate = useNavigate()
 
-
     useEffect(() => {
-
         async function loadFlower() {
             try {
-                console.log(id);
                 const res = await fetch(`http://localhost:8000/flowers/flower/${id}`)
                 const data = await res.json();
 
+                //set current question data for each data
                 setQuestionOne(data.questionOne)
                 setQuestionTwo(data.questionTwo)
                 setQuestionThree(data.questionThree)

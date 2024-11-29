@@ -9,6 +9,8 @@ export function Color({color}) {
     const [currCoins, setCurrCoins] = useState(0);
     const [colors, setColors] = useState([]);
 
+
+    // function to get the users colors purchased and their current coin amount
     const getAllData = async () => {
         try {
 
@@ -30,27 +32,30 @@ export function Color({color}) {
         getAllData()
     },[])
 
+    // function to deal with user purchase of color
      async function buyBtn() {
-            // if colors exists
+            // check if colors exists
             if (colors) {
                 colors.map((colorObj) => {
+
                     // if a color object has the same name as the color user wants to get, alert user that they already brought color
                     if (colorObj.name == color.name) {
                         alert("You already brought this color");
                         window.location.reload();
                     }
-
                 })
             }
-            // grab price of color purchased
-            const currPrice = color.price
 
-            if (currPrice > currCoins) {
+            // grab price of color purchased
+            const itemPrice = color.price
+
+            //first check if the item price is too expensive for user
+            if (itemPrice > currCoins) {
                 alert("You do not have enough leafs")
             }
             else {
                 //subract price from current leafs
-                const coins = Number(currCoins) - Number(currPrice)
+                const coins = Number(currCoins) - Number(itemPrice)
 
                 //add new leaf price to database
                 try {
@@ -74,15 +79,12 @@ export function Color({color}) {
                     body: JSON.stringify({email, name, dark, semiDark, medium, light, lightest})
                     })
 
-                    console.log('response ', responseColor)
-
                 } catch(err) {
                     console.log(err)
                 }
             }
 
         }
-
 
     return (
         <>

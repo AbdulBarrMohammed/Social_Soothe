@@ -5,27 +5,21 @@ import { Link } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { LogIn } from "../components/Login"
 
-//import * as jwt_decode from "jwt-decode"
-
-
 
 export function Journals() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const userEmail = cookies.Email
     const [journals, setJournals] = useState([])
-    const [user, setUser] = useState({})
     const [searchQuery, setSearchQuery] = useState("");
 
-    //const [bgColor, setBgColor] = useState("");
     const [colors, setColors] = useState([]);
     const [lightestBg, setLightestBg] = useState("");
-    //let darkBg = ''
 
     const getData = async () => {
         try {
             const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
-            const data = await res.json();
+            const journalData = await res.json();
 
             const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
             const dataColor = await resColor.json();
@@ -37,26 +31,20 @@ export function Journals() {
                 setLightestBg("#ACC8EA")
             }
             else {
+
+                // set colors for background
                 setColors(dataColors)
-                console.log("Current colors ", dataColors);
 
-                    dataColors.map((c) => {
-                        console.log("colors ->", c)
-                        if (c.name === dataColor.currColor) {
-                            console.log("We have found a bg color ", dataColor.currColor)
-                            setLightestBg(c.lightest)
-                        }
-
+                //check for current user color in users purchased colors to set chosen background color
+                dataColors.map((c) => {
+                    if (c.name === dataColor.currColor) {
+                        setLightestBg(c.lightest)
+                    }
                 })
-
             }
 
-
-
-
-
-
-            setJournals(data)
+            //set user journals
+            setJournals(journalData)
         } catch(err) {
             console.log(err)
         }
@@ -66,21 +54,18 @@ export function Journals() {
         getData()
     },[])
 
+    // function to query search for journals based on title
     async function onSearch(event) {
         event.preventDefault()
-        console.log("current curry", searchQuery)
         try {
             const res = await fetch(`http://localhost:8000/search/${searchQuery}/${userEmail}`)
             const data = await res.json();
-            console.log('query data', data)
             setJournals(data)
-            //setJournals(prevArray => [...prevArray, data[0]])
         } catch(err) {
             console.log(err)
         }
 
     }
-
 
     return (
         <div className=" h-screen" style={{ backgroundColor: lightestBg }}>
@@ -116,13 +101,9 @@ export function Journals() {
                 </div>
             </div>
 
-
             }
 
         </div>
-
-
-
 
     )
 
