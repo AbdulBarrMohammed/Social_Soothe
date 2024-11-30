@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AOS from "aos";
 import "aos/dist/aos.css"
-
+import { saFacts } from './factsData';
 
 const Questions = () => {
     // use state to open social anxiety question drop down button
@@ -38,7 +38,7 @@ const Questions = () => {
             </div>
               {isDropdown && (
 
-                <p>This works you were able to open the drop down option ! </p>
+                <p>{saFacts[0]}</p>
               )}
           </div>
 
@@ -60,7 +60,7 @@ const Questions = () => {
             </div>
               {isDropdownTwo && (
 
-                <p>This works you were able to open the drop down option ! </p>
+                <p>{saFacts[1]}</p>
               )}
           </div>
 
@@ -80,8 +80,7 @@ const Questions = () => {
 
             </div>
               {isDropdownThree && (
-
-                <p>This works you were able to open the drop down option ! </p>
+                  <p>{saFacts[2]}</p>
               )}
           </div>
 
@@ -101,7 +100,7 @@ const Questions = () => {
 
             </div>
               {isDropdownFour && (
-                <p>This works you were able to open the drop down option ! </p>
+                <p>{saFacts[3]}</p>
 
               )}
           </div>
@@ -122,7 +121,7 @@ const Questions = () => {
 
             </div>
               {isDropdownFive && (
-                <p>This works you were able to open the drop down option ! </p>
+                <p>{saFacts[4]}</p>
 
               )}
           </div>
@@ -143,7 +142,7 @@ const Questions = () => {
 
             </div>
               {isDropdownSix && (
-                <p>This works you were able to open the drop down option ! </p>
+                <p>{saFacts[5]}</p>
 
               )}
           </div>
@@ -163,12 +162,12 @@ const Questions = () => {
 
             </div>
               {isDropdownSeven && (
-                <p>This works you were able to open the drop down option ! </p>
+                <p>{saFacts[6]}</p>
 
               )}
           </div>
 
-          <button className='mt-20 bg-[#4470AD] text-white p-5 rounded-full text-[18px] font-bold shadow-md'>Get started</button>
+          <button className='mt-20 bg-[#4470AD] text-white p-5 rounded-full text-[18px] font-bold shadow-md hover:bg-[#5F8CC6] transition-all duration-300 ease-in-out'>Get started</button>
 
 
         </div>

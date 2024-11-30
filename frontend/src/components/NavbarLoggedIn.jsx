@@ -58,27 +58,31 @@ export function NavbarLoggedIn() {
     //rgb(68,112,173)
     return (
         <>
-        <nav className='pt-12 sticky top-0 text-white z-40' style={{ backgroundColor: semiBg }}>
-            <ul className='p-3 flex w-full items-center justify-center'>
-                    {pageDataLoggedIn.map((page) => {
-                        return (
+        {authToken &&
+            <nav className='pt-12 sticky top-0 text-white z-40' style={{ backgroundColor: semiBg }}>
+                <ul className='p-3 flex w-full items-center justify-center'>
+                        {pageDataLoggedIn.map((page) => {
+                            return (
 
-                                <Link to={page.path} className='text-lg flex items-center hover:bg-[#99AFD7] rounded-xl transition duration-300 ease-in-out'>
-                                    <div className='flex gap-2 px-10 py-1 items-center'>
-                                        <img src={page.img} className='h-7'/>
-                                        <li className='font-semibold text-base'>
-                                            {page.name}
-                                        </li>
-                                    </div>
-                                </Link>
+                                    <Link to={page.path} className='text-lg flex items-center hover:bg-[#99AFD7] rounded-xl transition duration-300 ease-in-out'>
+                                        <div className='flex gap-2 px-10 py-1 items-center'>
+                                            <img src={page.img} className='h-7'/>
+                                            <li className='font-semibold text-base'>
+                                                {page.name}
+                                            </li>
+                                        </div>
+                                    </Link>
 
 
-                        );
+                            );
 
-                    })}
+                        })}
 
-            </ul>
-      </nav>
+                </ul>
+            </nav>
+
+        }
+
 
         </>
     )

@@ -104,7 +104,7 @@ export const ArticleCard = () => {
           whileInView={"show"}
           viewport={{once: false, amount: 0.5}}
           className='flex justify-center'>
-            <button className='bg-[#4470AD] text-white  p-5 rounded-full text-[18px] font-bold shadow-md'>View all articles</button>
+            <button className='bg-[#4470AD] text-white  p-5 rounded-full text-[18px] font-bold shadow-md hover:bg-[#5F8CC6] transition-all duration-300 ease-in-out'>View all articles</button>
           </motion.div>
 
         </div>

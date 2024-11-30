@@ -50,16 +50,11 @@ export function LogIn() {
     //    navigate("/journals")
         window.location.reload()
    // }
-
-
-
-    //navigate("/journals")
-
   }
 
 
     return (
-        <div className= "flex items-center justify-center h-screen bg-[#CCDBEE]">
+        <div className= "flex items-center justify-center h-screen bg-[#ACC8EA]">
             <div className='flex flex-col justify-center items-center'>
                 <h2 className='text-3xl font-bold py-10'>Social.Soothe</h2>
                 <form className='flex flex-col gap-5 ' onSubmit={handleSubmit}>

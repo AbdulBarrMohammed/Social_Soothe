@@ -19,7 +19,7 @@ export function Landing() {
                 </p>
 
                 <Link to={`/journals`}>
-                    <button className='bg-[#4470AD] text-white  p-5 rounded-full text-[18px] font-bold shadow-md' >Try it now</button>
+                    <button className='bg-[#4470AD] text-white  p-5 rounded-full text-[18px] font-bold shadow-md hover:bg-[#5F8CC6] transition-all duration-300 ease-in-out' >Try it now</button>
                 </Link>
 
                 </div>
@@ -69,14 +69,14 @@ export function Landing() {
 
         {/* Social Soothe description section*/}
         <div className="bg-[#F0F8FF] flex flex-col justify-center items-center px-10 py-20 gap-10 w-full">
-          <h2 className='text-5xl text-center py-10 font-medium'>Take our Social Soothe challenge</h2>
+          <h2 className='text-5xl text-center py-10 font-medium'>Grow your social tree</h2>
           <div className='flex flex-col gap-20 items-center justify-center'>
 
             <div className='flex gap-20 items-center justify-center max-w-2xl' data-aos="fade-up">
                 <img src={"../src/assets/undraw_environment_iaus.svg"} className='w-1/3' />
                 <div className='flex flex-col gap-5'>
-                  <h2 className='text-3xl'>Start easy and slow</h2>
-                  <p className='text-2xl'>Our challenge will gradually give you social interactions through different levels, start with easy challenges that will slowly get your social juices flowing</p>
+                  <h2 className='text-3xl'>Document your social interactions</h2>
+                  <p className='text-2xl'>Before any social event that you are anxious about write down about the event and question and challenge your negative thoughts</p>
                 </div>
             </div>
 
@@ -87,8 +87,7 @@ export function Landing() {
               <img src={"../src/assets/undraw_gardening_re_e658.svg"} className='h-20' />
               <div className='flex flex-col gap-5'>
                 <h2 className='text-3xl'>Grow gradually</h2>
-                <p className='text-2xl'>Each step will gradually have you socially interact more, with each level, social interactions will require more talking
-              and public exposure.</p>
+                <p className='text-2xl'>Each completed social interaction will gradually grow your social tree with flowers.</p>
               </div>
             </div>
 
@@ -97,8 +96,8 @@ export function Landing() {
             <div className='flex gap-20 items-center justify-center max-w-2xl' data-aos="fade-up">
               <img src={"../src/assets/undraw_blooming_re_2kc4-2.svg"} className='w-1/3' />
               <div className='flex flex-col gap-5'>
-                <h2 className='text-3xl'>Level Up</h2>
-                <p className='text-2xl'>Complete each step to level up to gain a flower to help grow your social tree and help it sprout</p>
+                <h2 className='text-3xl'>Reward yourself</h2>
+                <p className='text-2xl'>Completing each social interaction rewards you with five leafs where you can use to earn rewards.</p>
               </div>
             </div>
 
@@ -118,7 +117,7 @@ export function Landing() {
               </p>
             </div>
             <div>
-              <button className='bg-[#44423F] text-white p-5 rounded-full text-[18px] font-bold shadow-md'>Resources</button>
+              <button className='bg-[#44423F] text-white p-5 rounded-full text-[18px] font-bold shadow-md hover:bg-[#6B6864] transition-all duration-300 ease-in-out'>Resources</button>
             </div>
 
           </div>
