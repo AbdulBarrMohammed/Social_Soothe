@@ -16,7 +16,9 @@ export function Journals() {
     const [colors, setColors] = useState([]);
     const [lightestBg, setLightestBg] = useState("");
 
+
     const getData = async () => {
+
         try {
             const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
             const journalData = await res.json();
@@ -27,7 +29,7 @@ export function Journals() {
             const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
             const dataColors = await resColors.json();
 
-            if (dataColor.currColor == 'Blue') {
+            if (dataColor.currColor.toLowerCase() == 'blue') {
                 setLightestBg("#ACC8EA")
             }
             else {
@@ -82,7 +84,7 @@ export function Journals() {
                             <input
                                     value={searchQuery}
                                     onChange={(event) => setSearchQuery(event.target.value)}
-                                    className="h-10 w-full rounded-3xl p-5" placeholder="Search journal title..."/>
+                                    className="h-10 w-full rounded-3xl p-5 shadow-md" placeholder="Search journal title..."/>
                             </form>
                             <Link to={`/createJournal`} className="flex flex-col rounded-full h-16 w-16 cursor-pointer p-5 bg-[#eeeeee] items-center justify-center">
                                     <img src="../src/assets/plus.svg" className="h-5"/>

@@ -26,7 +26,7 @@ export function NavbarLoggedIn() {
             const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
             const dataColors = await resColors.json();
 
-            if (dataColor.currColor == 'Blue') {
+            if (dataColor.currColor.toLowerCase() == 'blue') {
                 setSemiBg("#4470AD")
             }
 

@@ -43,7 +43,7 @@ export function Landing() {
         initial="hidden"
         whileInView={"show"}
         viewport={{once: false, amount: 0.5}}
-        className='bg-[#CCDBEE] flex flex-wrap justify-center items-center px-20 py-40 gap-16 w-full'>
+        className='bg-[#CCDBEE] flex flex-wrap justify-center items-center px-20 py-28 gap-16 w-full'>
             <div className='flex flex-col gap-5 max-w-sm'>
               <div className='flex  items-center gap-5'>
                 <img src={'../src/assets/undraw_smiley_face_re_9uid.svg'} className="h-28"/>

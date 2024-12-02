@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@squircle-js/react": "^1.2.0",
     "aos": "^2.3.4",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",

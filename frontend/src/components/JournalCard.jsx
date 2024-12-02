@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Squircle } from "@squircle-js/react"
 
 
 export function JournalCard ({journal}) {
@@ -7,86 +9,73 @@ export function JournalCard ({journal}) {
     let date = new Date(journal.dateCreated);
     let stringDate = date.toString().slice(4, 15)
 
+    const [currMood, setCurrMood] = useState("")
+    const [emoji, setEmoji] = useState("");
+    const [bgColor, setBgColor] = useState("");
+    const [textColor, setTextColor] = useState("");
+
+
+    useEffect(() => {
+        setCurrMood(journal.mood)
+        if (journal.mood == 'angry') {
+            setEmoji("../src/assets/angry.png")
+            setBgColor("rgb(249, 230, 224)")
+            setTextColor("rgb(209, 112, 83)");
+        }
+        else if (journal.mood == 'embarrassed') {
+            setEmoji("../src/assets/tired.png")
+            setBgColor("rgb(214, 249, 246)")
+            setTextColor("rgb(87, 156, 149)");
+
+        }
+        else if (journal.mood == 'stressed') {
+            setEmoji("../src/assets/nervous.png")
+            setBgColor("rgb(250, 225, 238)")
+            setTextColor("rgb(205, 92, 146)");
+        }
+        else if (journal.mood == 'worried') {
+            setEmoji("../src/assets/sad-2.png")
+            setBgColor("rgb(232, 218, 250)")
+            setTextColor("rgb(123, 57, 196)");
+        }
+        else if (journal.mood == 'sad') {
+            setEmoji("../src/assets/sad.png")
+            setBgColor("rgb(233, 234, 253)")
+            setTextColor("rgb(69, 74, 186)");
+        }
+        else {
+            setEmoji("../src/assets/smile.png")
+            setBgColor("rgb(251, 235, 190)")
+            setTextColor("rgb(195, 159, 60)");
+        }
+
+    }, [])
+
 
     return (
         <>
-
-                {journal.mood == 'happy' &&
-                    <Link to={`/selectedJournal/${journal.id}`} className="flex flex-col rounded-3xl cursor-pointer bg-emojiHappy p-5 hover: transition duration-300 ease-in-out shadow-md">
-                        <div className="flex flex-col items-center justify-center p-2 gap-5 w-48 h-48">
-                            <img src="../src/assets/smile.png" alt="" className="h-20"/>
-                            <div class="text-emojiHappyWord font-bold flex flex-col text-center">
-                                <p className="">{journal.title}</p>
-                                <p>{stringDate}</p>
+            <Link to={`/selectedJournal/${journal.id}`} className="">
+                    <Squircle
+                            cornerRadius={64}
+                            cornerSmoothing={1}
+                            width={200}
+                            height={200}
+                            className="flex-col cursor-pointer items-center justify-cente p-5 hover:opacity-85 transition duration-300 ease-in-out shadow-xl"
+                                style={{
+                                        background: bgColor,
+                                      }}
+                            >
+                            <div className="flex flex-col items-center justify-center p-2 gap-2">
+                                    <img src={emoji} alt="" className="h-16"/>
+                                    <div className=" font-bold flex flex-col text-center" style={{ color: textColor}}>
+                                        <p className="">{journal.title}</p>
+                                        <p>{stringDate}</p>
+                                    </div>
                             </div>
-                        </div>
-                    </Link>
 
-                }
+                </Squircle>
 
-                {journal.mood == 'sad' &&
-                    <Link to={`/selectedJournal/${journal.id}`} className="flex flex-col rounded-3xl cursor-pointer bg-emojiSad p-5 hover:opacity-85 transition duration-300 ease-in-out shadow-md">
-                        <div className="flex flex-col items-center justify-center p-2 gap-5 w-48 h-48">
-                            <img src="../src/assets/sad.png" alt="" className="h-20"/>
-                            <div className="text-emojiSadWord font-bold flex flex-col text-center">
-                                <p className="">{journal.title}</p>
-                                <p>{stringDate}</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                }
-                {journal.mood == 'worried' &&
-                    <Link to={`/selectedJournal/${journal.id}`} className="flex flex-col rounded-3xl cursor-pointer bg-emojiWorried p-5 hover:opacity-85 transition duration-300 ease-in-out shadow-md">
-                        <div className="flex flex-col items-center justify-center p-2 gap-5 w-48 h-48">
-                            <img src="../src/assets/sad-2.png" alt="" className="h-20"/>
-                            <div className="text-emojiWorriedWord font-bold flex flex-col text-center">
-                                <p className="">{journal.title}</p>
-                                <p>{stringDate}</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                }
-                {journal.mood == 'angry' &&
-                    <Link to={`/selectedJournal/${journal.id}`} className="flex flex-col rounded-3xl cursor-pointer bg-emojiAngry p-5 hover:opacity-85 transition duration-300 ease-in-out shadow-md">
-                        <div className="flex flex-col items-center justify-center p-2 gap-5 w-48 h-48">
-                            <img src="../src/assets/angry.png" alt="" className="h-20"/>
-                            <div className="text-emojiAngryWord font-bold flex flex-col text-center">
-                                <p className="">{journal.title}</p>
-                                <p>{stringDate}</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                }
-
-                {journal.mood == 'embarrassed' &&
-                    <Link to={`/selectedJournal/${journal.id}`} className="flex flex-col rounded-3xl cursor-pointer bg-emojiEmbarrassed p-5 hover:opacity-85 transition duration-300 ease-in-out shadow-md">
-                        <div className="flex flex-col items-center justify-center p-2 gap-5 w-48 h-48">
-                            <img src="../src/assets/tired.png" alt="" className="h-20"/>
-                            <div className="text-emojiEmbarrassedWord font-bold flex flex-col text-center">
-                                <p>{journal.title}</p>
-                                <p>{stringDate}</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                }
-
-                {journal.mood == 'stressed' &&
-                    <Link to={`/selectedJournal/${journal.id}`} className="flex flex-col rounded-3xl cursor-pointer bg-emojiStressed p-5 hover:opacity-85 transition duration-300 ease-in-out shadow-md">
-                        <div className="flex flex-col items-center justify-center p-2 gap-5 w-48 h-48">
-                            <img src="../src/assets/nervous.png" alt="" className="h-20"/>
-                            <div className="text-emojiStressedWord font-bold flex flex-col text-center">
-                                <p>{journal.title}</p>
-                                <p>{stringDate}</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                }
-
+             </Link>
 
 
         </>
