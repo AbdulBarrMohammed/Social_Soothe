@@ -77,7 +77,6 @@ export function JournalCard ({journal}) {
 
              </Link>
 
-
         </>
 
     )

@@ -69,7 +69,7 @@ export function Landing() {
                 <img src={'../src/assets/undraw_appreciate_it_re_yc8h.svg'} className="h-32"/>
                 <h2 className='font-bold text-2xl'>Recieve daily affirmations</h2>
               </div>
-              <p className='text-lg'>Check in everyday to recieve as many daily affirmations as you want to give you confidence throughout the day with dealing with social anxiety </p>
+              <p className='text-lg'>Check in everyday to recieve as many daily affirmations as you want to give you confidence throughout the day </p>
             </div>
         </motion.div>
 
