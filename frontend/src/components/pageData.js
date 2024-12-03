@@ -49,8 +49,8 @@ export const pageDataLeft = [
         path: "/faq"
     },
     {
-        name: "Advice",
-        path: "/advice"
+        name: "Articles",
+        path: "/articles"
     },
 
 ]

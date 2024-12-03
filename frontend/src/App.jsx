@@ -20,7 +20,7 @@ import { Awards } from './pages/Awards';
 import { LayoutAwards } from './components/LayoutAwards';
 import { UserSounds } from './pages/UserSounds';
 import { Settings } from './pages/Settings';
-
+import { Articles } from './pages/Articles';
 
 function App() {
 
@@ -32,6 +32,7 @@ function App() {
           <Route path="/" element={<Landing/>}/>
           <Route path="/signUp" element={<SignUp/>}/>
           <Route path="/login" element={<LogIn/>}/>
+          <Route path="/articles" element={<Articles/>}/>
           <Route element={<LayoutLoggedIn/>}>
             <Route path="/journals" element={<Journals/>}/>
             <Route path="/createJournal" element={<CreateJournal/>}/>
