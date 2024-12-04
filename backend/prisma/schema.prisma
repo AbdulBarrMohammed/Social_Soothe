@@ -66,6 +66,7 @@ model Flower {
   x Int
   y Int
   done Boolean
+  isChecked Boolean
 
 }
 

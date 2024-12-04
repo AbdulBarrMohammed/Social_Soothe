@@ -139,7 +139,7 @@ async function getAllFlowers(email) {
 
 }
 
-async function insertNewFlower(email, color, questionOne, questionTwo,questionThree,questionFour,questionFive, questionSix, x, y, questionSeven, dateCreated, done) {
+async function insertNewFlower(email, color, questionOne, questionTwo,questionThree,questionFour,questionFive, questionSix, x, y, questionSeven, dateCreated, done, isChecked) {
     const user = await prisma.user.findUnique({
       where: { email: email }
     });
@@ -158,6 +158,7 @@ async function insertNewFlower(email, color, questionOne, questionTwo,questionTh
         questionSeven,
         dateCreated: dateCreated,
         done: done,
+        isChecked: isChecked,
         author: {
           connect: { id: user.id }
         }
@@ -197,7 +198,7 @@ async function updateFlower(id, color, questionOne,
   questionFive,
   questionSix,
   questionSeven,
-  done) {
+  done, isChecked) {
 
   const updateFlower = await prisma.flower.update({
     where: {
@@ -212,7 +213,8 @@ async function updateFlower(id, color, questionOne,
       questionFive: questionFive,
       questionSix: questionSix,
       questionSeven: questionSeven,
-      done: done
+      done: done,
+      isChecked: isChecked
     }
   });
 
@@ -236,6 +238,20 @@ async function updateFlowerColor(currId, color, done) {
 
 }
 
+async function updateFlowerChecked(currId, checked) {
+    const updateFlower = await prisma.flower.update({
+      where: {
+        id: currId
+      },
+      data: {
+          isChecked: checked,
+      }
+    });
+
+  return updateFlower
+
+}
+
 
 async function getAllPositions(req, res) {
   const pos = await prisma.flower.findMany({
@@ -244,7 +260,6 @@ async function getAllPositions(req, res) {
       y: true
     }
   });
-  //return res.json(pos);
   return pos;
 }
 
@@ -451,6 +466,7 @@ module.exports = {
     getSearchQuery,
     getUser,
     updateCoin,
+    updateFlowerChecked,
 
     getAllSounds,
     insertNewSound,

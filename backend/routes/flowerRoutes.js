@@ -9,5 +9,7 @@ router.get("/flowers/flower/:id", flowerController.getSelectedFlower)
 router.get("/flowers/flower/delete/:id", flowerController.deleteFlower)
 router.post("/flowers/flower/update/:id", flowerController.editFlowerPost);
 router.post("/flowers/flower/color/update/:id", flowerController.editFlowerPostColor);
+router.post("/flowers/flower/check/update/:id", flowerController.editFlowerPostChecked);
+
 
 module.exports = router;

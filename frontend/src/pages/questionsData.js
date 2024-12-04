@@ -68,13 +68,8 @@ export function increment(index, input, setQuestionSix, setShowQuestions, setSho
 
 
 export async function handleColorChange(done, currId, setOpenModal) {
-    let color = ""
         try {
-            if (done) {
-                color = "#059033"; // Assign the color directly to a variable
-            } else {
-                color = "#808080";
-            }
+            let color = done ?  "#059033" : "#808080";
             const response = await fetch(`http://localhost:8000/flowers/flower/color/update/${currId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

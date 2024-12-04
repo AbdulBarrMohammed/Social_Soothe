@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 //import { getJournal, getJournals, createJournal, updateJournal, deleteJournal } from './controller'
 import React from 'react'
+import { motion } from 'framer-motion';
 
-import {HashRouter as Router, Routes, Route} from "react-router-dom";
+
+import {HashRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import { Landing } from './pages/Landing';
 import { SignUp } from './components/SignUp';
 import {Layout} from "./components/Layout"
@@ -22,46 +24,64 @@ import { UserSounds } from './pages/UserSounds';
 import { Settings } from './pages/Settings';
 import { Articles } from './pages/Articles';
 import { Resources } from './pages/Resources';
+import { AnimatePresence } from 'framer-motion';
+
 
 function App() {
 
+  const location = useLocation();
+
   return (
     <>
-    <Router>
-      <Routes>
-        <Route element={<Layout/>}>
-          <Route path="/" element={<Landing/>}/>
-          <Route path="/signUp" element={<SignUp/>}/>
-          <Route path="/login" element={<LogIn/>}/>
-          <Route path="/articles" element={<Articles/>}/>
-          <Route path="/resources" element={<Resources/>}/>
-          <Route element={<LayoutLoggedIn/>}>
-            <Route path="/journals" element={<Journals/>}/>
-            <Route path="/createJournal" element={<CreateJournal/>}/>
-            <Route path="/selectedJournal/:id" element={<SelectedJournal/>}/>
-            <Route path="/breatheIntro" element={<BreatheIntro/>}/>
-            <Route path="/breathe/:start/:middle/:end" element={<Breathe/>}/>
-            <Route path="/socialInteractions" element={<SocialInteractions/>}/>
-            <Route path="/editFlower/:id" element={<EditFlower/>}/>
-            <Route path="/affirmations" element={<Affirmations/>}/>
-            <Route path="/userSounds" element={<UserSounds/>}/>
-            <Route path="/settings" element={<Settings/>}/>
-            <Route element={<LayoutAwards/>}>
-              <Route path="/awards/:type" element={<Awards/>}/>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route element={<Layout/>}>
+            <Route path="/" element={<PageWrapper><Landing/></PageWrapper>}/>
+            <Route path="/signUp" element={<PageWrapper><SignUp/></PageWrapper>}/>
+            <Route path="/login" element={<PageWrapper><LogIn/></PageWrapper>}/>
+            <Route path="/articles" element={<PageWrapper><Articles/></PageWrapper>}/>
+            <Route path="/resources" element={<PageWrapper><Resources/></PageWrapper>}/>
+            <Route element={<LayoutLoggedIn/>}>
+              <Route path="/journals" element={<PageWrapper><Journals/></PageWrapper>}/>
+              <Route path="/createJournal" element={<PageWrapper><CreateJournal/></PageWrapper>}/>
+              <Route path="/selectedJournal/:id" element={<PageWrapper><SelectedJournal/></PageWrapper>}/>
+              <Route path="/breatheIntro" element={<PageWrapper><BreatheIntro/></PageWrapper>}/>
+              <Route path="/breathe/:start/:middle/:end" element={<PageWrapper><Breathe/></PageWrapper>}/>
+              <Route path="/socialInteractions" element={<PageWrapper><SocialInteractions/></PageWrapper>}/>
+              <Route path="/editFlower/:id" element={<PageWrapper><EditFlower/></PageWrapper>}/>
+              <Route path="/affirmations" element={<PageWrapper><Affirmations/></PageWrapper>}/>
+              <Route path="/userSounds" element={<PageWrapper><UserSounds/></PageWrapper>}/>
+              <Route path="/settings" element={<PageWrapper><Settings/></PageWrapper>}/>
+              <Route element={<LayoutAwards/>}>
+                <Route path="/awards/:type" element={<Awards/>}/>
+
+              </Route>
+
+
 
             </Route>
-
-
-
           </Route>
-        </Route>
-      </Routes>
-
-    </Router>
+        </Routes>
+      </AnimatePresence>
 
     </>
   )
 
+}
+
+
+function PageWrapper({ children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20}}
+      animate={{ opacity: 1, y: 0}}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5}}
+    >
+      {children}
+
+    </motion.div>
+  )
 }
 
 export default App

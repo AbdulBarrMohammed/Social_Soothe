@@ -45,17 +45,50 @@ export function Settings() {
 
     }
 
+    function handleChange(e) {
+        e.preventDefault()
+        console.log(e.target.value)
+    }
+
     return (
         <>
-            <p>This is the settings</p>
-            <p>Choose color schemes</p>
-            {colors.map((color, index) => {
-                return (
-                    <p onClick={(e) => handleClick(color.name)}>{color.name}</p>
-                    )
-                })
-            }
-            <p onClick={(e) => handleClick("Blue")}>Blue</p>
+            <div className="flex flex-col px-20 pt-10 h-screen bg-[#ACC8EA] text-[#44423F]">
+                <div>
+                    <h1 className="text-4xl font-bold">Account Settings</h1>
+
+                </div>
+                <div>
+                    <h1 className="text-2xl font-bold">Appearance</h1>
+                    <hr className="border-[#44423F] border" />
+                    <select onClick={(e) => handleChange(e)}>
+                        <option>Choose a background color</option>
+                        {colors.map((color, index) => {
+                            return (
+                                <option key={index}>
+                                    {color.name}
+                                </option>
+                            );
+                        })}
+                    </select>
+
+
+
+                </div>
+                <div>
+                    <h1 className="text-2xl font-bold">background Sounds</h1>
+                    <hr className="border-[#44423F] border" />
+                    <h2>Choose a background sound to play during breathing exercises</h2>
+
+                </div>
+                <div>
+                    <h1 className="text-2xl font-bold">Delete account</h1>
+                    <hr className="border-[#44423F] border" />
+                    <button>Press to delete account</button>
+
+                </div>
+
+            </div>
+
 
         </>
     )

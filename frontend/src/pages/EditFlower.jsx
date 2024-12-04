@@ -25,6 +25,7 @@ export function EditFlower() {
     const [questionSeven, setQuestionSeven] = useState("")
     const [color, setColor] = useState("")
     const [done, setDone] = useState(false)
+    const [isChecked, setIsChecked] = useState(false);
 
     const navigate = useNavigate()
 
@@ -44,6 +45,7 @@ export function EditFlower() {
                 setQuestionSeven(data.questionSeven)
                 setColor(data.color)
                 setDone(data.done)
+                setIsChecked(data.isChecked)
             } catch(err) {
                 console.log(err)
             }
@@ -64,7 +66,7 @@ export function EditFlower() {
                 questionFour,
                 questionFive,
                 questionSix,
-                questionSeven, done})
+                questionSeven, done, isChecked})
             })
 
         } catch(err) {

@@ -25,6 +25,7 @@ export function SocialInteractions() {
     const [color, setColor] = useState("");
     const [showConfetti, setShowConfetti] = useState(false);
     const [currCoins, setCurrCoins] = useState(-1);
+    const [isChecked, setIsChecked] = useState(false);
 
     //create flower
     const [showQuestion, setShowQuestions] = useState(false)
@@ -70,6 +71,7 @@ export function SocialInteractions() {
                 setQuestionSeven(data.questionSeven)
                 setColor(data.color)
                 setShowConfetti(false)
+                setIsChecked(data.isChecked)
             } catch(err) {
                 console.log(err)
             }
@@ -99,27 +101,48 @@ export function SocialInteractions() {
 
     async function handleComplete(e) {
         setDone(e.target.checked)
-        if (e.target.checked == true) {
-            //add 10 coins to user coins
-            let coins = currCoins + 5
-            try {
-                const response = await fetch(`http://localhost:8000/user/update`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({coins, email})
-                })
-            } catch(err) {
-                console.log(err)
+
+        console.log("is checked button", isChecked)
+        //first check if the user has already pressed the check in the past
+        if (!isChecked) {
+
+            if (e.target.checked == true) {
+                //add 10 coins to user coins
+                let coins = currCoins + 5
+                try {
+                    const response = await fetch(`http://localhost:8000/user/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({coins, email})
+                    })
+
+                    ///update the flower is be checked is true
+                    const checked = true
+                    setIsChecked(true)
+                    const responseChecked = await fetch(`http://localhost:8000/flowers/flower/check/update/${currId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({currId, checked})
+                    })
+                } catch(err) {
+                    console.log(err)
+                }
+                setShowConfetti(true)
+                setTimeout(() => {
+                    setShowConfetti(false);
+                  }, 10000);
             }
-            setShowConfetti(true)
-            setTimeout(() => {
-                setShowConfetti(false);
-              }, 10000);
+            else {
+                setShowConfetti(false)
+            }
         }
+
         else {
-            setShowConfetti(false)
+            alert("You have already checked this")
         }
+
     }
+
 
     //show questions for creating flower
     function showQuestions(e) {
@@ -153,7 +176,11 @@ export function SocialInteractions() {
     function handleSevenSubmit() {
         addQuestionSeven(currId, color, questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven,
             done, setQuestionSevenModal)
-        }
+    }
+
+    function closeQuestions() {
+        setShowQuestions(false);
+    }
 
     return (
         <div>
@@ -227,6 +254,7 @@ export function SocialInteractions() {
                                 <div className="flex gap-2 w-4/4">
                                     <h1>{index + 1}.</h1>
                                     <h1>{ques}</h1>
+                                    <p onClick={closeQuestions}>X</p>
                                 </div>
                                     <textarea value={input} onChange={(e) => setInput(e.target.value)} className="border h-40" required/>
                                     <div className="flex justify-between">

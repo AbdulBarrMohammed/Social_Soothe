@@ -30,6 +30,7 @@ async function createFlowerPost(req, res) {
     const color = 'gray'
     const dateCreated = new Date()
     const done = false
+    const isChecked = false
 
     try {
         await db.insertNewFlower(email, color, questionOne,
@@ -40,7 +41,7 @@ async function createFlowerPost(req, res) {
             questionSix,
             x,
             y,
-            questionSeven, dateCreated, done);
+            questionSeven, dateCreated, done, isChecked);
         // Send a success response with any necessary data back to the client
         res.status(201).json({ message: 'flower created successfully'});
     } catch (error) {
@@ -85,14 +86,14 @@ async function editFlowerPost(req, res) {
             questionFour,
             questionFive,
             questionSix,
-            questionSeven, done} = req.body
+            questionSeven, done, isChecked} = req.body
         await db.updateFlower(id, color, questionOne,
             questionTwo,
             questionThree,
             questionFour,
             questionFive,
             questionSix,
-            questionSeven, done);
+            questionSeven, done, isChecked);
         res.json("successfully updated flower")
 
     } catch (err) {
@@ -113,6 +114,18 @@ async function editFlowerPostColor(req, res) {
     }
 }
 
+async function editFlowerPostChecked(req, res) {
+    try {
+        const {currId, checked} = req.body
+        await db.updateFlowerChecked(currId, checked);
+        res.json("successfully updated flower check")
+    } catch (err) {
+        console.log("error....", err)
+        res.status(500).json({ message: 'Error updating flower check' });
+    }
+
+}
+
 
 module.exports = {
     displayFlowers,
@@ -120,7 +133,8 @@ module.exports = {
     getSelectedFlower,
     deleteFlower,
     editFlowerPost,
-    editFlowerPostColor
+    editFlowerPostColor,
+    editFlowerPostChecked
 
 
 }

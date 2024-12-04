@@ -156,11 +156,6 @@ export function Breathe() {
             );
         };
 
-        const openSoundOptions = () => {
-            navigate("/userSounds");
-        }
-
-
         const start = () => {
             //first check if the exercise is the 3-3-3 pattern
             if (startNum == 3) {
@@ -241,7 +236,6 @@ export function Breathe() {
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={start}>Start</button>
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Pause</button>
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound}>Play background sound</button>
-
             </div>
         </div>
         <div>
@@ -251,7 +245,7 @@ export function Breathe() {
         <div className="flex flex-col w-1/3 gap-5">
             <h2 className="font-bold text-3xl">{title}</h2>
             <p>{description}</p>
-            <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={openSoundOptions}>Sounds</button>
+
         </div>
 
     </div>
