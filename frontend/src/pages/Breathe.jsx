@@ -75,16 +75,15 @@ export function Breathe() {
         getCurrSound()
     }, [])
 
-    const [key, setKey] = useState(0); // To re-render the timer
+    const [key, setKey] = useState(0); // re-render the timer
 
     const restart = () => {
-        currBgSound.current.play()
+            currBgSound.current.play()
             if (turn == 2 || turn == 5 || turn == 8) {
                 breatheInAudio.current.play()
                 setRounds(rounds + 1)
                 setBreathe("Breathe in...")
                 setCounter(startNum)
-
             }
 
             else if (turn == 0 || turn == 3 || turn == 6 || turn == 9) {
@@ -164,9 +163,7 @@ export function Breathe() {
 
         const start = () => {
             //first check if the exercise is the 3-3-3 pattern
-            console.log(turn, "this is the go value")
             if (startNum == 3) {
-
                 if (counter == endNum && (turn == 1 || turn == 4 || turn == 7 || turn == 10)) {
                     console.log("hold")
                 }
@@ -177,9 +174,9 @@ export function Breathe() {
                     breatheInAudio.current.play()
                 }
 
-
             }
             else {
+
                 //before checking check if the exercise is in the breathing stage which should have counter of start number
                 if (counter == startNum) {
                     breatheInAudio.current.play()
@@ -196,6 +193,7 @@ export function Breathe() {
 
   useEffect(() => {
     let timer;
+    // check if the breathing exercise is active and counter is greater than 9
     if (isActive && counter > 0) {
       timer = setInterval(
         () => setCounter((prevCounter) => prevCounter - 1),
@@ -242,7 +240,7 @@ export function Breathe() {
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={clear}>Restart</button>
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={start}>Start</button>
                 <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Pause</button>
-                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound}>Play background sounds</button>
+                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound}>Play background sound</button>
 
             </div>
         </div>

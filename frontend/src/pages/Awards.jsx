@@ -41,7 +41,7 @@ export function Awards() {
     }, [type]);
 
     return (
-        <div className="flex-col pt-10 bg-[#ACC8EA] min-h-screen px-10">
+        <div className="flex-col pt-10 bg-[#ACC8EA] min-h-screen px-10 text-[#44423F]">
             {isSounds &&
                 <>
                     <p className="text-2xl py-3">{type}</p>
@@ -83,8 +83,6 @@ export function Awards() {
                     </div>
                 </>
             }
-
-
 
         </div>
     )

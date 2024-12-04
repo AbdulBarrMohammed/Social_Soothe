@@ -42,7 +42,7 @@ export const pageDataLeft = [
     },
     {
         name: "Resources",
-        path: "/contact"
+        path: "/resources"
     },
     {
         name: "FAQ",
