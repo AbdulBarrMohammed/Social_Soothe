@@ -6,14 +6,14 @@ export function AwardNavbar() {
             <div className="flex flex-col gap-3">
                 <h1 className="text-4xl font-bold">Use your leafs to earn awards</h1>
                 <h2 className="text-2xl font-medium">Choose some of the options below to better your experience in social sooth</h2>
-                <div className="flex gap-5 pt-3">
-                    <Link to={"/awards/Sounds"} className="border border-[#6C6D74] p-2 rounded-lg">
+                <div className="flex gap-5 pt-3 text-white">
+                    <Link to={"/awards/Sounds"} className="bg-[#6888BE] p-4 rounded-xl shadow-md">
                         Breathing exercise sounds
                     </Link>
-                    <Link to={"/awards/Colors"} className="border border-[#6C6D74] p-2 rounded-lg">
+                    <Link to={"/awards/Colors"} className="bg-[#6888BE] p-4 rounded-xl shadow-md">
                         Color schemes
                     </Link>
-                    <Link to={"/awards/Fonts"} className="border border-[#6C6D74] p-2 rounded-lg">
+                    <Link to={"/awards/Fonts"} className=" bg-[#6888BE] p-4 rounded-xl shadow-md">
                         Fonts
                     </Link>
                 </div>

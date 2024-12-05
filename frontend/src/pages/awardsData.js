@@ -7,23 +7,26 @@ export const sounds = [
         price: 150
     },
     {
-        wavSound: "../../src/assets/sounds/calm-waves-early-morning-4.wav",
-        title: "Calm morning waves",
-        price: 20
-    },
-    {
-        wavSound: "../../src/assets/sounds/calm-mountain-creek-ambience-228231.wav",
-        title: "Calm mountain creek",
-        price: 130
-    },
-    {
         wavSound: "../../src/assets/sounds/calming-rain-1.wav",
         title: "Calm rain",
+        price: 10
+    },
+
+    {
+        wavSound: "../../src/assets/sounds/jungle-nature-229896.wav",
+        title: "Jungle nature",
+        price: 130
+    },
+
+    {
+        wavSound: "../../src/assets/sounds/fire-place-189399.wav",
+        title: "Fire place",
         price: 50
     },
+
     {
-        wavSound: "../../src/assets/sounds/cold-snowfall-ambience-5-minutes-sound-effect-164512.wav",
-        title: "Calm snowfall",
+        wavSound: "../../src/assets/sounds/firewood-burning-sound-179862.wav",
+        title: "Firewood burning",
         price: 30
     },
     {
@@ -31,22 +34,52 @@ export const sounds = [
         title: "Countryside morning",
         price: 200
     },
+
     {
-        wavSound: "../../src/assets/sounds/fire-place-189399.wav",
-        title: "Fire place",
+        wavSound: "../../src/assets/sounds/light-rain-2.wav",
+        title: "Light rain",
         price: 210
     },
+
     {
-        wavSound: "../src/assets/sounds/firewood-burning-sound-179862.wav",
-        title: "Firewood burning",
+        wavSound: "../../src/assets/sounds/morning-breeze-and-birds-35105.wav",
+        title: "Morning breeze and birds",
         price: 150
     },
+
     {
-        wavSound: "../src/assets/sounds/heavy-rain-3.wav",
-        title: "Heavy rain",
+        wavSound: "../../src/assets/sounds/ocean-2.wav",
+        title: "Ocean",
         price: 30
     },
+
+    {
+
+    wavSound: "../../src/assets/sounds/rain-and-thunder-sfx-5.wav",
+    title: "Rain and thunder",
+    price: 40
+    },
+
+    {
+        wavSound: "../../src/assets/sounds/sea-waves-1.wav",
+        title: "Sea waves",
+        price: 120
+    },
+
+    {
+        wavSound: "../../src/assets/sounds/waterfall-sounds-259625.wav",
+        title: "Waterfall sounds",
+        price: 120
+    },
+
+    {
+        wavSound: "../../src/assets/sounds/waves-on-the-lake-in-summer-time-in-wav-5.wav",
+        title: "Summer lake waves",
+        price: 160
+    },
+
 ]
+
 
 /*
 dark String

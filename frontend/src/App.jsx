@@ -20,12 +20,11 @@ import { EditFlower } from './pages/EditFlower';
 import { Affirmations } from './pages/Affirmations';
 import { Awards } from './pages/Awards';
 import { LayoutAwards } from './components/LayoutAwards';
-import { UserSounds } from './pages/UserSounds';
 import { Settings } from './pages/Settings';
 import { Articles } from './pages/Articles';
 import { Resources } from './pages/Resources';
 import { AnimatePresence } from 'framer-motion';
-
+import { About } from './pages/About';
 
 function App() {
 
@@ -41,6 +40,7 @@ function App() {
             <Route path="/login" element={<PageWrapper><LogIn/></PageWrapper>}/>
             <Route path="/articles" element={<PageWrapper><Articles/></PageWrapper>}/>
             <Route path="/resources" element={<PageWrapper><Resources/></PageWrapper>}/>
+            <Route path="/about" element={<PageWrapper><About/></PageWrapper>}/>
             <Route element={<LayoutLoggedIn/>}>
               <Route path="/journals" element={<PageWrapper><Journals/></PageWrapper>}/>
               <Route path="/createJournal" element={<PageWrapper><CreateJournal/></PageWrapper>}/>
@@ -50,7 +50,6 @@ function App() {
               <Route path="/socialInteractions" element={<PageWrapper><SocialInteractions/></PageWrapper>}/>
               <Route path="/editFlower/:id" element={<PageWrapper><EditFlower/></PageWrapper>}/>
               <Route path="/affirmations" element={<PageWrapper><Affirmations/></PageWrapper>}/>
-              <Route path="/userSounds" element={<PageWrapper><UserSounds/></PageWrapper>}/>
               <Route path="/settings" element={<PageWrapper><Settings/></PageWrapper>}/>
               <Route element={<LayoutAwards/>}>
                 <Route path="/awards/:type" element={<Awards/>}/>

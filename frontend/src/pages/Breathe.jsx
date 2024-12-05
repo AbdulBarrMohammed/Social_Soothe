@@ -27,6 +27,8 @@ export function Breathe() {
 
     const [title, setTitle] = useState("");
     const [bgSound, setBgSound] = useState("");
+    const [sounds, setSounds] = useState("");
+
 
 
     const breatheInAudio = useRef(new Audio("../../src/assets/breathe-in.wav"))
@@ -63,8 +65,24 @@ export function Breathe() {
         try {
             const res = await fetch(`http://localhost:8000/user/${email}`)
             const data = await res.json();
-            setBgSound(data.currSound)
+            //setBgSound(data.currSound)
             console.log('current data', data.currSound)
+
+            const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
+            const dataSounds = await resSounds.json();
+
+            setSounds(dataSounds)
+
+            console.log("sounds ->", dataSounds);
+            dataSounds.map((s) => {
+                console.log(s);
+                if (s.name == data.currSound) {
+                    console.log("WE HAVE FOUND A SOUND", s.src)
+                    setBgSound(s.src)
+
+                }
+
+            })
 
         } catch(err) {
             console.log(err)
@@ -75,10 +93,13 @@ export function Breathe() {
         getCurrSound()
     }, [])
 
+
+
+
     const [key, setKey] = useState(0); // re-render the timer
 
     const restart = () => {
-            currBgSound.current.play()
+            //currBgSound.current.play()
             if (turn == 2 || turn == 5 || turn == 8) {
                 breatheInAudio.current.play()
                 setRounds(rounds + 1)

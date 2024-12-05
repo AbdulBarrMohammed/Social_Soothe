@@ -19,8 +19,8 @@ export function Landing() {
   return (
     <>
       {/* main section */}
-      <div className="bg-[#CCDBEE] flex flex-col items-center text-[#44423F]">
-        <div className='bg-[#F0F8FF] flex gap-10  justify-center items-center px-20 py-40 w-full'>
+      <div className="bg-[#F0F8FF] flex flex-col items-center text-[#44423F]">
+        <div className='bg-[#CCDBEE] flex gap-10  justify-center items-center px-20 py-40 w-full'>
                 <div className='w-2/4 flex gap-6 flex-col'>
                 <h1 className='text-7xl font-semibold leading-[5rem] text-[#44423F]'>Helping You Navigate Social Anxiety.</h1>
                 <p className='text-3xl leading-[2.6rem] text-[#44423F]'>Social Soothe will help with your social anxiety
@@ -43,7 +43,7 @@ export function Landing() {
         initial="hidden"
         whileInView={"show"}
         viewport={{once: false, amount: 0.5}}
-        className='bg-[#CCDBEE] flex flex-wrap justify-center items-center px-20 py-28 gap-16 w-full'>
+        className='bg-[#F0F8FF] flex flex-wrap justify-center items-center px-20 py-28 gap-16 w-full'>
             <div className='flex flex-col gap-5 max-w-sm'>
               <div className='flex  items-center gap-5'>
                 <img src={'../src/assets/undraw_smiley_face_re_9uid.svg'} className="h-28"/>
@@ -77,7 +77,7 @@ export function Landing() {
 
 
         {/* Social Soothe description section*/}
-        <div className="bg-[#F0F8FF] flex flex-col justify-center items-center px-10 py-20 gap-10 w-full">
+        <div className="bg-[#CCDBEE] flex flex-col justify-center items-center px-10 py-20 gap-10 w-full">
           <h2 className='text-5xl text-center py-10 font-medium'>Grow your social tree</h2>
           <div className='flex flex-col gap-20 items-center justify-center'>
 

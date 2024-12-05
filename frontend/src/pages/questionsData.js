@@ -13,7 +13,7 @@ export const questions = [
 
 export async function submitAnswers(email, questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven, setShowSubmit) {
     //add flower to database
-    const x = Math.random() * 500;
+    const x = Math.random() * 800;
     const y = Math.random() * 100;
     const response = await fetch(`http://localhost:8000/flowers/create`, {
         method: 'POST',

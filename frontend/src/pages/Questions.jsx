@@ -19,9 +19,9 @@ const Questions = () => {
 
 
     return (
-        <div className='flex flex-col bg-[#CCDBEE] px-20 py-20 justify-center items-center w-full'>
+        <div className='flex flex-col bg-[#F0F8FF] px-20 py-20 justify-center items-center w-full'>
           <h2 className='text-5xl text-center leading-[4rem] py-16' data-aos="fade-up">Social anxiety questions</h2>
-          <div className='p-3 border-y border-[#C4C8C1] w-3/4 flex flex-col'>
+          <div className='p-3 border-y border-[#44423F] w-3/4 flex flex-col'>
             <div className='flex justify-between items-center gap-10'>
               <h2 className='text-xl' data-aos="fade-up">What is social anxiety?</h2>
               <button onClick={() => setIsDropdown((prev) => !prev)}>
@@ -43,7 +43,7 @@ const Questions = () => {
           </div>
 
 
-          <div className='p-3 border-b border-[#C4C8C1] w-3/4 flex flex-col'>
+          <div className='p-3 border-b border-[#44423F] w-3/4 flex flex-col'>
             <div className='flex justify-between items-center gap-10'>
               <h2 className='text-xl' data-aos="fade-up">What are the symptoms social anxiety?</h2>
               <button onClick={() => setIsDropdownTwo((prev) => !prev)}>
@@ -64,7 +64,7 @@ const Questions = () => {
               )}
           </div>
 
-          <div className='p-3 border-b border-[#C4C8C1] w-3/4 flex flex-col'>
+          <div className='p-3 border-b border-[#44423F] w-3/4 flex flex-col'>
             <div className='flex justify-between items-center gap-10'>
               <h2 className='text-xl' data-aos="fade-up">What are the causes of social anxiety?</h2>
               <button onClick={() => setIsDropdownThree((prev) => !prev)}>
@@ -84,7 +84,7 @@ const Questions = () => {
               )}
           </div>
 
-          <div className='p-3 border-b border-[#C4C8C1] w-3/4 flex flex-col'>
+          <div className='p-3 border-b border-[#44423F] w-3/4 flex flex-col'>
             <div className='flex justify-between items-center gap-10'>
               <h2 className='text-xl' data-aos="fade-up">How many people have social anxiety?</h2>
               <button onClick={() => setIsDropdownFour((prev) => !prev)}>
@@ -105,7 +105,7 @@ const Questions = () => {
               )}
           </div>
 
-          <div className='p-3 border-b border-[#C4C8C1] w-3/4 flex flex-col'>
+          <div className='p-3 border-b border-[#44423F] w-3/4 flex flex-col'>
             <div className='flex justify-between items-center gap-10'>
               <h2 className='text-xl' data-aos="fade-up">What treatments are available for social anxiety?</h2>
               <button onClick={() => setIsDropdownFive((prev) => !prev)}>
@@ -126,7 +126,7 @@ const Questions = () => {
               )}
           </div>
 
-          <div className='p-3 border-b border-[#C4C8C1] w-3/4 flex flex-col'>
+          <div className='p-3 border-b border-[#44423F] w-3/4 flex flex-col'>
             <div className='flex justify-between items-center gap-10'>
               <h2 className='text-xl' data-aos="fade-up">How is social anxiety diagnosed?</h2>
               <button onClick={() => setIsDropdownSix((prev) => !prev)}>
@@ -146,7 +146,7 @@ const Questions = () => {
 
               )}
           </div>
-          <div className='p-3 border-b border-[#C4C8C1] w-3/4 flex flex-col'>
+          <div className='p-3 border-b border-[#44423F] w-3/4 flex flex-col'>
             <div className='flex justify-between items-center gap-10'>
               <h2 className='text-xl' data-aos="fade-up">Is social anxiety the same as shyness?</h2>
               <button onClick={() => setIsDropdownSeven((prev) => !prev)}>
