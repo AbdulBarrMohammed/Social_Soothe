@@ -1,5 +1,4 @@
 export const questions = [
-    "Describe the social event that will occur?",
     "Whats the worst that can happen?",
     "Who is gonna judge you?",
     "How bad will that really be?",
@@ -41,13 +40,10 @@ export function increment(index, input, setQuestionSix, setShowQuestions, setSho
         setQuestionSix(input)
         setShowQuestions(false)
         setShowSubmit(true)
-        setIndex(0)
-        setQues(questions[0])
+        setIndex(1)
+        setQues(questions[1])
     } else {
-        if (index == 0) {
-            setQuestionOne(input)
-        }
-        else if (index == 1) {
+        if (index == 1) {
             setQuestionTwo(input)
         }
         else if (index == 2) {
@@ -98,26 +94,13 @@ export async function deleteFlower(currId) {
 
 }
 
-export async function addQuestionSeven(currId, color, questionOne,
-    questionTwo,
-    questionThree,
-    questionFour,
-    questionFive,
-    questionSix,
-    questionSeven, done, setQuestionSevenModal) {
+export async function addQuestionSeven(currId, questionSeven, setQuestionSevenModal) {
     try {
         const id = currId
-        const response = await fetch(`http://localhost:8000/flowers/flower/update/${currId}`, {
+        const response = await fetch(`http://localhost:8000/flowers/flower/questionSeven/update/${currId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({id, color, questionOne,
-            questionTwo,
-            questionThree,
-            questionFour,
-            questionFive,
-            questionSix,
-            questionSeven, done})
-        })
+        body: JSON.stringify({id, questionSeven})})
         setQuestionSevenModal(false)
 
     } catch(err) {

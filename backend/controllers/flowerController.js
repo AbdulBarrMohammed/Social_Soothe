@@ -126,6 +126,17 @@ async function editFlowerPostChecked(req, res) {
 
 }
 
+async function editFlowerQuestionSeven(req, res) {
+    try {
+        const {id, questionSeven} = req.body
+        await db.updateFlowerQuestionSeven(id, questionSeven);
+        res.json("successfully updated flower question seven")
+    } catch (err) {
+        console.log("error....", err)
+        res.status(500).json({ message: 'Error updating flower check' });
+    }
+}
+
 
 module.exports = {
     displayFlowers,
@@ -134,7 +145,8 @@ module.exports = {
     deleteFlower,
     editFlowerPost,
     editFlowerPostColor,
-    editFlowerPostChecked
+    editFlowerPostChecked,
+    editFlowerQuestionSeven
 
 
 }

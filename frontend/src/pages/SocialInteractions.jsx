@@ -35,6 +35,7 @@ export function SocialInteractions() {
     const [input, setInput] = useState("")
 
     const [questionOne, setQuestionOne] = useState("")
+    const [titleQuestion, setTitleQuestion] = useState(false);
     const [questionTwo, setQuestionTwo] = useState("")
     const [questionThree, setQuestionThree] = useState("")
     const [questionFour, setQuestionFour] = useState("")
@@ -202,6 +203,7 @@ export function SocialInteractions() {
 
     function explainEvent() {
         setQuestionSevenModal(true)
+
     }
 
     async function handleSubmit(e) {
@@ -210,13 +212,23 @@ export function SocialInteractions() {
     }
 
     function handleSevenSubmit() {
-        addQuestionSeven(currId, color, questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven,
-            done, setQuestionSevenModal)
+        addQuestionSeven(currId, questionSeven, setQuestionSevenModal)
     }
 
     function closeQuestions() {
         setShowQuestions(false);
     }
+
+    function handleOneSubmit() {
+        setTitleQuestion(false);
+        setShowQuestions(true)
+
+    }
+
+    function showQuestionOne() {
+        setTitleQuestion(true);
+    }
+
 
     return (
         <div>
@@ -278,10 +290,29 @@ export function SocialInteractions() {
                             <img src="../src/assets/rb_1364.png" className="h-60 mb-10"/>
                         </>
                     }
-                        <div onClick={showQuestions} className="absolute top-48 right-10 rounded-full h-20 w-20 cursor-pointer bg-[#eeeeee] p-5 items-center justify-center">
+                        <div onClick={showQuestionOne} className="absolute top-48 right-10 rounded-full h-20 w-20 cursor-pointer bg-[#eeeeee] p-5 items-center justify-center">
                             Add flower
                         </div>
                     </div>
+
+                    {titleQuestion  &&
+
+
+                        <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
+                            <div className="bg-white p-10">
+                                <form className="flex flex-col gap-5 p-10">
+
+                                <div>
+                                        <p className="font-bold">Title your social event</p>
+                                        <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionOne(e.target.value)} value={questionOne} maxLength={10}/>
+                                    </div>
+
+                                    <button onClick={handleOneSubmit}>done</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    }
 
                     {showQuestion &&
 

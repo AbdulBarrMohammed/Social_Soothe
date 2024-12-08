@@ -252,6 +252,18 @@ async function updateFlowerChecked(currId, checked) {
 
 }
 
+async function updateFlowerQuestionSeven(id, questionSeven) {
+  const updateFlower = await prisma.flower.update({
+    where: {
+      id: id
+    },
+    data: {
+      questionSeven: questionSeven
+    }
+  })
+  return updateFlower
+}
+
 
 async function getAllPositions(req, res) {
   const pos = await prisma.flower.findMany({
@@ -467,6 +479,7 @@ module.exports = {
     getUser,
     updateCoin,
     updateFlowerChecked,
+    updateFlowerQuestionSeven,
 
     getAllSounds,
     insertNewSound,
