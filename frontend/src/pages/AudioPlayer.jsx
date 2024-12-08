@@ -2,13 +2,18 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import ReactConfetti from 'react-confetti';
 
-export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex }) {
+
+export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex, setItemBrought }) {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
     const [currCoins, setCurrCoins] = useState(0);
     const [sounds, setSounds] = useState([]);
+    const [showConfetti, setShowConfetti] = useState(false);
+
+    const [congrats, setCongrats] = useState(false);
 
     const [isPlaying, setIsPlaying] = useState(false);
     const playPic =  "../../src/assets/play.svg"
@@ -17,6 +22,39 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
 
     const audioRef = useRef(null);
 
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
+
+    const setBgColor = async () => {
+        try {
+            //Get users current pick for a background color
+            const resColor = await fetch(`http://localhost:8000/user/${email}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor.toLowerCase() == 'blue') {
+                setButtonColor("#6888BE")
+            }
+            else {
+                //check for current user color in users purchased colors to set chosen background color
+                dataColors.map((c) => {
+                    if (c.name === dataColor.currColor) {
+                        setButtonColor(c.semiDark)
+                    }
+                })
+            }
+
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        setBgColor()
+    },[])
+
     useEffect(() => {
         if (currAudioIndex !== index && isPlaying) {
             pause();
@@ -24,38 +62,38 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
     }, [currAudioIndex]);
 
 
-
-    const getCoins = async () => {
+    /**
+     * Function to get all of current users color and coin amount data in database
+     * @param none
+     * @return none
+     */
+    const getData = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/user/${email}`)
-            const data = await res.json();
-            setCurrCoins(data.coins)
+            const resCoins = await fetch(`http://localhost:8000/user/${email}`)
+            const dataCoins = await resCoins.json();
+            setCurrCoins(dataCoins.coins)
+
+            const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
+            const dataSounds = await resSounds.json();
+
+            setSounds(dataSounds)
         } catch(err) {
             console.log(err)
         }
     }
 
     useEffect(() => {
-        getCoins()
+        getData()
     },[])
 
-    const getSounds = async () => {
-        try {
-            const res = await fetch(`http://localhost:8000/sounds/${email}`)
-            const data = await res.json();
-
-            setSounds(data)
-        } catch(err) {
-            console.log(err)
-        }
-    }
-
-    useEffect(() => {
-        getSounds()
-    },[])
-
+    /**
+     * Function to play current sound that is pressed by user
+     * @param none
+     * @return none
+     */
     function handlePlay() {
 
+        //Check if their is an audio current
         if (audioRef.current) {
             audioRef.current.play();
             setIsPlaying(true);
@@ -63,6 +101,11 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
         }
     }
 
+    /**
+     * Pauses and plays current audio that is playing
+     * @param none
+     * @return none
+     */
     function playPause() {
         if (isPlaying) {
             pause();
@@ -73,6 +116,11 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
 
     }
 
+    /**
+     * Pauses current audio that is playing
+     * @param none
+     * @return none
+     */
     function pause() {
         if (audioRef.current) {
             audioRef.current.pause();
@@ -80,59 +128,78 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
         }
     }
 
+    /**
+     * Adds sound purchased by user to their sounds list in their database
+     * @param none
+     * @return none
+     */
     async function buyBtn() {
         //first check if user already brought sound
-        console.log("sounds list", sounds)
-        console.log("current coins", currCoins)
-        console.log("audio name", audioSrc.title)
         if (sounds) {
             sounds.map((soundObj) => {
                 if (audioSrc.title == soundObj.name) {
                     alert("You already brought this item");
-                    window.location.reload();
+                    return;
 
                 }
 
             })
         }
-
+        //Grab current price of item user wants to purchase
         const currPrice = audioSrc.price
 
-        if (currPrice > currCoins) {
-            console.log("You do not have enough leafs")
-            console.log(currPrice, currCoins)
-        }
-        else {
-            //subract price from current leafs
+        //Checks if users coins are enough to buy item
+        if (currCoins >= currPrice) {
+
+            //Subracts price from current leafs
             const coins = Number(currCoins) - Number(audioSrc.price)
 
-            //add new leaf price to database
+            //Adds new leaf price to database
             try {
-                const response = await fetch(`http://localhost:8000/user/update`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({coins, email})
-                })
+                //First checks if user wants to buy item
+                if (confirm("Are you sure you want to purchase this?")) {
+                    setItemBrought(true);
+                    const response = await fetch(`http://localhost:8000/user/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({coins, email})
+                    })
 
-                const name = audioSrc.title
-                const src = audioSrc.wavSound
-                const responseSound = await fetch(`http://localhost:8000/sounds/create`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({email, name, src})
-                })
+                    const name = audioSrc.title
+                    const src = audioSrc.wavSound
+                    const responseSound = await fetch(`http://localhost:8000/sounds/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({email, name, src})
+                    })
+                    setShowConfetti(true)
+                    setTimeout(() => {
+                        setShowConfetti(false);
+                    }, 10000);
+
+
+                }
+                else {
+                    navigate("/awards");
+                    //setShowConfetti(false);
+                }
 
             } catch(err) {
                 console.log(err)
             }
         }
+        else {
+            alert("You do not have enough leafs");
+        }
+
 
 
     }
 
     return (
         <div className="">
-            <div className="bg-[#6888BE] flex justify-between p-7 rounded-2xl text-white shadow-md">
+
+            <div className=" flex justify-between p-7 rounded-2xl text-white shadow-md" style={{ backgroundColor: buttonsColor }}>
                 <div className="flex gap-4 items-center">
                     <button onClick={playPause}>
                         {isPlaying ? <img src={pausePic} className="h-10"/> : <img src={playPic} className="h-10"/>}
@@ -147,13 +214,15 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
                         <img src={'../src/assets/leaf.png'} className="h-5"/>
 
                     </div>
-
-                    <button onClick={buyBtn} className="border border-white bg-[#6888BE] px-10 py-2 rounded-3xl">
+                    {showConfetti && <ReactConfetti/>}
+                    <button onClick={buyBtn} className="border border-white px-10 py-2 rounded-3xl" style={{ backgroundColor: buttonsColor }}>
                         Buy
                     </button>
 
                 </div>
             </div>
+
+
         </div>
 
     )

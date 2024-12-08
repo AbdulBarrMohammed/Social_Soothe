@@ -15,67 +15,67 @@ export const sounds = [
     {
         wavSound: "../../src/assets/sounds/jungle-nature-229896.wav",
         title: "Jungle nature",
-        price: 130
+        price: 1
     },
 
     {
         wavSound: "../../src/assets/sounds/fire-place-189399.wav",
         title: "Fire place",
-        price: 50
+        price: 5
     },
 
     {
         wavSound: "../../src/assets/sounds/firewood-burning-sound-179862.wav",
         title: "Firewood burning",
-        price: 30
+        price: 3
     },
     {
         wavSound: "../../src/assets/sounds/countryside-morning-sounds-246032.wav",
         title: "Countryside morning",
-        price: 200
+        price: 2
     },
 
     {
         wavSound: "../../src/assets/sounds/light-rain-2.wav",
         title: "Light rain",
-        price: 210
+        price: 2
     },
 
     {
         wavSound: "../../src/assets/sounds/morning-breeze-and-birds-35105.wav",
         title: "Morning breeze and birds",
-        price: 150
+        price: 1
     },
 
     {
         wavSound: "../../src/assets/sounds/ocean-2.wav",
         title: "Ocean",
-        price: 30
+        price: 3
     },
 
     {
 
     wavSound: "../../src/assets/sounds/rain-and-thunder-sfx-5.wav",
     title: "Rain and thunder",
-    price: 40
+    price: 3
     },
 
     {
         wavSound: "../../src/assets/sounds/sea-waves-1.wav",
         title: "Sea waves",
-        price: 120
+        price: 1
     },
 
     {
         wavSound: "../../src/assets/sounds/waterfall-sounds-259625.wav",
         title: "Waterfall sounds",
-        price: 120
+        price: 1
     },
 
     {
         wavSound: "../../src/assets/sounds/waves-on-the-lake-in-summer-time-in-wav-5.wav",
         title: "Summer lake waves",
-        price: 160
+        price: 1
     },
 
 ]

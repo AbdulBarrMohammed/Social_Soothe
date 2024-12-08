@@ -17,21 +17,24 @@ export function Settings() {
     const email = cookies.Email
     const navigate = useNavigate()
 
+
+    /**
+     * gets current users purchased colors and sounds
+     * @param none
+     * @return none
+     */
     const getData = async () => {
         try {
+
+            //Get user colors from backend route
             const resColors = await fetch(`http://localhost:8000/colors/${email}`)
             const dataColors = await resColors.json();
             setColors(dataColors)
 
-
+            //Get user sounds from backend route
             const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
             const dataSounds = await resSounds.json();
-
             setSounds(dataSounds)
-
-            console.log("sounds ->", dataSounds);
-
-
 
         } catch(err) {
             console.log(err)
@@ -43,10 +46,18 @@ export function Settings() {
     },[])
 
 
-
+    /**
+     * Gets current color chosen in dropdown and stores color in users current color in database
+     * @param event
+     * @return none
+     */
     async function handleChangeColor(e) {
         e.preventDefault()
+
+        //Grabs current color chosen
         const color = e.target.value
+
+        //Checks if color is picked and stores the color in the database in the backend
         if (color) {
             try {
                 const response = await fetch(`http://localhost:8000/user/color/update`, {
@@ -58,19 +69,22 @@ export function Settings() {
                 console.log(err)
             }
         }
-        else {
-            console.log('none')
-        }
 
 
     }
 
+    /**
+     * Gets current sound chosen in dropdown and stores sound in users current sound in database
+     * @param event
+     * @return none
+     */
     async function handleChangeSound(e) {
         e.preventDefault()
-        const sound = e.target.value
-        console.log('sound', sound)
 
-        //make sure a sound is picked
+        //Grab current sound
+        const sound = e.target.value
+
+        //Make sure a sound is picked
         if (sound) {
             try {
                 const response = await fetch(`http://localhost:8000/user/sound/update`, {
@@ -83,10 +97,6 @@ export function Settings() {
             }
 
         }
-
-        /*
-
-        console.log(sound); */
 
     }
 

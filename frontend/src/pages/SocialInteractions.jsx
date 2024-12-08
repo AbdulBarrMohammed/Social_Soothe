@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
-import { questions } from "./questionsData";
-import { submitAnswers } from "./questionsData";
-import { increment } from "./questionsData";
-import { handleColorChange } from "./questionsData";
-import { deleteFlower } from "./questionsData";
-import { addQuestionSeven } from "./questionsData";
+import { questions } from "../data/questionsData";
+import { submitAnswers } from "../data/questionsData";
+import { increment } from "../data/questionsData";
+import { handleColorChange } from "../data/questionsData";
+import { deleteFlower } from "../data/questionsData";
+import { addQuestionSeven } from "../data/questionsData";
 import ReactConfetti from 'react-confetti';
 import { LogIn } from "../components/Login";
 
@@ -42,11 +42,12 @@ export function SocialInteractions() {
     const [questionSix, setQuestionSix] = useState("")
     const [questionSeven, setQuestionSeven] = useState("")
 
+    const [lightestBg, setLightestBg] = useState("#ACC8EA");
+
     const getData = async () => {
         try {
             const res = await fetch(`http://localhost:8000/tree/flowers/${email}`)
             const data = await res.json();
-            console.log("current data -> ", data)
             if (data) {
                 setFlowers(data)
             }
@@ -58,6 +59,42 @@ export function SocialInteractions() {
 
     useEffect(() => {
         getData()
+    },[])
+
+
+    const setBgColor = async () => {
+        try {
+
+            //Get users current pick for a background color
+            const resColor = await fetch(`http://localhost:8000/user/${email}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor.toLowerCase() == 'blue') {
+                setLightestBg("#ACC8EA")
+            }
+            else {
+
+
+
+                //check for current user color in users purchased colors to set chosen background color
+                dataColors.map((c) => {
+                    if (c.name === dataColor.currColor) {
+                        setLightestBg(c.lightest)
+                    }
+                })
+            }
+
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        setBgColor()
     },[])
 
 
@@ -102,7 +139,6 @@ export function SocialInteractions() {
     async function handleComplete(e) {
         setDone(e.target.checked)
 
-        console.log("is checked button", isChecked)
         //first check if the user has already pressed the check in the past
         if (!isChecked) {
 
@@ -221,7 +257,7 @@ export function SocialInteractions() {
                             </div>
                         </div>
                 }
-                    <div className="flex flex-col items-center pt-10 px-10 gap-1 bg-[#ACC8EA] h-screen">
+                    <div className="flex flex-col items-center pt-10 px-10 gap-1 h-screen" style={{ backgroundColor: lightestBg }}>
                     {authToken &&
                         <>
                             <div className=" h-96 w-4/5 relative">

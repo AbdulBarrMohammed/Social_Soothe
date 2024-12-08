@@ -78,38 +78,37 @@ export function CreateJournal() {
              moodModal &&
                 <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
 
-                    <div className="bg-white px-10 py-5 rounded-2xl flex flex-col gap-8">
+                    <div className="bg-white px-10 py-5 rounded-2xl flex flex-col gap-5 mb-10">
 
-                        <div className="flex gap-16">
+                        <div className="flex gap-10">
                             <button onClick={() => navigate(-1)} className="font-bold text-2xl"> &times; </button>
                             <p className="text-center font-bold text-xl">{`How did this social interaction make you feel?:  ${mood}`}</p>
 
                         </div>
 
-
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 grid-rows-2">
-                                <div onClick={() => setMood("sad")} className="cursor-pointer flex flex-col items-center gap-2 p-8 bg-emojiSad rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/sad.png" className="h-36"/>
+                                <div onClick={() => setMood("sad")} className="cursor-pointer flex flex-col items-center gap-2 p-5 bg-emojiSad rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
+                                    <img src="../src/assets/sad.png" className="h-20"/>
                                     <p className="text-lg font-semibold text-emojiSadWord">Sad</p>
                                 </div>
-                                <div onClick={() => setMood("happy")} className="cursor-pointer flex flex-col items-center gap-2 p-8 bg-emojiHappy rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/smile.png" className="h-36"/>
+                                <div onClick={() => setMood("happy")} className="cursor-pointer flex flex-col items-center gap-2 p-5 bg-emojiHappy rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
+                                    <img src="../src/assets/smile.png" className="h-20"/>
                                     <p className="text-lg font-semibold text-emojiHappyWord">Happy</p>
                                 </div>
-                                <div onClick={() => setMood("angry")} className="cursor-pointer flex flex-col items-center gap-2 p-8 bg-emojiAngry rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/angry.png" className="h-36"/>
+                                <div onClick={() => setMood("angry")} className="cursor-pointer flex flex-col items-center gap-2 p-5 bg-emojiAngry rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
+                                    <img src="../src/assets/angry.png" className="h-20"/>
                                     <p className="text-lg font-semibold text-emojiAngryWord">Angry</p>
                                 </div>
-                                <div onClick={() => setMood("worried")} className="cursor-pointer flex flex-col items-center gap-2 p-8 bg-emojiWorried rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/sad-2.png" className="h-36"/>
+                                <div onClick={() => setMood("worried")} className="cursor-pointer flex flex-col items-center gap-2 p-5 bg-emojiWorried rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
+                                    <img src="../src/assets/sad-2.png" className="h-20"/>
                                     <p className="text-lg font-semibold text-emojiWorriedWord">Worried</p>
                                 </div>
-                                <div onClick={() => setMood("embarrassed")} className="cursor-pointer flex flex-col items-center gap-2 p-8 bg-emojiEmbarrassed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/tired.png" className="h-36"/>
+                                <div onClick={() => setMood("embarrassed")} className="cursor-pointer flex flex-col items-center gap-2 p-5 bg-emojiEmbarrassed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
+                                    <img src="../src/assets/tired.png" className="h-20"/>
                                     <p className="text-lg font-semibold text-emojiEmbarrassedWord">Embarrassed</p>
                                 </div>
-                                <div onClick={() => setMood("stressed")} className="cursor-pointer flex flex-col items-center gap-2 p-8 bg-emojiStressed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/nervous.png" className="h-36"/>
+                                <div onClick={() => setMood("stressed")} className="cursor-pointer flex flex-col items-center gap-2 p-5 bg-emojiStressed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
+                                    <img src="../src/assets/nervous.png" className="h-20"/>
                                     <p className="text-lg font-semibold text-emojiStressedWord">Stressed</p>
                                 </div>
 

@@ -6,7 +6,10 @@ import { useCookies } from "react-cookie";
 
 export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, chosenSound, setChosenSound, currSoundSrc, setCurrSoundSrc }) {
 
+    // site cookies for current user
     const [cookies, setCookie, removeCookie] = useCookies(null)
+
+    //auth token and user email
     const authToken = cookies.AuthToken
     const email = cookies.Email
 
@@ -24,6 +27,11 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
         }
     }, [currAudioIndex]);
 
+    /**
+     * plays current audio
+     * @param none
+     * @return none
+     */
     function handlePlay() {
 
         //check if current audio exists

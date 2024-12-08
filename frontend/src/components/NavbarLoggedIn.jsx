@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { pageDataLoggedIn } from "./pageData"
+import { pageDataLoggedIn } from "../data/pageData"
 import { useEffect } from "react"
 import { useState } from "react"
 import { useCookies } from "react-cookie"

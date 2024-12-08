@@ -1,10 +1,49 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 export function BreatheIntro() {
+
+    const [lightestBg, setLightestBg] = useState("#ACC8EA");
+    const [cookies, setCookie, removeCookie] = useCookies(null)
+    const authToken = cookies.AuthToken
+    const email = cookies.Email
+
+    const setBgColor = async () => {
+        try {
+            //Get users current pick for a background color
+            const resColor = await fetch(`http://localhost:8000/user/${email}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor.toLowerCase() == 'blue') {
+                setLightestBg("#ACC8EA")
+            }
+            else {
+                //check for current user color in users purchased colors to set chosen background color
+                dataColors.map((c) => {
+                    if (c.name === dataColor.currColor) {
+                        setLightestBg(c.lightest)
+                    }
+                })
+            }
+
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        setBgColor()
+    },[])
+
     return (
         <>
-            <div className="flex flex-col items-center pt-10 gap-10 bg-[#ACC8EA] h-screen">
+            <div className="flex flex-col items-center pt-10 gap-10 h-screen" style={{ backgroundColor: lightestBg }}>
                 <h1 className="font-bold text-2xl">Choose a breathing exercise</h1>
 
                 <div className="flex gap-10 text-emojiSadWord">

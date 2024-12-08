@@ -1,4 +1,4 @@
-import { articles } from "../pages/articleData"
+import { articles } from "../data/articleData"
 
 export function ArticlesCard({article, index}) {
     return (

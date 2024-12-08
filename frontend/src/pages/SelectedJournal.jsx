@@ -10,18 +10,25 @@ export function SelectedJournal() {
     const [content, setContent] = useState("")
     const navigate = useNavigate()
 
-    //grabbing id from clicked journal
+    //Grabs id from clicked journal parameters
     let params = useParams()
     let id = params.id
 
 
     useEffect(() => {
 
+        /**
+         * Gets users current journal entries in the database
+         * @param none
+         * @return none
+         */
         async function loadJournal() {
             try {
                 const res = await fetch(`http://localhost:8000/journals/journal/${id}`)
                 const data = await res.json();
                 setJournal(data)
+
+                //Grabs title and content of journal to be able to change latter
                 setTitle(data.title)
                 setContent(data.content)
             } catch(err) {
@@ -31,8 +38,13 @@ export function SelectedJournal() {
         loadJournal()
     }, [id])
 
-
+    /**
+     * Deletes journal from users journal database
+     * @param none
+     * @return none
+     */
     async function removeJournal() {
+        //First checks if user wants to delete journal entry
         if (confirm("Are you sure you want to delete?")) {
             try {
                 const res = await fetch(`http://localhost:8000/journals/journal/delete/${id}`)
@@ -43,18 +55,33 @@ export function SelectedJournal() {
 
             navigate("/journals");
           }
-
     }
 
+    /**
+     * Opens edit modal
+     * @param none
+     * @return none
+     */
     function openEdit() {
         setFormModal(true);
 
     }
 
+    /**
+     * closes form modal
+     * @param none
+     * @return none
+     */
     function closeModal() {
         setFormModal(false)
     }
 
+
+    /**
+     * Stores current changes made to journal when user edits it
+     * @param event
+     * @return none
+     */
     async function handleEditJournalSubmit(e) {
         e.preventDefault();
         try {

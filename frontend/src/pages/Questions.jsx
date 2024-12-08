@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import AOS from "aos";
 import "aos/dist/aos.css"
-import { saFacts } from './factsData';
+import { saFacts } from '../data/factsData';
 
 const Questions = () => {
-    // use state to open social anxiety question drop down button
+  // Used to state to open social anxiety question drop down button
   const [isDropdown, setIsDropdown] = useState(false); const [isDropdownTwo, setIsDropdownTwo] = useState(false); const [isDropdownThree, setIsDropdownThree] = useState(false);
   const [isDropdownFour, setIsDropdownFour] = useState(false);
   const [isDropdownFive, setIsDropdownFive] = useState(false);

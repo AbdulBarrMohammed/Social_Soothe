@@ -1,7 +1,7 @@
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { breatheInfo } from "./breatheData";
+import { breatheInfo } from "../data/breatheData";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
@@ -37,6 +37,45 @@ export function Breathe() {
 
 
     const navigate = useNavigate()
+
+    const [lightestBg, setLightestBg] = useState("#ACC8EA");
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
+
+
+
+
+    const setBgColor = async () => {
+        try {
+            //Get users current pick for a background color
+            const resColor = await fetch(`http://localhost:8000/user/${email}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor.toLowerCase() == 'blue') {
+                setLightestBg("#ACC8EA")
+                setButtonColor("#6888BE")
+
+            }
+            else {
+                //check for current user color in users purchased colors to set chosen background color
+                dataColors.map((c) => {
+                    if (c.name === dataColor.currColor) {
+                        setLightestBg(c.lightest)
+                        setButtonColor(c.semiDark)
+                    }
+                })
+            }
+
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+    useEffect(() => {
+        setBgColor()
+    },[])
 
     useEffect(() => {
         // Update the bg sound reference when bgSound changes
@@ -231,7 +270,7 @@ export function Breathe() {
   }
 
   return (
-    <div className="flex bg-[#ACC8EA] h-screen justify-center pt-10 gap-10">
+    <div className="flex h-screen justify-center pt-10 gap-10" style={{ backgroundColor: lightestBg }}>
 
         <div className="flex flex-col items-center gap-5 ">
             <div>
@@ -242,7 +281,7 @@ export function Breathe() {
                 onComplete={handleComplete}
                 isPlaying={isActive}
                 duration={counter}
-                colors={"#4470AD"}
+                colors={buttonsColor}
                 size={350}
                 >
                 {renderTime}
@@ -253,10 +292,10 @@ export function Breathe() {
             </div>
             <div className="flex gap-5">
 
-                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={clear}>Restart</button>
-                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md" onClick={start}>Start</button>
-                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={pause}>Pause</button>
-                <button className="bg-[#4470AD] p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound}>Play background sound</button>
+                <button className=" p-3 rounded-2xl text-white shadow-md" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
+                <button className=" p-3 rounded-2xl text-white shadow-md" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
+                <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
+                <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound} style={{ backgroundColor: buttonsColor }}>Play background sound</button>
             </div>
         </div>
         <div>

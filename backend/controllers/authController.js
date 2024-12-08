@@ -1,48 +1,41 @@
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
-const passport = require("passport");
 const jwt = require('jsonwebtoken')
 
-async function displayUsers(req, res) {
-    //const { email }  = req.user;
-
-    try {
-        const users = await db.getAllUsers();
-        res.json(users); // Sending the users to the frontend
-    } catch (err) {
-        res.status(500).json({ message: 'Error fetching users' });
-    }
-
-
-}
-
-
+/**
+     * Adds new user to database
+     * @param request, response, next
+     * @return none
+     */
 async function signUpPost(req, res, next) {
+
+    //Grabs new users email, password and gender entered
     const { email, password, gender } = req.body
     try {
-        // Hash the password with bcrypt
+        // Hashes the password with bcrypt
         bcrypt.hash(password, 10, async (err, hashedPassword) => {
-          console.log(hashedPassword)
           if (err) {
-            // Handle hashing error
+            // Handles hashing error
             return next(err);
           }
 
-          // Store hashedPassword in DB
+          // Stores hashedPassword in DB
           try {
+
+              //Sets new user with original data first
               const coins = 0;
               const currColor = 'blue'
               const currFont = 'Roboto'
-              const currSound = 'none'
-              const currBackgroundImg = 'none'
-              const signUp = await db.insertNewUser(email, hashedPassword, gender, coins, currColor, currFont, currSound, currBackgroundImg);
-              const token = jwt.sign({ email }, 'secret', {expiresIn: '1hr' })
+              const currSound = 'none' //IN THE FUTURE GIVE THEM A SOUND ROUTE FIRST
+              const currBackgroundImg = 'none' //REMOVE THIS IN THE FUTURE
 
+              //Inserts new user information in the database
+              const signUp = await db.insertNewUser(email, hashedPassword, gender, coins, currColor, currFont, currSound, currBackgroundImg);
+
+              //Setting user token
+              const token = jwt.sign({ email }, 'secret', {expiresIn: '1hr' })
               res.json({ email, token })
 
-            console.log('User signed up successfully');
-
-            //res.redirect("library");
           } catch (dbError) {
             return next(dbError);
           }
@@ -52,6 +45,8 @@ async function signUpPost(req, res, next) {
         return next(err);
       }
 }
+
+
 async function logInPost(req, res) {
   const { email, password } = req.body;
   try {

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { questions } from "./questionsData";
+import { questions } from "../data/questionsData";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +30,11 @@ export function EditFlower() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        /**
+         * Grabs all of users flowers in database
+         * @param none
+         * @return none
+         */
         async function loadFlower() {
             try {
                 const res = await fetch(`http://localhost:8000/flowers/flower/${id}`)
@@ -43,7 +48,10 @@ export function EditFlower() {
                 setQuestionFive(data.questionFive)
                 setQuestionSix(data.questionSix)
                 setQuestionSeven(data.questionSeven)
+
+                //Set users current color
                 setColor(data.color)
+
                 setDone(data.done)
                 setIsChecked(data.isChecked)
             } catch(err) {

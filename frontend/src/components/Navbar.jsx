@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import { pageDataLeft } from "./pageData"
-import { pageDataRight } from "./pageData"
+import { pageDataLeft } from "../data/pageData"
+import { pageDataRight } from "../data/pageData"
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCookies } from "react-cookie"
@@ -70,10 +70,10 @@ export function Navbar() {
     },[])
 
     function handleLogout() {
-        console.log("logged out")
         removeCookie("Email");
         removeCookie("AuthToken")
-        naviagte("/")
+        window.location.reload(false);
+        naviagte("/login")
     }
 
     //text-[#44423F]

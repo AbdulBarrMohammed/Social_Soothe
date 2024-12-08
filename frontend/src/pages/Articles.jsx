@@ -1,5 +1,5 @@
 import { ArticlesCard } from "../components/ArticlesCard"
-import { articles } from "./articleData"
+import { articles } from "../data/articleData"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -43,8 +43,8 @@ export function Articles () {
                 </div>
             </div>
             <div className="px-40 flex gap-20 py-40 bg-[#ACC8EA]">
-                <div className="flex flex-col gap-10">
-                    <h1 className="font-bold text-4xl">Slow down your breathing</h1>
+                <div className="flex flex-col gap-5">
+                    <h1 className="font-bold text-5xl">Slow down your breathing</h1>
                     <p className="text-xl">Often times anxiety can lead a person to have faster heart rate and excess oxygen. Thats why it is recommended that
                         a person dealing with this should try and slow their breathing by taking slower breathes, that way it can decrease excess
                         oxygen coming in.
