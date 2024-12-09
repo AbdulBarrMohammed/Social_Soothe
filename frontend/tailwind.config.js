@@ -6,6 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+
+    screens: {
+      'sm': '320px',
+      // => @media (min-width: 576px) { ... }
+    },
     extend: {
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
