@@ -142,6 +142,7 @@ export function Settings() {
                                 </option>
                             );
                         })}
+                        <option>{"Default breathing"}</option>
                     </select>
 
                 </div>

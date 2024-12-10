@@ -3,9 +3,8 @@ export const questions = [
     "Who is gonna judge you?",
     "How bad will that really be?",
     "Whats the odds of that actually happening?",
-    "How will you deal with it?",
-    "Explain how the social interaction went"
-
+    "How will you cope if does happen?",
+    "How did the event go?"
 ]
 
 
@@ -13,7 +12,7 @@ export const questions = [
 export async function submitAnswers(email, questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven, setShowSubmit) {
     //add flower to database
     const x = Math.random() * 800;
-    const y = Math.random() * 100;
+    const y = Math.random() * 200;
     const response = await fetch(`http://localhost:8000/flowers/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,23 +35,23 @@ export async function submitAnswers(email, questionOne, questionTwo, questionThr
 //increment each question
 export function increment(index, input, setQuestionSix, setShowQuestions, setShowSubmit, setIndex, setQues, setQuestionOne, setQuestionTwo, setQuestionThree, setQuestionFour,
     setQuestionFive, setInput) {
-    if (index == 5) {
+    if (index == 4) {
         setQuestionSix(input)
         setShowQuestions(false)
         setShowSubmit(true)
         setIndex(1)
         setQues(questions[1])
     } else {
-        if (index == 1) {
+        if (index == 0) {
             setQuestionTwo(input)
         }
-        else if (index == 2) {
+        else if (index == 1) {
             setQuestionThree(input)
         }
-        else if (index == 3) {
+        else if (index == 2) {
             setQuestionFour(input)
         }
-        else if (index == 4) {
+        else if (index == 3) {
             setQuestionFive(input)
 
         }

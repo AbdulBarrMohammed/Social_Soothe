@@ -78,8 +78,6 @@ export function SocialInteractions() {
             }
             else {
 
-
-
                 //check for current user color in users purchased colors to set chosen background color
                 dataColors.map((c) => {
                     if (c.name === dataColor.currColor) {
@@ -296,18 +294,15 @@ export function SocialInteractions() {
                     </div>
 
                     {titleQuestion  &&
-
-
-                        <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
-                            <div className="bg-white p-10">
-                                <form className="flex flex-col gap-5 p-10">
-
-                                <div>
-                                        <p className="font-bold">Title your social event</p>
-                                        <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionOne(e.target.value)} value={questionOne} maxLength={10}/>
+                        <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex flex-col items-center justify-center h-screen">
+                            <div className="bg-white p-2 rounded-xl  flex flex-col items-center justify-center">
+                                <form className="flex flex-col gap-5 p-5 items-center justify-center">
+                                    <div className="flex flex-col items-center justify-center">
+                                        <p className="font-bold text-center">Title your social event</p>
+                                        <input className="text-xl w-full h-10 border rounded-lg p-2" onChange={(e) => setQuestionOne(e.target.value)} value={questionOne} maxLength={10}/>
                                     </div>
 
-                                    <button onClick={handleOneSubmit}>done</button>
+                                    <button onClick={handleOneSubmit}>Next</button>
 
                                 </form>
                             </div>
@@ -318,10 +313,13 @@ export function SocialInteractions() {
 
                         <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
                             <div className="bg-white rounded-xl p-10 flex flex-col gap-5 w-1/2">
-                                <div className="flex gap-2 w-4/4">
-                                    <h1>{index + 1}.</h1>
-                                    <h1>{ques}</h1>
-                                    <p onClick={closeQuestions}>X</p>
+                                <div className="flex justify-between w-4/4 font-bold text-lg">
+                                    <div className="flex gap-5">
+                                        <h1>{index + 1}.</h1>
+                                        <h1>{ques}</h1>
+                                    </div>
+
+                                    <p onClick={closeQuestions}>&#x2715;</p>
                                 </div>
                                     <textarea value={input} onChange={(e) => setInput(e.target.value)} className="border h-40" required/>
                                     <div className="flex justify-between">
@@ -346,7 +344,7 @@ export function SocialInteractions() {
                                 <div className="bg-white p-10">
                                     <form className="flex flex-col gap-5 p-10">
                                         <div>
-                                            <p className="font-bold">{questions[6]}</p>
+                                            <p className="font-bold">{questions[5]}</p>
                                             <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionSeven(e.target.value)} value={questionSeven} maxLength={500}/>
                                         </div>
 

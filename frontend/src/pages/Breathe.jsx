@@ -29,6 +29,8 @@ export function Breathe() {
     const [bgSound, setBgSound] = useState("");
     const [sounds, setSounds] = useState("");
 
+    const [defaultBgSound, setDefaultBgSound] = useState(false);
+
 
 
     const breatheInAudio = useRef(new Audio("../../src/assets/breathe-in.wav"))
@@ -105,23 +107,28 @@ export function Breathe() {
             const res = await fetch(`http://localhost:8000/user/${email}`)
             const data = await res.json();
             //setBgSound(data.currSound)
-            console.log('current data', data.currSound)
 
             const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
             const dataSounds = await resSounds.json();
 
             setSounds(dataSounds)
 
-            console.log("sounds ->", dataSounds);
-            dataSounds.map((s) => {
-                console.log(s);
-                if (s.name == data.currSound) {
-                    console.log("WE HAVE FOUND A SOUND", s.src)
-                    setBgSound(s.src)
+            //Check if the user just wants to play the defualt breathing bg sounds
+            if (data.currSound == 'Default breathing'){
+                setDefaultBgSound(true)
+            }
+            else {
 
-                }
+                dataSounds.map((s) => {
+                    console.log(s);
+                    if (s.name == data.currSound) {
+                        console.log("WE HAVE FOUND A SOUND", s.src)
+                        setBgSound(s.src)
 
-            })
+                    }
+
+                })
+            }
 
         } catch(err) {
             console.log(err)
@@ -138,27 +145,29 @@ export function Breathe() {
     const [key, setKey] = useState(0); // re-render the timer
 
     const restart = () => {
-            //currBgSound.current.play()
-            if (turn == 2 || turn == 5 || turn == 8) {
-                breatheInAudio.current.play()
-                setRounds(rounds + 1)
-                setBreathe("Breathe in...")
-                setCounter(startNum)
-            }
+        if (turn == 2 || turn == 5 || turn == 8) {
+            defaultBgSound ?  breatheInAudio.current.play() : ""
+            setRounds(rounds + 1)
+            setBreathe("Breathe in...")
+            setCounter(startNum)
+        }
 
-            else if (turn == 0 || turn == 3 || turn == 6 || turn == 9) {
-                setBreathe("Hold breathe...")
-                setCounter(middleNum)
-            }
-            else if (turn == 1 || turn == 4 || turn == 7 || turn == 10) {
-                exhaleAudio.current.play()
-                setBreathe("exhale...")
-                setCounter(endNum)
-            }
-            setIsActive(true);
-            setTurn(turn + 1);
-            // Increment the key to re-render the timer
-            setKey((prevKey) => prevKey + 1);
+        else if (turn == 0 || turn == 3 || turn == 6 || turn == 9) {
+            setBreathe("Hold breathe...")
+            setCounter(middleNum)
+        }
+        else if (turn == 1 || turn == 4 || turn == 7 || turn == 10) {
+            defaultBgSound ?  exhaleAudio.current.play() : ""
+            //exhaleAudio.current.play()
+            setBreathe("exhale...")
+            setCounter(endNum)
+        }
+
+
+        setIsActive(true);
+        setTurn(turn + 1);
+        // Increment the key to re-render the timer
+        setKey((prevKey) => prevKey + 1);
 
     };
 
@@ -192,9 +201,14 @@ export function Breathe() {
 
         const pause = () => {
             setIsActive(false)
-            currBgSound.current.pause()
-            breatheInAudio.current.pause()
-            exhaleAudio.current.pause()
+            if (defaultBgSound) {
+                breatheInAudio.current.pause()
+                exhaleAudio.current.pause()
+            }
+            else {
+                currBgSound.current.pause()
+            }
+
 
         }
 
@@ -217,30 +231,37 @@ export function Breathe() {
         };
 
         const start = () => {
-            //first check if the exercise is the 3-3-3 pattern
-            if (startNum == 3) {
-                if (counter == endNum && (turn == 1 || turn == 4 || turn == 7 || turn == 10)) {
-                    console.log("hold")
-                }
-                else if (counter == startNum && (turn == 2 || turn == 5 || turn == 8 || turn == 11)) {
-                    exhaleAudio.play()
+            //Checks to see if user wants default background breathing noises
+            if (defaultBgSound) {
+                //first check if the exercise is the 3-3-3 pattern
+                if (startNum == 3) {
+                    if (counter == endNum && (turn == 1 || turn == 4 || turn == 7 || turn == 10)) {
+                        console.log("hold")
+                    }
+                    else if (counter == startNum && (turn == 2 || turn == 5 || turn == 8 || turn == 11)) {
+                        exhaleAudio.play()
+                    }
+                    else {
+                        breatheInAudio.current.play()
+                    }
+
                 }
                 else {
-                    breatheInAudio.current.play()
-                }
 
+                    //before checking check if the exercise is in the breathing stage which should have counter of start number
+                    if (counter == startNum) {
+                        breatheInAudio.current.play()
+                    }
+                    else if (counter == endNum) {
+                        exhaleAudio.current.play()
+                    }
+
+                }
             }
             else {
-
-                //before checking check if the exercise is in the breathing stage which should have counter of start number
-                if (counter == startNum) {
-                    breatheInAudio.current.play()
-                }
-                else if (counter == endNum) {
-                    exhaleAudio.current.play()
-                }
-
+                currBgSound.current.play()
             }
+
             setIsActive(true)
 
         }
@@ -270,47 +291,45 @@ export function Breathe() {
   }
 
   return (
-    <div className="flex h-screen justify-center pt-10 gap-10" style={{ backgroundColor: lightestBg }}>
+        <div className="flex h-screen justify-center pt-10 gap-10" style={{ backgroundColor: lightestBg }}>
 
-        <div className="flex flex-col items-center gap-5 ">
+            <div className="flex flex-col items-center gap-5 ">
+                <div>
+                    <h3 className="font-bold text-2xl">Progress Timer</h3>
+                </div>
+                <div key={key} id="pomodoro-timer" className="Progressbar">
+                    <CountdownCircleTimer
+                    onComplete={handleComplete}
+                    isPlaying={isActive}
+                    duration={counter}
+                    colors={buttonsColor}
+                    size={350}
+                    >
+                    {renderTime}
+
+
+                    </CountdownCircleTimer>
+
+                </div>
+                <div className="flex gap-5">
+
+                    <button className=" p-3 rounded-2xl text-white shadow-md" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
+                    <button className=" p-3 rounded-2xl text-white shadow-md" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
+                    <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
+                    <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound} style={{ backgroundColor: buttonsColor }}>Play background sound</button>
+                </div>
+            </div>
             <div>
-                <h3 className="font-bold text-2xl">Progress Timer</h3>
-            </div>
-            <div key={key} id="pomodoro-timer" className="Progressbar">
-                <CountdownCircleTimer
-                onComplete={handleComplete}
-                isPlaying={isActive}
-                duration={counter}
-                colors={buttonsColor}
-                size={350}
-                >
-                {renderTime}
-
-
-                </CountdownCircleTimer>
 
             </div>
-            <div className="flex gap-5">
 
-                <button className=" p-3 rounded-2xl text-white shadow-md" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
-                <button className=" p-3 rounded-2xl text-white shadow-md" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
-                <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
-                <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound} style={{ backgroundColor: buttonsColor }}>Play background sound</button>
+            <div className="flex flex-col w-1/3 gap-5">
+                <h2 className="font-bold text-3xl">{title}</h2>
+                <p>{description}</p>
+
             </div>
-        </div>
-        <div>
 
         </div>
 
-        <div className="flex flex-col w-1/3 gap-5">
-            <h2 className="font-bold text-3xl">{title}</h2>
-            <p>{description}</p>
-
-        </div>
-
-    </div>
-
-  );
-
-
-}
+    )
+  }

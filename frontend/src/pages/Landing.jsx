@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {motion} from 'framer-motion';
 import { fadeIn } from '../variants';
 import Questions from './Questions';
-import { ArticleCard } from './ArticleCard';
+import  { ArticleCard } from '../components/ArticleCard'
 
 //Hard parts
 // * Authenticating different users with passport and crypting their password with brycpt and using jwt tokens
