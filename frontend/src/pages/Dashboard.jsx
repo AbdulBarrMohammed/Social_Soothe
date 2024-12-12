@@ -1,4 +1,4 @@
-import { LineGraph } from "../data/Line.jsx"
+import { PieChart } from "../data/Pie.jsx"
 
 
 export function Dashboard() {
@@ -6,7 +6,7 @@ export function Dashboard() {
         <>
             <div className="flex flex-col px-20 py-10">
                 <p>This is a dashbaord</p>
-                <LineGraph />
+                <PieChart />
             </div>
         </>
     )
