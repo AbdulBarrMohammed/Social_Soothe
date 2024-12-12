@@ -21,8 +21,9 @@ export const PieChart = () => {
     const userEmail = cookies.Email
 
     const pieData = [0,0,0,0,0,0]
+    const socialTreeLength = 0
 
-    const getJournals = async () => {
+    const getData = async () => {
 
         try {
             const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
@@ -38,7 +39,7 @@ export const PieChart = () => {
     }
 
     useEffect(() => {
-        getJournals()
+        getData()
     },[])
 
 
