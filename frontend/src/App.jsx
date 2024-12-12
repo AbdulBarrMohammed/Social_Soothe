@@ -25,6 +25,7 @@ import { Articles } from './pages/Articles';
 import { Resources } from './pages/Resources';
 import { AnimatePresence } from 'framer-motion';
 import { About } from './pages/About';
+import { Dashboard } from './pages/Dashboard';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
               <Route path="/editFlower/:id" element={<PageWrapper><EditFlower/></PageWrapper>}/>
               <Route path="/affirmations" element={<PageWrapper><Affirmations/></PageWrapper>}/>
               <Route path="/settings" element={<PageWrapper><Settings/></PageWrapper>}/>
+              <Route path="/dashboard" element={<PageWrapper><Dashboard/></PageWrapper>}/>
               <Route element={<LayoutAwards/>}>
                 <Route path="/awards/:type" element={<Awards/>}/>
 

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { breatheInfo } from "../data/breatheData";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import ReactConfetti from "react-confetti";
 
 export function Breathe() {
 
@@ -30,6 +31,7 @@ export function Breathe() {
     const [sounds, setSounds] = useState("");
 
     const [defaultBgSound, setDefaultBgSound] = useState(false);
+    const [showConfetti, setShowConfetti] = useState(false);
 
 
 
@@ -190,6 +192,11 @@ export function Breathe() {
                 setCounter(startNum)
                 setRounds(1)
                 setBreathe("Breathe in...")
+
+                setShowConfetti(true)
+                setTimeout(() => {
+                    setShowConfetti(false);
+                  }, 10000);
             }
              else {
 
@@ -292,6 +299,8 @@ export function Breathe() {
 
   return (
         <div className="flex h-screen justify-center pt-10 gap-10" style={{ backgroundColor: lightestBg }}>
+
+            {showConfetti && <ReactConfetti/>}
 
             <div className="flex flex-col items-center gap-5 ">
                 <div>
