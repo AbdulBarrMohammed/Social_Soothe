@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import ReactConfetti from 'react-confetti';
 
 
+
 export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex, setItemBrought }) {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
@@ -26,6 +27,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex,
 
     const setBgColor = async () => {
         try {
+
             //Get users current pick for a background color
             const resColor = await fetch(`http://localhost:8000/user/${email}`)
             const dataColor = await resColor.json();
@@ -34,7 +36,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex,
             const dataColors = await resColors.json();
 
             if (dataColor.currColor.toLowerCase() == 'blue') {
-                setButtonColor("#6888BE")
+                setButtonColor("#4470AD")
             }
             else {
                 //check for current user color in users purchased colors to set chosen background color
@@ -56,6 +58,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex,
     },[])
 
     useEffect(() => {
+        //if current audio index does not equal the index clicked and sound is playing then pause the sound
         if (currAudioIndex !== index && isPlaying) {
             pause();
         }
@@ -75,6 +78,8 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex,
 
             const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
             const dataSounds = await resSounds.json();
+
+
 
             setSounds(dataSounds)
         } catch(err) {
@@ -134,63 +139,74 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex,
      * @return none
      */
     async function buyBtn() {
+        let brought = false;
+
         //first check if user already brought sound
         if (sounds) {
             sounds.map((soundObj) => {
                 if (audioSrc.title == soundObj.name) {
                     alert("You already brought this item");
-                    return;
+                    brought = true
 
                 }
 
             })
-        }
-        //Grab current price of item user wants to purchase
-        const currPrice = audioSrc.price
 
-        //Checks if users coins are enough to buy item
-        if (currCoins >= currPrice) {
+            //If item was not brought
+            if (!brought) {
 
-            //Subracts price from current leafs
-            const coins = Number(currCoins) - Number(audioSrc.price)
+                //Grab current price of item user wants to purchase
+                const currPrice = audioSrc.price
 
-            //Adds new leaf price to database
-            try {
-                //First checks if user wants to buy item
-                if (confirm("Are you sure you want to purchase this?")) {
-                    setItemBrought(true);
-                    const response = await fetch(`http://localhost:8000/user/update`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({coins, email})
-                    })
+                //Checks if users coins are enough to buy item
+                if (currCoins >= currPrice) {
 
-                    const name = audioSrc.title
-                    const src = audioSrc.wavSound
-                    const responseSound = await fetch(`http://localhost:8000/sounds/create`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({email, name, src})
-                    })
-                    setShowConfetti(true)
-                    setTimeout(() => {
-                        setShowConfetti(false);
-                    }, 10000);
+                    //Subracts price from current leafs
+                    const coins = Number(currCoins) - Number(audioSrc.price)
+
+                    //Adds new leaf price to database
+                    try {
+                        //First checks if user wants to buy item
+                        if (confirm("Are you sure you want to purchase this?")) {
+                            setItemBrought(true);
+                            const response = await fetch(`http://localhost:8000/user/update`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({coins, email})
+                            })
+
+                            const name = audioSrc.title
+                            const src = audioSrc.wavSound
+                            const responseSound = await fetch(`http://localhost:8000/sounds/create`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({email, name, src})
+                            })
+                            setShowConfetti(true)
+                            setTimeout(() => {
+                                setShowConfetti(false);
+                            }, 10000);
 
 
+                        }
+                        else {
+                            navigate("/awards");
+                            //setShowConfetti(false);
+                        }
+
+                    } catch(err) {
+                        console.log(err)
+                    }
                 }
                 else {
-                    navigate("/awards");
-                    //setShowConfetti(false);
+                    alert("You do not have enough leafs");
                 }
 
-            } catch(err) {
-                console.log(err)
             }
+
+
         }
-        else {
-            alert("You do not have enough leafs");
-        }
+
 
 
 

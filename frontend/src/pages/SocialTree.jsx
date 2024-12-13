@@ -12,7 +12,7 @@ import { addQuestionSeven } from "../data/questionsData";
 import ReactConfetti from 'react-confetti';
 import { LogIn } from "../components/Login";
 
-export function SocialInteractions() {
+export function SocialTree() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
@@ -288,8 +288,8 @@ export function SocialInteractions() {
                             <img src="../src/assets/rb_1364.png" className="h-60 mb-10"/>
                         </>
                     }
-                        <div onClick={showQuestionOne} className="absolute top-48 right-10 rounded-full h-20 w-20 cursor-pointer bg-[#eeeeee] p-5 items-center justify-center">
-                            Add flower
+                        <div onClick={showQuestionOne} className="absolute top-10 right-10 rounded-full h-14 w-14 cursor-pointer bg-[#eeeeee] p-4 flex items-center justify-center shadow-md">
+                            <img src="../src/assets/leaf.png"/>
                         </div>
                     </div>
 

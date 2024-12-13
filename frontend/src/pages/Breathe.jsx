@@ -59,7 +59,7 @@ export function Breathe() {
 
             if (dataColor.currColor.toLowerCase() == 'blue') {
                 setLightestBg("#ACC8EA")
-                setButtonColor("#6888BE")
+                setButtonColor("#4470AD")
 
             }
             else {
@@ -325,7 +325,6 @@ export function Breathe() {
                     <button className=" p-3 rounded-2xl text-white shadow-md" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
                     <button className=" p-3 rounded-2xl text-white shadow-md" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
                     <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
-                    <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={openPlayBgSound} style={{ backgroundColor: buttonsColor }}>Play background sound</button>
                 </div>
             </div>
             <div>

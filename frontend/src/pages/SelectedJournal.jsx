@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { useCookies } from "react-cookie"
 
 
 export function SelectedJournal() {
@@ -8,6 +9,12 @@ export function SelectedJournal() {
     const [formModal, setFormModal] = useState(false);
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
+    const [cookies, setCookie, removeCookie] = useCookies(null)
+    const [lightestBg, setLightestBg] = useState("");
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
+
+    const authToken = cookies.AuthToken
+    const userEmail = cookies.Email
     const navigate = useNavigate()
 
     //Grabs id from clicked journal parameters
@@ -31,6 +38,32 @@ export function SelectedJournal() {
                 //Grabs title and content of journal to be able to change latter
                 setTitle(data.title)
                 setContent(data.content)
+
+                const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
+                const dataColor = await resColor.json();
+
+                const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
+                const dataColors = await resColors.json();
+
+                if (dataColor.currColor.toLowerCase() == 'blue') {
+                    setLightestBg("#ACC8EA")
+                    setButtonColor("#4470AD")
+                }
+                else {
+
+                    // set colors for background
+                    setColors(dataColors)
+
+                    //check for current user color in users purchased colors to set chosen background color
+                    dataColors.map((c) => {
+                        if (c.name === dataColor.currColor) {
+                            setLightestBg(c.lightest)
+                            setButtonColor(c.semiDark)
+
+                        }
+                    })
+                }
+
             } catch(err) {
                 console.log(err)
             }
@@ -99,7 +132,7 @@ export function SelectedJournal() {
 
 
     return (
-        <div className="p-10 h-screen bg-[#CCDBEE]">
+        <div className="p-10 h-screen" style={{ backgroundColor: lightestBg }}>
             <div className="flex flex-col gap-3">
                 <header className="flex justify-between">
                     <div className="flex gap-5 items-center">
@@ -107,13 +140,13 @@ export function SelectedJournal() {
                         <h2 className="text-xl">{stringDate}</h2>
                     </div>
                     <div className="flex gap-4">
-                        <div className="flex p-3 bg-[#6888BE] text-white rounded-2xl items-center justify-center shadow-md">
+                        <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
                             <button onClick={() => navigate(-1)}>Back</button>
                         </div>
-                        <div className="flex p-3 bg-[#6888BE] text-white rounded-2xl items-center justify-center shadow-md">
+                        <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
                             <button onClick={removeJournal}>delete</button>
                         </div>
-                        <div className="flex p-3 bg-[#6888BE] text-white rounded-2xl items-center justify-center shadow-md">
+                        <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
                             <button onClick={openEdit}>edit</button>
                         </div>
                     </div>

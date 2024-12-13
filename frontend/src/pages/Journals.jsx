@@ -86,13 +86,13 @@ export function Journals() {
                                     onChange={(event) => setSearchQuery(event.target.value)}
                                     className="h-10 w-full rounded-3xl p-5 shadow-md" placeholder="Search journal title..."/>
                             </form>
-                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-10 w-10 cursor-pointer p-7 bg-[#eeeeee] items-center justify-center">
+                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-10 w-10 cursor-pointer p-5 bg-[#eeeeee] items-center justify-center shadow-md">
                                     +
                             </Link>
                         </div>
 
                         <div className="flex justify-center items-center">
-                            <div className="flex flex-wrap gap-10 justify-center items-center pb-10">
+                            <div className="flex flex-wrap gap-10 justify-center items-center pb-10 px-10">
 
                                 {journals.map((journal) => {
                                         return (

@@ -19,7 +19,7 @@ export const pageDataLoggedIn = [
     },
     {
         name: "Social Tree",
-        path: "/socialInteractions",
+        path: "/socialTree",
         img: "../src/assets/tree-outline.svg"
     },
     {

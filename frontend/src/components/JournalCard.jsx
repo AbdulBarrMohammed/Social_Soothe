@@ -61,9 +61,9 @@ export function JournalCard ({journal}) {
                             width={200}
                             height={200}
                             className="flex-col cursor-pointer items-center justify-cente p-5 hover:opacity-85 transition duration-300 ease-in-out shadow-xl"
-                                style={{
-                                        background: bgColor,
-                                      }}
+                            style={{
+                                background: bgColor,
+                              }}
                             >
                             <div className="flex flex-col items-center justify-center p-2 gap-2">
                                     <img src={emoji} alt="" className="h-16"/>

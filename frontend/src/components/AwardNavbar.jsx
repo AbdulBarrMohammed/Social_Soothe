@@ -20,7 +20,7 @@ export function AwardNavbar() {
 
             if (dataColor.currColor.toLowerCase() == 'blue') {
                 setLightestBg("#ACC8EA")
-                setButtonColor("#6888BE")
+                setButtonColor("#4470AD")
             }
             else {
                 //check for current user color in users purchased colors to set chosen background color

@@ -15,7 +15,7 @@ import { CreateJournal } from './pages/CreateJournal';
 import { SelectedJournal } from './pages/SelectedJournal';
 import { BreatheIntro } from './pages/BreatheIntro';
 import { Breathe } from './pages/Breathe';
-import { SocialInteractions } from './pages/SocialInteractions';
+import { SocialTree } from './pages/SocialTree';
 import { EditFlower } from './pages/EditFlower';
 import { Affirmations } from './pages/Affirmations';
 import { Awards } from './pages/Awards';
@@ -48,7 +48,7 @@ function App() {
               <Route path="/selectedJournal/:id" element={<PageWrapper><SelectedJournal/></PageWrapper>}/>
               <Route path="/breatheIntro" element={<PageWrapper><BreatheIntro/></PageWrapper>}/>
               <Route path="/breathe/:start/:middle/:end" element={<PageWrapper><Breathe/></PageWrapper>}/>
-              <Route path="/socialInteractions" element={<PageWrapper><SocialInteractions/></PageWrapper>}/>
+              <Route path="/socialTree" element={<PageWrapper><SocialTree/></PageWrapper>}/>
               <Route path="/editFlower/:id" element={<PageWrapper><EditFlower/></PageWrapper>}/>
               <Route path="/affirmations" element={<PageWrapper><Affirmations/></PageWrapper>}/>
               <Route path="/settings" element={<PageWrapper><Settings/></PageWrapper>}/>

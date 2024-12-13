@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { Color } from "./Color";
 import { colors } from "../data/awardsData";
+import { sounds as soundsData } from "../data/awardsData";
 
 export function Awards() {
     const params = useParams()
@@ -17,6 +18,8 @@ export function Awards() {
     const [itemBrought, setItemBrought] = useState(false);
     const [showConfetti, setShowConfetti] = useState(false);
     const authToken = cookies.AuthToken
+
+    const [currSounds, setCurrSounds] = useState([]);
 
     const [currAudioIndex, setCurrAudioIndex] = useState(0);
 
@@ -44,6 +47,35 @@ export function Awards() {
                     }
                 })
             }
+
+            const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
+            const dataSounds = await resSounds.json();
+
+            //List off available sounds that user has not brought yet
+            let availableSounds = []
+            //get users current sounds purchased and add the sound to available sounds
+            dataSounds.map((s) => {
+                availableSounds.push(s.src)
+            })
+
+            console.log("users current available sounds", availableSounds)
+
+            let finalSounds = []
+            //loop through sounds that can be brought
+            soundsData.map((s) => {
+                console.log(s.wavSound)
+                if (availableSounds.includes(s.wavSound)) {
+                    console.log("FOUND A MATCH")
+                }
+                else {
+                    finalSounds.push(s)
+                    console.log('HIII')
+                }
+
+            })
+
+            console.log("edited available sounds", finalSounds.length)
+            setCurrSounds(finalSounds);
 
         }
         catch(err) {
@@ -87,7 +119,7 @@ export function Awards() {
 
                     <p className="text-2xl py-3">{type}</p>
                     <div className="flex flex-col gap-3 pb-5">
-                        {sounds.map((sound, index) => {
+                        {currSounds.map((sound, index) => {
                                 return (
 
                                         <AudioPlayer audioSrc={sound} index={index} currAudioIndex={currAudioIndex}
