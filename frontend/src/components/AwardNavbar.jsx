@@ -53,9 +53,6 @@ export function AwardNavbar() {
                     <Link to={"/awards/Colors"} className=" p-4 rounded-xl shadow-md" style={{ backgroundColor: buttonsColor }}>
                         Color schemes
                     </Link>
-                    <Link to={"/awards/Fonts"} className="p-4 rounded-xl shadow-md" style={{ backgroundColor: buttonsColor }}>
-                        Fonts
-                    </Link>
                 </div>
             </div>
         </div>

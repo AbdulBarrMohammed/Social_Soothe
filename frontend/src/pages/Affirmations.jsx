@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { data } from "../data/affirmationsData"
 import { useState } from "react"
 import { useCookies } from "react-cookie";
+import { LogIn } from "../components/Login";
 
 export function Affirmations () {
 
@@ -50,9 +51,17 @@ export function Affirmations () {
     },[])
 
     return (
-        <div className="flex bg-[#CCDBEE] h-screen justify-center pt-60 gap-10 px-20" style={{ backgroundColor: lightestBg }}>
-            <p className="text-3xl text-center">{quote}</p>
-        </div>
+
+        <>
+            {!authToken &&  <LogIn/>}
+            {authToken &&
+                <div className="flex bg-[#CCDBEE] h-screen justify-center pt-60 gap-10 px-20" style={{ backgroundColor: lightestBg }}>
+                    <p className="text-3xl text-center">{quote}</p>
+                </div>
+            }
+
+        </>
+
     )
 
 }

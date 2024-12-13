@@ -5,6 +5,7 @@ import { breatheInfo } from "../data/breatheData";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import ReactConfetti from "react-confetti";
+import { LogIn } from "../components/Login";
 
 export function Breathe() {
 
@@ -298,46 +299,57 @@ export function Breathe() {
   }
 
   return (
-        <div className="flex h-screen justify-center pt-10 gap-10" style={{ backgroundColor: lightestBg }}>
+    <div>
+        {!authToken &&  <LogIn/>}
 
-            {showConfetti && <ReactConfetti/>}
+        {authToken &&
 
-            <div className="flex flex-col items-center gap-5 ">
+            <div className="flex h-screen justify-center pt-10 gap-10" style={{ backgroundColor: lightestBg }}>
+
+                {showConfetti && <ReactConfetti/>}
+
+                <div className="flex flex-col items-center gap-5 ">
+                    <div>
+                        <h3 className="font-bold text-2xl">Progress Timer</h3>
+                    </div>
+                    <div key={key} id="pomodoro-timer" className="Progressbar">
+                        <CountdownCircleTimer
+                        onComplete={handleComplete}
+                        isPlaying={isActive}
+                        duration={counter}
+                        colors={buttonsColor}
+                        size={350}
+                        >
+                        {renderTime}
+
+
+                        </CountdownCircleTimer>
+
+                    </div>
+                    <div className="flex gap-5">
+
+                        <button className=" p-3 rounded-2xl text-white shadow-md" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
+                        <button className=" p-3 rounded-2xl text-white shadow-md" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
+                        <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
+                    </div>
+                </div>
                 <div>
-                    <h3 className="font-bold text-2xl">Progress Timer</h3>
-                </div>
-                <div key={key} id="pomodoro-timer" className="Progressbar">
-                    <CountdownCircleTimer
-                    onComplete={handleComplete}
-                    isPlaying={isActive}
-                    duration={counter}
-                    colors={buttonsColor}
-                    size={350}
-                    >
-                    {renderTime}
-
-
-                    </CountdownCircleTimer>
 
                 </div>
-                <div className="flex gap-5">
 
-                    <button className=" p-3 rounded-2xl text-white shadow-md" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
-                    <button className=" p-3 rounded-2xl text-white shadow-md" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
-                    <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
+                <div className="flex flex-col w-1/3 gap-5">
+                    <h2 className="font-bold text-3xl">{title}</h2>
+                    <p>{description}</p>
+
                 </div>
-            </div>
-            <div>
 
             </div>
 
-            <div className="flex flex-col w-1/3 gap-5">
-                <h2 className="font-bold text-3xl">{title}</h2>
-                <p>{description}</p>
+        }
 
-            </div>
 
-        </div>
+
+    </div>
 
     )
   }

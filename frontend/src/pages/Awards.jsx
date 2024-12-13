@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { sounds } from "../data/awardsData";
 import { useState } from "react";
 import { AudioPlayer } from "./AudioPlayer";
 import { useEffect } from "react";
@@ -7,16 +6,14 @@ import { useCookies } from "react-cookie";
 import { Color } from "./Color";
 import { colors } from "../data/awardsData";
 import { sounds as soundsData } from "../data/awardsData";
+import { LogIn } from "../components/Login"
 
 export function Awards() {
     const params = useParams()
     const type = params.type;
     const [isSounds ,setIsSounds] = useState(false);
-    const [isFonts, setIsFonts] = useState(false);
     const [isColors, setIsColors] = useState(false);
     const [cookies, setCookie, removeCookie] = useCookies(null)
-    const [itemBrought, setItemBrought] = useState(false);
-    const [showConfetti, setShowConfetti] = useState(false);
     const authToken = cookies.AuthToken
 
     const [currSounds, setCurrSounds] = useState([]);
@@ -51,31 +48,9 @@ export function Awards() {
             const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
             const dataSounds = await resSounds.json();
 
-            //List off available sounds that user has not brought yet
-            let availableSounds = []
-            //get users current sounds purchased and add the sound to available sounds
-            dataSounds.map((s) => {
-                availableSounds.push(s.src)
-            })
+            setCurrSounds(filterAvailableSound(dataSounds));
 
-            console.log("users current available sounds", availableSounds)
 
-            let finalSounds = []
-            //loop through sounds that can be brought
-            soundsData.map((s) => {
-                console.log(s.wavSound)
-                if (availableSounds.includes(s.wavSound)) {
-                    console.log("FOUND A MATCH")
-                }
-                else {
-                    finalSounds.push(s)
-                    console.log('HIII')
-                }
-
-            })
-
-            console.log("edited available sounds", finalSounds.length)
-            setCurrSounds(finalSounds);
 
         }
         catch(err) {
@@ -87,6 +62,36 @@ export function Awards() {
         setBgColor()
     },[])
 
+
+    /**
+     * Filters sounds of sounds purchased by user
+     * @param dataSounds (array)
+     * @return availableSounds (array)
+     */
+    function filterAvailableSound(dataSounds) {
+        //Create a list of current sounds in user sound datas to filter the sounds src
+        let currSounds = []
+
+        //get users current sounds purchased and add the sound to available sounds
+        dataSounds.map((s) => {
+            currSounds.push(s.src)
+        })
+
+        //list for available sounds
+        let availableSounds = []
+
+        //loop through sounds that can be brought
+        soundsData.map((s) => {
+            console.log(s.wavSound)
+            if (!currSounds.includes(s.wavSound)) {
+                availableSounds.push(s)
+            }
+        })
+
+        return availableSounds;
+
+    }
+
     /**
      * Switches views based on which type of item user wants to view
      * @param event
@@ -95,16 +100,10 @@ export function Awards() {
     useEffect(() => {
         if (type === "Sounds") {
             setIsSounds(true);
-            setIsFonts(false);
-            setIsColors(false)
-        } else if (type === "Fonts") {
-            setIsFonts(true);
-            setIsSounds(false);
             setIsColors(false)
         }
         else if (type == "Colors") {
             setIsColors(true)
-            setIsFonts(false)
             setIsSounds(false)
 
         }
@@ -113,18 +112,14 @@ export function Awards() {
     return (
         <div className="flex-col pt-10 bg-[#ACC8EA] min-h-screen px-10 text-[#44423F]" style={{ backgroundColor: lightestBg }}>
 
-
             {isSounds &&
                 <>
-
                     <p className="text-2xl py-3">{type}</p>
                     <div className="flex flex-col gap-3 pb-5">
                         {currSounds.map((sound, index) => {
                                 return (
-
                                         <AudioPlayer audioSrc={sound} index={index} currAudioIndex={currAudioIndex}
-                                            setCurrAudioIndex={setCurrAudioIndex} setItemBrought={setItemBrought}/>
-
+                                            setCurrAudioIndex={setCurrAudioIndex}/>
 
                                     )
                                 })
@@ -133,12 +128,6 @@ export function Awards() {
                     </div>
                 </>
 
-            }
-            {
-                isFonts &&
-                <>
-                    <p>This is fonts</p>
-                </>
             }
             {
                 isColors &&
@@ -156,6 +145,11 @@ export function Awards() {
                     </div>
                 </>
             }
+
+
+
+
+
 
         </div>
     )

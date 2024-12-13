@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useCookies } from "react-cookie"
+import { LogIn } from "../components/Login"
 
 
 export function SelectedJournal() {
@@ -132,35 +133,39 @@ export function SelectedJournal() {
 
 
     return (
-        <div className="p-10 h-screen" style={{ backgroundColor: lightestBg }}>
-            <div className="flex flex-col gap-3">
-                <header className="flex justify-between">
-                    <div className="flex gap-5 items-center">
-                        <h1 className="text-3xl font-bold">{journal.title}</h1>
-                        <h2 className="text-xl">{stringDate}</h2>
+        <div className=" h-screen" style={{ backgroundColor: lightestBg }}>
+            {!authToken &&  <LogIn/>}
+            {authToken &&
+                <div className="flex flex-col gap-3 p-10">
+                    <header className="flex justify-between">
+                        <div className="flex gap-5 items-center">
+                            <h1 className="text-3xl font-bold">{journal.title}</h1>
+                            <h2 className="text-xl">{stringDate}</h2>
+                        </div>
+                        <div className="flex gap-4">
+                            <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
+                                <button onClick={() => navigate(-1)}>Back</button>
+                            </div>
+                            <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
+                                <button onClick={removeJournal}>delete</button>
+                            </div>
+                            <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
+                                <button onClick={openEdit}>edit</button>
+                            </div>
+                        </div>
+                    </header>
+                    <div className="flex items-center gap-3">
+                        <h1 className="text-2xl font-bold">You felt: </h1>
+                        <h1 className="text-2xl">{journal.mood}</h1>
                     </div>
-                    <div className="flex gap-4">
-                        <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
-                            <button onClick={() => navigate(-1)}>Back</button>
-                        </div>
-                        <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
-                            <button onClick={removeJournal}>delete</button>
-                        </div>
-                        <div className="flex p-3 text-white rounded-2xl items-center justify-center shadow-md" style={{ backgroundColor: buttonsColor }}>
-                            <button onClick={openEdit}>edit</button>
-                        </div>
+                    <div className="text-xl">
+                        {journal.content}
                     </div>
-                </header>
-                <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-bold">You felt: </h1>
-                    <h1 className="text-2xl">{journal.mood}</h1>
                 </div>
-                <div className="text-xl">
-                    {journal.content}
-                </div>
-            </div>
 
-            { formModal &&
+            }
+
+            { formModal && authToken &&
                 <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-30 flex flex-col items-center justify-center">
                     <div className="flex justify-start">
                         <div onClick={closeModal} className="cursor-pointer">close btn</div>
@@ -179,6 +184,7 @@ export function SelectedJournal() {
 
                 </div>
             }
+
 
         </div>
     )

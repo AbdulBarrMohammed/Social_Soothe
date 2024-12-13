@@ -288,10 +288,16 @@ export function SocialTree() {
                             <img src="../src/assets/rb_1364.png" className="h-60 mb-10"/>
                         </>
                     }
+
+                    {authToken &&
                         <div onClick={showQuestionOne} className="absolute top-10 right-10 rounded-full h-14 w-14 cursor-pointer bg-[#eeeeee] p-4 flex items-center justify-center shadow-md">
                             <img src="../src/assets/leaf.png"/>
                         </div>
+
+                    }
+
                     </div>
+
 
                     {titleQuestion  &&
                         <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex flex-col items-center justify-center h-screen">

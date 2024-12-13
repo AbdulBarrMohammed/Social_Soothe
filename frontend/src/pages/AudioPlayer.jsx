@@ -6,7 +6,7 @@ import ReactConfetti from 'react-confetti';
 
 
 
-export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex, setItemBrought }) {
+export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex }) {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
