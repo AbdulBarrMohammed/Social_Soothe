@@ -17,6 +17,9 @@ export function Settings() {
     const authToken = cookies.AuthToken
     const email = cookies.Email
     const navigate = useNavigate()
+    const [lightestBg, setLightestBg] = useState("#ACC8EA");
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
+
 
 
     /**
@@ -106,13 +109,47 @@ export function Settings() {
 
     }
 
+
+    const setBgColor = async () => {
+        try {
+            //Get users current pick for a background color
+            const resColor = await fetch(`http://localhost:8000/user/${email}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor.toLowerCase() == 'blue') {
+                setLightestBg("#ACC8EA")
+                setButtonColor("#4470AD")
+
+            }
+            else {
+                //check for current user color in users purchased colors to set chosen background color
+                dataColors.map((c) => {
+                    if (c.name === dataColor.currColor) {
+                        setLightestBg(c.lightest)
+                        setButtonColor(c.semiDark)
+                    }
+                })
+            }
+
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+    useEffect(() => {
+        setBgColor()
+    },[])
+
     return (
         <>
         {!authToken &&  <LogIn/>}
 
         {authToken &&
 
-        <div className="flex flex-col px-20 pt-10 h-screen bg-[#ACC8EA] text-[#44423F] gap-10">
+        <div className="flex flex-col px-20 pt-10 h-screen text-[#44423F] gap-10" style={{ backgroundColor: lightestBg }}>
             <div className="pb-5">
                 <h1 className="text-4xl font-bold">Account Settings</h1>
 
@@ -121,7 +158,7 @@ export function Settings() {
                 <h1 className="text-2xl font-bold">Appearance</h1>
                 <hr className="border-[#44423F] border mb-5" />
                 <p className="font-bold text-xl">Choose a background color</p>
-                <select onClick={(e) => handleChangeColor(e)} className="px-10 py-3 rounded-lg bg-[#6888BE] text-white shadow-md">
+                <select onClick={(e) => handleChangeColor(e)} className="px-10 py-3 rounded-lg text-white shadow-md" style={{ backgroundColor: buttonsColor }}>
                 <option value="">Background colors</option>
                     {colors.map((color, index) => {
                         return (
@@ -138,7 +175,7 @@ export function Settings() {
                 <h1 className="text-2xl font-bold">Background Sounds</h1>
                 <hr className="border-[#44423F] border mb-5" />
                 <p className="font-bold text-xl">Choose a background sound for breathing exercise</p>
-                <select onClick={(e) => handleChangeSound(e)} className="px-10 py-3 rounded-lg bg-[#6888BE] text-white shadow-md">
+                <select onClick={(e) => handleChangeSound(e)} className="px-10 py-3 rounded-lg text-white shadow-md" style={{ backgroundColor: buttonsColor }}>
                 <option value="">background sounds</option>
                     {sounds.map((sound, index) => {
                         return (
@@ -155,14 +192,14 @@ export function Settings() {
                 <h1 className="text-2xl font-bold">Delete account</h1>
                 <hr className="border-[#44423F] border mb-5" />
                 <p>Press button below to delete account</p>
-                <button className="bg-[#6888BE] rounded-xl shadow-md text-white px-10 py-3 ">delete account</button>
+                <button className="rounded-xl shadow-md text-white px-10 py-3 " style={{ backgroundColor: buttonsColor }}>delete account</button>
 
             </div>
 
             <div className="">
                 {/* MAKE SURE TO NAVIGATE TO DASHBAORD WHEN FINISHED */}
                 <h2 className="text-2xl font-bold">Save changes</h2>
-                <button className="bg-[#6888BE] rounded-xl shadow-md text-white px-10 py-3 " onClick={saveChanges}>Save</button>
+                <button className="rounded-xl shadow-md text-white px-10 py-3 " onClick={saveChanges} style={{ backgroundColor: buttonsColor }}>Save</button>
             </div>
 
         </div>

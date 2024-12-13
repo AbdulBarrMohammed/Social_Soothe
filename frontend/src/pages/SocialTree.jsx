@@ -44,6 +44,7 @@ export function SocialTree() {
     const [questionSeven, setQuestionSeven] = useState("")
 
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
 
     const getData = async () => {
         try {
@@ -75,6 +76,7 @@ export function SocialTree() {
 
             if (dataColor.currColor.toLowerCase() == 'blue') {
                 setLightestBg("#ACC8EA")
+                setButtonColor("#6888BE")
             }
             else {
 
@@ -82,6 +84,7 @@ export function SocialTree() {
                 dataColors.map((c) => {
                     if (c.name === dataColor.currColor) {
                         setLightestBg(c.lightest)
+                        setButtonColor(c.semiDark)
                     }
                 })
             }
@@ -261,7 +264,7 @@ export function SocialTree() {
                                         </div>
                                 </div>
                                 <div className="flex justify-center">
-                                    <button onClick={handleSubmit} className="py-3 px-5 bg-[#4470AD] text-white rounded-2xl shadow-md">Done</button>
+                                    <button onClick={handleSubmit} className="py-3 px-5 text-white rounded-2xl shadow-md" style={{ backgroundColor: buttonsColor }}>Done</button>
                                 </div>
 
                             </div>

@@ -14,6 +14,9 @@ export function CreateJournal() {
     const [formModal, setFormModal] = useState(false);
     const [currCoins, setCurrCoins] = useState(-1);
 
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
+    const [lightestBg, setLightestBg] = useState("#ACC8EA");
+
     const navigate = useNavigate()
 
     // get user coin amount
@@ -29,6 +32,40 @@ export function CreateJournal() {
 
     useEffect(() => {
         getCoins()
+    },[])
+
+
+    const setBgColor = async () => {
+        try {
+            //Get users current pick for a background color
+            const resColor = await fetch(`http://localhost:8000/user/${email}`)
+            const dataColor = await resColor.json();
+
+            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColors.json();
+
+            if (dataColor.currColor.toLowerCase() == 'blue') {
+                setLightestBg("#ACC8EA")
+                setButtonColor("#4470AD")
+            }
+            else {
+                //check for current user color in users purchased colors to set chosen background color
+                dataColors.map((c) => {
+                    if (c.name === dataColor.currColor) {
+                        setLightestBg(c.lightest)
+                        setButtonColor(c.semiDark)
+                    }
+                })
+            }
+
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        setBgColor()
     },[])
 
     async function handleJournalSubmit(e) {
@@ -113,7 +150,7 @@ export function CreateJournal() {
                                 </div>
 
                         </div>
-                        <button className="bg-[#4470AD] text-white p-5 rounded-full text-sm font-bold shadow-md"onClick={submitModal}>Submit</button>
+                        <button className="text-white p-5 rounded-full text-sm font-bold shadow-md" onClick={submitModal} style={{ backgroundColor: buttonsColor }}>Submit</button>
 
                     </div>
 
@@ -129,7 +166,7 @@ export function CreateJournal() {
                         <input className="font-bold text-2xl" onChange={(e) => setTitle(e.target.value)} maxLength={15} required placeholder="Title"/>
                         <textarea className="text-xl h-96 border rounded-lg p-2" onChange={(e) => setContent(e.target.value)} maxLength={1000} required placeholder={`Why are you feeling ${mood}...`}/>
                         <div>
-                            <button type="submit" className="bg-[#4470AD] text-white  p-5 rounded-full text-sm font-bold shadow-md">Add entry</button>
+                            <button type="submit" className="text-white  p-5 rounded-full text-sm font-bold shadow-md" style={{ backgroundColor: buttonsColor }}>Add entry</button>
                         </div>
 
                     </form>

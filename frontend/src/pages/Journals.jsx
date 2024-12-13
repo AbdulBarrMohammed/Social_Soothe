@@ -15,6 +15,7 @@ export function Journals() {
 
     const [colors, setColors] = useState([]);
     const [lightestBg, setLightestBg] = useState("");
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
 
 
     const getData = async () => {
@@ -31,6 +32,7 @@ export function Journals() {
 
             if (dataColor.currColor.toLowerCase() == 'blue') {
                 setLightestBg("#ACC8EA")
+                setButtonColor("#6888BE")
             }
             else {
 
@@ -41,6 +43,7 @@ export function Journals() {
                 dataColors.map((c) => {
                     if (c.name === dataColor.currColor) {
                         setLightestBg(c.lightest)
+                        setButtonColor(c.semiDark)
                     }
                 })
             }
@@ -86,7 +89,7 @@ export function Journals() {
                                     onChange={(event) => setSearchQuery(event.target.value)}
                                     className="h-10 w-full rounded-3xl p-5 shadow-md" placeholder="Search journal title..."/>
                             </form>
-                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-10 w-10 cursor-pointer p-5 bg-[#eeeeee] items-center justify-center shadow-md">
+                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-10 w-10 cursor-pointer p-5 items-center justify-center shadow-md text-white" style={{ backgroundColor: buttonsColor }}>
                                     +
                             </Link>
                         </div>

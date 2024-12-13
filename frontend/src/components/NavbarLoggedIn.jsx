@@ -16,6 +16,7 @@ export function NavbarLoggedIn() {
     //const [bgColor, setBgColor] = useState("");
     const [colors, setColors] = useState([]);
     const [semiBg, setSemiBg] = useState("");
+    const [lightestBg, setLightestBg] = useState("");
     //let darkBg = ''
 
     const getData = async () => {
@@ -28,6 +29,7 @@ export function NavbarLoggedIn() {
 
             if (dataColor.currColor.toLowerCase() == 'blue') {
                 setSemiBg("#4470AD")
+                setLightestBg("#CCDBEE")
             }
 
             else {
@@ -64,10 +66,10 @@ export function NavbarLoggedIn() {
                         {pageDataLoggedIn.map((page) => {
                             return (
 
-                                    <Link to={page.path} className='text-lg flex items-center hover:bg-[#99AFD7] rounded-xl transition duration-300 ease-in-out'>
+                                    <Link to={page.path} className='text-lg flex items-center rounded-xl'>
                                         <div className='flex gap-2 px-10 py-1 items-center'>
                                             <img src={page.img} className='h-7'/>
-                                            <li className='font-semibold text-base'>
+                                            <li className='hover:font-semibold transition duration-300 ease-in-out'>
                                                 {page.name}
                                             </li>
                                         </div>
