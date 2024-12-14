@@ -1,6 +1,5 @@
 import { Pie } from 'react-chartjs-2'
 import { Chart as ChartJS , Tooltip, Legend, ArcElement} from 'chart.js'
-//import { pieChartData } from './moodData'
 import { useCookies } from 'react-cookie'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -74,14 +73,14 @@ export const PieChart = () => {
                 label: "Mood",
                 data: pieData,
                 backgroundColor: [
-                    "rgb(251, 235, 190)",
-                    "rgb(249, 230, 224)",
-                    "rgb(214, 249, 246)",
-                    "rgb(233, 234, 253)",
-                    "rgb(232, 218, 250)",
-                    "rgb(250, 225, 238)"
+                    "rgb(195, 159, 60)",
+                    "rgb(209, 112, 83)",
+                    "rgb(87, 156, 149)",
+                    "rgb(69, 74, 186)",
+                    "rgb(123, 57, 196)",
+                    "rgb(205, 92, 146)"
                 ],
-                hoverOffset: 4,
+                hoverOffset: 1,
 
             }
         ]
