@@ -96,9 +96,12 @@ export function Breathe() {
         } else if (endNum === 6) {
             setTitle(breatheInfo[1].title);
             setDescription(breatheInfo[1].info)
-        } else {
+        } else if (endNum == 8) {
             setTitle(breatheInfo[2].title);
             setDescription(breatheInfo[2].info)
+        }
+        else {
+            //user picked regular breathing
         }
 
 
@@ -148,6 +151,7 @@ export function Breathe() {
     const [key, setKey] = useState(0); // re-render the timer
 
     const restart = () => {
+
         if (turn == 2 || turn == 5 || turn == 8) {
             defaultBgSound ?  breatheInAudio.current.play() : ""
             setRounds(rounds + 1)
@@ -158,6 +162,8 @@ export function Breathe() {
         else if (turn == 0 || turn == 3 || turn == 6 || turn == 9) {
             setBreathe("Hold breathe...")
             setCounter(middleNum)
+
+
         }
         else if (turn == 1 || turn == 4 || turn == 7 || turn == 10) {
             defaultBgSound ?  exhaleAudio.current.play() : ""
@@ -182,6 +188,8 @@ export function Breathe() {
             setBreathe("Breathe in...")
             setRounds(1)
             setKey((prevKey) => prevKey + 1);
+            currBgSound.current.pause()
+            currBgSound.current = new Audio(bgSound)
         };
 
         const handleComplete = () => {
@@ -241,6 +249,7 @@ export function Breathe() {
         const start = () => {
             //Checks to see if user wants default background breathing noises
             if (defaultBgSound) {
+
                 //first check if the exercise is the 3-3-3 pattern
                 if (startNum == 3) {
                     if (counter == endNum && (turn == 1 || turn == 4 || turn == 7 || turn == 10)) {
@@ -291,12 +300,6 @@ export function Breathe() {
   }, [counter, isActive]);
 
 
-  function openPlayBgSound() {
-
-    console.log("The current bg sound playing is: ", currBgSound)
-    currBgSound.current.play()
-
-  }
 
   return (
     <div>

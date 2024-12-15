@@ -100,6 +100,8 @@ export function Dashboard() {
                 <h1>Your social standing</h1>
                 <img src={socialStanding.img} className="h-28 w-28"/>
                 <p>{socialStanding.text}</p>
+                <p>Your leaf points: count</p>
+                <p>Journal Entries: count</p>
             </div>
         </>
     )

@@ -32,7 +32,7 @@ export function Journals() {
 
             if (dataColor.currColor.toLowerCase() == 'blue') {
                 setLightestBg("#ACC8EA")
-                setButtonColor("#6888BE")
+                setButtonColor("#4470AD")
             }
             else {
 

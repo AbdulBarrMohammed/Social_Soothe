@@ -65,10 +65,7 @@ export function BreatheIntro() {
                             <p className="font-bold text-lg">4-7-8 breathing exercise:</p>
                             <p className="font-bold text-lg">For overall Anxiety</p>
                         </Link>
-                        <Link to={"/breathe/4/7/8"} className="bg-emojiSad flex flex-col items-center justify-center p-4 h-56 w-56 text-center rounded-3xl cursor-pointer shadow-md">
-                            <p className="font-bold text-lg">Just breathe:</p>
-                            <p className="font-bold text-lg">For self meditation</p>
-                        </Link>
+
 
                     </div>
                     <img src="../src/assets/balloons.svg" className="h-60 pt-10"/>
