@@ -114,7 +114,7 @@ export function Settings() {
                 console.log(err)
             }
         }
-        navigate("/journals");
+        navigate("/dashboard");
 
     }
 
@@ -206,7 +206,6 @@ export function Settings() {
             </div>
 
             <div className="">
-                {/* MAKE SURE TO NAVIGATE TO DASHBAORD WHEN FINISHED */}
                 <h2 className="text-2xl font-bold">Save changes</h2>
                 <button className="rounded-xl shadow-md text-white px-10 py-3 " onClick={saveChanges} style={{ backgroundColor: buttonsColor }}>Save</button>
             </div>

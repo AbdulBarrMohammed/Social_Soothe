@@ -350,14 +350,15 @@ export function SocialTree() {
 
                         {questionSevenModal &&
                             <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
-                                <div className="bg-white p-10">
-                                    <form className="flex flex-col gap-5 p-10">
-                                        <div>
+                                <div className="bg-white p-5 flex items-center justify-center rounded-xl">
+                                    <form className="flex flex-col gap-5 p-5 items-center">
+                                        <div className="flex flex-col items-center justify-center gap-5">
                                             <p className="font-bold">{questions[5]}</p>
-                                            <textarea className="text-xl w-1/2 h-40 border rounded-lg p-2" onChange={(e) => setQuestionSeven(e.target.value)} value={questionSeven} maxLength={500}/>
+                                            <textarea className="text-xl h-40 border rounded-lg p-2" onChange={(e) => setQuestionSeven(e.target.value)} value={questionSeven} maxLength={500}/>
                                         </div>
-
-                                        <button onClick={handleSevenSubmit}>done</button>
+                                        <div>
+                                            <button className="py-3 px-5 text-white rounded-2xl shadow-md" onClick={handleSevenSubmit} style={{ backgroundColor: buttonsColor }}>done</button>
+                                        </div>
 
                                     </form>
                                 </div>
