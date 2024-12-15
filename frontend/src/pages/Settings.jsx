@@ -21,6 +21,11 @@ export function Settings() {
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
 
+    //current sound, and background color user chose
+    const [currBgColor, setCurrBgColor] = useState("")
+    const [currBgSound, setCurrBgSound] = useState("")
+
+
 
     /**
      * gets current users purchased colors and sounds
@@ -39,6 +44,7 @@ export function Settings() {
             const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
             const dataSounds = await resSounds.json();
             setSounds(dataSounds)
+
 
         } catch(err) {
             console.log(err)
@@ -60,20 +66,7 @@ export function Settings() {
 
         //Grabs current color chosen
         const color = e.target.value
-
-        //Checks if color is picked and stores the color in the database in the backend
-        if (color) {
-            try {
-                const response = await fetch(`http://localhost:8000/user/color/update`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({color, email})
-                })
-            } catch(err) {
-                console.log(err)
-            }
-        }
-
+        setCurrBgColor(color)
 
     }
 
@@ -87,9 +80,15 @@ export function Settings() {
 
         //Grab current sound
         const sound = e.target.value
+        setCurrBgSound(sound)
+
+    }
+
+    async function saveChanges(){
 
         //Make sure a sound is picked
-        if (sound) {
+        if (currBgSound) {
+            const sound = currBgSound
             try {
                 const response = await fetch(`http://localhost:8000/user/sound/update`, {
                 method: 'POST',
@@ -102,9 +101,19 @@ export function Settings() {
 
         }
 
-    }
-
-    function saveChanges(){
+        //Checks if color is picked and stores the color in the database in the backend
+        if (currBgColor) {
+            const color = currBgColor
+            try {
+                const response = await fetch(`http://localhost:8000/user/color/update`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({color, email})
+                })
+            } catch(err) {
+                console.log(err)
+            }
+        }
         navigate("/journals");
 
     }

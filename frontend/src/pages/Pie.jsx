@@ -80,7 +80,7 @@ export const PieChart = () => {
                     "rgb(123, 57, 196)",
                     "rgb(205, 92, 146)"
                 ],
-                hoverOffset: 1,
+                hoverOffset: 4,
 
             }
         ]
@@ -93,6 +93,7 @@ export const PieChart = () => {
             <div className='h-80'>
                 <Pie options={options}
                     data={pieChartData}
+
 
                     />
 
