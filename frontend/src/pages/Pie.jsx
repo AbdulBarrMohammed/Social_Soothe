@@ -28,8 +28,6 @@ export const PieChart = () => {
             const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
             const journalData = await res.json();
 
-            //    "Happy", "Angry", "Embarrassed", "Sad", "Worried", "Stressed"
-
             //set user journals
             setJournals(journalData)
         } catch(err) {
@@ -90,10 +88,9 @@ export const PieChart = () => {
     return (
         <div >
 
-            <div className='h-80'>
+            <div className='h-72'>
                 <Pie options={options}
                     data={pieChartData}
-
 
                     />
 

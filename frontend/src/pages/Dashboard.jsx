@@ -13,6 +13,9 @@ export function Dashboard() {
 
     const [lightestBg, setLightestBg] = useState("");
     const [buttonsColor, setButtonColor] = useState("#6888BE");
+    const [userEmail, setUserEmail] = useState("");
+
+
 
     const [socialStanding, setSocialStanding] = useState({
         img: '../../src/assets/icons8-seed-64.png',
@@ -68,9 +71,21 @@ export function Dashboard() {
             const resColors = await fetch(`http://localhost:8000/colors/${email}`)
             const dataColors = await resColors.json();
 
+
+
+            //get index of @ symbol
+            const atSymbolIndex = email.indexOf("@");
+
+            //remove @ symbol and just include the user email name
+            const editEmail = email.substring(0, atSymbolIndex)
+            console.log("edit email", editEmail)
+            setUserEmail(editEmail)
+
+
+
             if (dataColor.currColor.toLowerCase() == 'blue') {
                 setLightestBg("#ACC8EA")
-                setButtonColor("#6888BE")
+                setButtonColor("#4470AD")
             }
             else {
 
@@ -94,14 +109,59 @@ export function Dashboard() {
 
     return (
         <>
-            <div className="flex flex-col px-20 py-10 h-screen" style={{ backgroundColor: lightestBg }}>
-                <p>This is a dashbaord</p>
-                <PieChart />
-                <h1>Your social standing</h1>
-                <img src={socialStanding.img} className="h-28 w-28"/>
-                <p>{socialStanding.text}</p>
-                <p>Your leaf points: count</p>
-                <p>Journal Entries: count</p>
+            <div className="flex flex-col px-20 gap-10 pt-5 h-full" style={{ backgroundColor: lightestBg }}>
+
+                <div className="flex justify-start items-center gap-5">
+                    <div>
+                        <img src={"../src/assets/breeze.png"} className="h-20"/>
+                    </div>
+                    <div className="flex flex-col">
+                        <h1 className="text-3xl">Welcome back <span className="font-bold">{userEmail}</span></h1>
+                        <p>Below is your recent activiy information</p>
+                    </div>
+                </div>
+
+
+
+                <div className="grid gap-4 grid-cols-2 grid-rows-2 mb-10">
+                    <div className="flex flex-col items-start justify-start p-5 rounded-3xl bg-[url('../src/assets/landscape.jpg')] bg-no-repeat bg-cover bg-bottom">
+                        TEST
+                    </div>
+                    <div className="grid gap-4 grid-cols-2 grid-rows-2">
+                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/leaf.png"/>
+                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+
+                        </div>
+                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/leaf.png"/>
+                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+
+                        </div>
+                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/leaf.png"/>
+                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+                        </div>
+                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/leaf.png"/>
+                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+                        </div>
+                    </div>
+
+                    <div className="bg-emojiSad shadow-md flex flex-col items-center justify-center rounded-3xl">
+                        <PieChart />
+                    </div>
+
+                    <div className="bg-emojiSad shadow-md flex gap-24 py-5 justify-center rounded-3xl">
+
+
+                        <img src={socialStanding.img} className="h-60 w-60"/>
+                        <p>{socialStanding.text}</p>
+
+                    </div>
+
+                </div>
+
             </div>
         </>
     )

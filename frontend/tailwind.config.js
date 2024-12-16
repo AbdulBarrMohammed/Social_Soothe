@@ -12,6 +12,10 @@ export default {
       // => @media (min-width: 576px) { ... }
     },
     extend: {
+
+      backgroundImage: {
+        'dashboard_img': "url('/src/assets/undraw_nature_benefits_re_kk70.svg')",
+      },
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
       },
