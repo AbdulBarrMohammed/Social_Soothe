@@ -141,7 +141,7 @@ export function CreateJournal() {
                                     <p className="text-lg font-semibold text-emojiWorriedWord">Worried</p>
                                 </div>
                                 <div onClick={() => setMood("embarrassed")} className="cursor-pointer flex flex-col items-center gap-2 justify-center h-64 w-72 bg-emojiEmbarrassed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/tired.png" className="h-28"/>
+                                    <img src="../src/assets/emojiEmbarressed.png" className="h-28"/>
                                     <p className="text-lg font-semibold text-emojiEmbarrassedWord">Embarrassed</p>
                                 </div>
                                 <div onClick={() => setMood("stressed")} className="cursor-pointer flex flex-col items-center gap-2  justify-center h-64 w-72 bg-emojiStressed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">

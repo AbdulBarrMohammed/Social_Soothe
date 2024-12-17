@@ -30,18 +30,19 @@ export function Dashboard() {
 
             console.log('data length',  data.length)
             if (data.length >= 22 && data.length < 100) {
-                const newData = {img : '../../src/assets/icons8-sprout-48.png', text: 'Sprouting Plant'}
+                const newData = {img : '../../src/assets/plant.png', text: 'Sprouting Plant'}
                 setSocialStanding(newData)
                 console.log("changing the social data")
 
             }
             else if (data.length >= 100) {
-                const newData = {img : '../../src/assets/icons8-sunflower-64.png', text: 'Social Sprout Flower'}
+                const newData = {img : '../../src/assets/cineraria.png', text: 'Social Sprout Flower'}
                 setSocialStanding(newData)
                 console.log("changing the social data")
             }
             else {
-
+                const newData = {img : '../../src/assets/seed-bag.png', text: 'Seed'}
+                setSocialStanding(newData)
             }
 
 

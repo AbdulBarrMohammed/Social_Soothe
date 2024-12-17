@@ -294,7 +294,7 @@ export function SocialTree() {
 
                     {authToken &&
                         <div onClick={showQuestionOne} className="absolute top-10 right-10 rounded-full h-14 w-14 cursor-pointer bg-[#eeeeee] p-4 flex items-center justify-center shadow-md">
-                            <img src="../src/assets/leaf.png"/>
+                            <img src="../src/assets/camellia.png"/>
                         </div>
 
                     }
