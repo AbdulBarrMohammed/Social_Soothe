@@ -71,12 +71,12 @@ export const PieChart = () => {
                 label: "Mood",
                 data: pieData,
                 backgroundColor: [
-                    "rgb(195, 159, 60)",
-                    "rgb(209, 112, 83)",
+                    "rgb(249,208,64)",
+                    "#e0474c",
                     "rgb(87, 156, 149)",
-                    "rgb(69, 74, 186)",
+                    "#6595DA",
                     "rgb(123, 57, 196)",
-                    "rgb(205, 92, 146)"
+                    "rgb(199,107,152)"
                 ],
                 hoverOffset: 4,
 

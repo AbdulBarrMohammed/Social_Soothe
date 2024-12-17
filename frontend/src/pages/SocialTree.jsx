@@ -194,7 +194,7 @@ export function SocialTree() {
 
     //increment each question
     function add() {
-        increment(index, input, setQuestionSix, setShowQuestions, setShowSubmit, setIndex, setQues, setQuestionOne, setQuestionTwo, setQuestionThree, setQuestionFour,
+        increment(index, input, setQuestionSix, setShowQuestions, setShowSubmit, setIndex, setQues, setQuestionTwo, setQuestionThree, setQuestionFour,
             setQuestionFive, setInput)
     }
 

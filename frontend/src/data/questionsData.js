@@ -33,7 +33,7 @@ export async function submitAnswers(email, questionOne, questionTwo, questionThr
 
 
 //increment each question
-export function increment(index, input, setQuestionSix, setShowQuestions, setShowSubmit, setIndex, setQues, setQuestionOne, setQuestionTwo, setQuestionThree, setQuestionFour,
+export function increment(index, input, setQuestionSix, setShowQuestions, setShowSubmit, setIndex, setQues, setQuestionTwo, setQuestionThree, setQuestionFour,
     setQuestionFive, setInput) {
     if (index == 4) {
         setQuestionSix(input)
@@ -64,7 +64,7 @@ export function increment(index, input, setQuestionSix, setShowQuestions, setSho
 
 export async function handleColorChange(done, currId, setOpenModal) {
         try {
-            let color = done ?  "#059033" : "#808080";
+            let color = done ?  "#F79BB4" : "#808080"; //F79BB4 808080 #59033
             const response = await fetch(`http://localhost:8000/flowers/flower/color/update/${currId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

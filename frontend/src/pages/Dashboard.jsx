@@ -30,18 +30,18 @@ export function Dashboard() {
 
             console.log('data length',  data.length)
             if (data.length >= 22 && data.length < 100) {
-                const newData = {img : '../../src/assets/plant.png', text: 'Sprouting Plant'}
+                const newData = {img : '../../src/assets/green-tea.png', text: 'Social Sprouting Plant'}
                 setSocialStanding(newData)
                 console.log("changing the social data")
 
             }
             else if (data.length >= 100) {
-                const newData = {img : '../../src/assets/cineraria.png', text: 'Social Sprout Flower'}
+                const newData = {img : '../../src/assets/rose.png', text: 'Social Sprout Flower'}
                 setSocialStanding(newData)
                 console.log("changing the social data")
             }
             else {
-                const newData = {img : '../../src/assets/seed-bag.png', text: 'Seed'}
+                const newData = {img : '../../src/assets/seed-bag.png', text: 'Social Seed'}
                 setSocialStanding(newData)
             }
 
@@ -114,7 +114,7 @@ export function Dashboard() {
                     <div>
                         <img src={"../src/assets/breeze.png"} className="h-20"/>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-[#44423F]">
                         <h1 className="text-3xl">Welcome back <span className="font-bold">{userEmail}</span></h1>
                         <p>Below is your recent activiy information</p>
                     </div>
@@ -124,7 +124,7 @@ export function Dashboard() {
 
                 <div className="grid gap-4 grid-cols-2 grid-rows-2 mb-10">
                     <div className="flex flex-col items-start justify-start p-5 rounded-3xl bg-[url('../src/assets/landscape.jpg')] bg-no-repeat bg-cover bg-bottom">
-                        TEST
+                       <p className="text-3xl p-3">Dashboard</p>
                     </div>
                     <div className="grid gap-4 grid-cols-2 grid-rows-2">
                         <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
@@ -147,15 +147,20 @@ export function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="bg-emojiSad shadow-md flex flex-col items-center justify-center rounded-3xl">
+                    <div className="bg-white flex gap-5 justify-center rounded-3xl p-5">
+                        <h1 className="text-3xl font-bold pt-5">Daily Moods</h1>
                         <PieChart />
                     </div>
 
-                    <div className="bg-emojiSad shadow-md flex gap-24 py-5 justify-center rounded-3xl">
-
+                    <div className=" bg-white flex flex-wrap gap-5 p-5 pt-10 justify-center rounded-3xl text-[#44423F]">
 
                         <img src={socialStanding.img} className="h-60 w-60"/>
-                        <p>{socialStanding.text}</p>
+                        <div className="flex flex-col gap-2">
+                            <h1 className="text-3xl font-bold">Your social standing</h1>
+                            <p className="text-xl">{socialStanding.text}</p>
+
+                        </div>
+
 
                     </div>
 
