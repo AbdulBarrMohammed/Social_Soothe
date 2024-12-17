@@ -26,15 +26,12 @@ export function LogIn() {
     })
 
     const data = await response.json()
-    console.log("login data below")
-    console.log(data)
 
     if (data.detail == "User does not exist") {
-      console.log("user does not exist")
       navigate("/login");
     }
     else {
-      navigate("/journals")
+      navigate("/dashboard")
       setCookie('Email', data.email)
       setCookie('AuthToken', data.token)
     }

@@ -227,7 +227,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
                 <div className="flex gap-4 items-center">
                     <div className="flex items-cente gap-2">
                         <p>{audioSrc.price}</p>
-                        <img src={'../src/assets/leaf.png'} className="h-5"/>
+                        <img src={'../src/assets/leaf-2.png'} className="h-5"/>
 
                     </div>
                     {showConfetti && <ReactConfetti/>}

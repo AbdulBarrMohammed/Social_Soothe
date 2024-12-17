@@ -125,19 +125,19 @@ export function CreateJournal() {
 
                         <div className="flex flex-wrap gap-y-5 gap-x-16 items-center justify-center sm:gap-x-5">
                                 <div onClick={() => setMood("sad")} className="cursor-pointer flex flex-col items-center gap-2 justify-center h-64 w-72 bg-emojiSad rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/sad.png" className="h-28"/>
+                                    <img src="../src/assets/emojiSad.png" className="h-28"/>
                                     <p className="text-lg font-semibold text-emojiSadWord">Sad</p>
                                 </div>
                                 <div onClick={() => setMood("happy")} className="cursor-pointer flex flex-col items-center gap-2  justify-center h-64 w-72 bg-emojiHappy rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/smile.png" className="h-28"/>
+                                    <img src="../src/assets/emojiHappy.png" className="h-28"/>
                                     <p className="text-lg font-semibold text-emojiHappyWord">Happy</p>
                                 </div>
                                 <div onClick={() => setMood("angry")} className="cursor-pointer flex flex-col items-center gap-2 justify-center h-64 w-72 bg-emojiAngry rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/angry.png" className="h-28"/>
+                                    <img src="../src/assets/emojiMad.png" className="h-28"/>
                                     <p className="text-lg font-semibold text-emojiAngryWord">Angry</p>
                                 </div>
                                 <div onClick={() => setMood("worried")} className="cursor-pointer flex flex-col items-center gap-2 justify-center h-64 w-72 bg-emojiWorried rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/sad-2.png" className="h-28"/>
+                                    <img src="../src/assets/emojiWorry.png" className="h-28"/>
                                     <p className="text-lg font-semibold text-emojiWorriedWord">Worried</p>
                                 </div>
                                 <div onClick={() => setMood("embarrassed")} className="cursor-pointer flex flex-col items-center gap-2 justify-center h-64 w-72 bg-emojiEmbarrassed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
@@ -145,7 +145,7 @@ export function CreateJournal() {
                                     <p className="text-lg font-semibold text-emojiEmbarrassedWord">Embarrassed</p>
                                 </div>
                                 <div onClick={() => setMood("stressed")} className="cursor-pointer flex flex-col items-center gap-2  justify-center h-64 w-72 bg-emojiStressed rounded-3xl hover:opacity-75 transition duration-300 ease-in-out">
-                                    <img src="../src/assets/nervous.png" className="h-28"/>
+                                    <img src="../src/assets/emojiStressed.png" className="h-28"/>
                                     <p className="text-lg font-semibold text-emojiStressedWord">Stressed</p>
                                 </div>
 

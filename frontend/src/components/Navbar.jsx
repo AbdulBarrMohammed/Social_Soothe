@@ -120,7 +120,7 @@ export function Navbar() {
 
                 {authToken &&
                     <div className="flex gap-5">
-                        <p className="flex items-center justify-center gap-2"><img src={'../src/assets/leaf.png'} className="h-5"/> {coins}</p>
+                        <p className="flex items-center justify-center gap-2"><img src={'../src/assets/leaf-2.png'} className="h-5"/> {coins}</p>
                         <button onClick={handleLogout} className='hover:font-bold transition duration-300 ease-in-out'>Log out</button>
                     </div>
 

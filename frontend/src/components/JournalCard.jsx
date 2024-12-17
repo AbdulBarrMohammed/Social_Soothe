@@ -18,33 +18,33 @@ export function JournalCard ({journal}) {
     useEffect(() => {
         setCurrMood(journal.mood)
         if (journal.mood == 'angry') {
-            setEmoji("../src/assets/angry.png")
+            setEmoji("../src/assets/emojiMad.png")
             setBgColor("rgb(249, 230, 224)")
             setTextColor("rgb(209, 112, 83)");
         }
         else if (journal.mood == 'embarrassed') {
-            setEmoji("../src/assets/tired.png")
+            setEmoji("../src/assets/emojiEmbarressed.png")
             setBgColor("rgb(214, 249, 246)")
             setTextColor("rgb(87, 156, 149)");
 
         }
         else if (journal.mood == 'stressed') {
-            setEmoji("../src/assets/nervous.png")
+            setEmoji("../src/assets/emojiStressed.png")
             setBgColor("rgb(250, 225, 238)")
             setTextColor("rgb(205, 92, 146)");
         }
         else if (journal.mood == 'worried') {
-            setEmoji("../src/assets/sad-2.png")
+            setEmoji("../src/assets/emojiWorry.png")
             setBgColor("rgb(232, 218, 250)")
             setTextColor("rgb(123, 57, 196)");
         }
         else if (journal.mood == 'sad') {
-            setEmoji("../src/assets/sad.png")
+            setEmoji("../src/assets/emojiSad.png")
             setBgColor("rgb(233, 234, 253)")
             setTextColor("rgb(69, 74, 186)");
         }
         else {
-            setEmoji("../src/assets/smile.png")
+            setEmoji("../src/assets/emojiHappy.png")
             setBgColor("rgb(251, 235, 190)")
             setTextColor("rgb(195, 159, 60)");
         }

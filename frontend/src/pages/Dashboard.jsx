@@ -51,8 +51,6 @@ export function Dashboard() {
 
 
 
-
-
     }
 
     useEffect(() => {
@@ -128,23 +126,23 @@ export function Dashboard() {
                         TEST
                     </div>
                     <div className="grid gap-4 grid-cols-2 grid-rows-2">
-                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
-                            <img className="h-14"src="../src/assets/leaf.png"/>
-                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+                        <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/leaf-2.png"/>
+                            <p className="text-2xl"> 17 <span>Leafs Earned</span></p>
 
                         </div>
-                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
-                            <img className="h-14"src="../src/assets/leaf.png"/>
-                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+                        <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/camellia.png"/>
+                            <p className="text-2xl"> 17 <span>Tree flowers</span></p>
 
                         </div>
-                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
-                            <img className="h-14"src="../src/assets/leaf.png"/>
-                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+                        <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/scrapbook.png"/>
+                            <p className="text-2xl"> 10 <span>Journal Entries</span></p>
                         </div>
-                        <div className="flex flex-col items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
-                            <img className="h-14"src="../src/assets/leaf.png"/>
-                            <p className="text-2xl"> 17 <span>Leafs</span></p>
+                        <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                            <img className="h-14"src="../src/assets/gold-medal.png"/>
+                            <p className="text-2xl"> 17 <span>Awards Earned</span></p>
                         </div>
                     </div>
 
