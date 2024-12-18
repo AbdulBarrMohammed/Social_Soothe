@@ -102,11 +102,6 @@ export function Dashboard() {
             setUserEmail(editEmail)
 
 
-            //bg-[url('../src/assets/landscape.jpg')]
-            //'url(../src/assets/sunset.jpg)'
-            //
-
-
         } catch(err) {
             console.log(err)
         }
@@ -119,11 +114,9 @@ export function Dashboard() {
                 hour: "2-digit",
                 minute: "2-digit",
           });
-          //console.log(n.includes("PM"))
-          //console.log(n > "07:30")
 
           //Sunrise time
-          if (time > "06:00" && time < "11:00" && time.includes("AM") ) {
+          if (time > "06:00" && time < "12:00" && time.includes("AM") ) {
                 setBgTime("url(../src/assets/sunrise.jpg)");
                 setTimeText("Good morning");
           }
@@ -145,7 +138,6 @@ export function Dashboard() {
             setBgTime("url(../src/assets/night.jpg)");
             setTimeText("Good night");
           }
-
 
 
     })
@@ -194,17 +186,17 @@ export function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="bg-white flex gap-5 justify-center rounded-3xl p-5">
-                        <h1 className="text-3xl font-bold pt-5">Daily Moods</h1>
+                    <div className="bg-white flex gap-5 justify-center rounded-3xl p-5 text-black">
                         <PieChart />
+                        <h1 className="text-3xl font-bold pt-5">Daily Moods</h1>
                     </div>
 
-                    <div className=" bg-white flex flex-wrap gap-5 p-5 pt-10 justify-center rounded-3xl text-[#44423F]">
+                    <div className=" bg-white flex flex-wrap gap-5 p-5 pt-10 justify-center rounded-3xl text-white" style={{ backgroundColor: buttonsColor }}>
 
                         <img src={socialStanding.img} className="h-60 w-60"/>
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-3xl font-bold">Your social standing</h1>
+                        <div className="flex flex-col gap-2 text-white">
                             <p className="text-xl">{socialStanding.text}</p>
+                            <h1 className="text-3xl font-bold">Your social standing</h1>
 
                         </div>
 

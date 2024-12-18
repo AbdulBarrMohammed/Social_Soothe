@@ -12,6 +12,7 @@ import { addQuestionSeven } from "../data/questionsData";
 import ReactConfetti from 'react-confetti';
 import { LogIn } from "../components/Login";
 import { getUserCurrentColor } from "../data/dataFunctions";
+import { getLeafCount } from "../data/dataFunctions";
 
 export function SocialTree() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -25,7 +26,7 @@ export function SocialTree() {
     const [questionSevenModal, setQuestionSevenModal] = useState(false);
     const [color, setColor] = useState("");
     const [showConfetti, setShowConfetti] = useState(false);
-    const [currCoins, setCurrCoins] = useState(-1);
+    const [currLeafs, setCurrLeafs] = useState(-1);
     const [isChecked, setIsChecked] = useState(false);
 
     //create flower
@@ -62,13 +63,10 @@ export function SocialTree() {
 
     useEffect(() => {
         getData()
-    },[])
-
-
-    useEffect(() => {
         getUserCurrentColor(email, setLightestBg, setButtonColor)
-    }, [])
+        getLeafCount(email, setCurrLeafs)
 
+    }, [])
 
 
     useEffect(() => {
@@ -89,20 +87,6 @@ export function SocialTree() {
         loadFlower()
     }, [currId])
 
-    const getCoins = async () => {
-        try {
-            const res = await fetch(`http://localhost:8000/user/${email}`)
-            const data = await res.json();
-            setCurrCoins(data.coins)
-        } catch(err) {
-            console.log(err)
-        }
-    }
-
-    useEffect(() => {
-        getCoins()
-    },[])
-
 
     function handleClick(id) {
         setCurrId(id)
@@ -116,8 +100,8 @@ export function SocialTree() {
         if (!isChecked) {
 
             if (e.target.checked == true) {
-                //add 10 coins to user coins
-                let coins = currCoins + 5
+                //add 5 coins to user coins
+                let coins = currLeafs + 5
                 try {
                     const response = await fetch(`http://localhost:8000/user/update`, {
                     method: 'POST',
@@ -150,12 +134,6 @@ export function SocialTree() {
             alert("You have already checked this")
         }
 
-    }
-
-
-    //show questions for creating flower
-    function showQuestions(e) {
-        setShowQuestions(true)
     }
 
     //delete flower
@@ -264,7 +242,7 @@ export function SocialTree() {
                     }
 
                     {authToken &&
-                        <div onClick={showQuestionOne} className="absolute top-10 right-10 rounded-full h-14 w-14 cursor-pointer bg-[#eeeeee] p-4 flex items-center justify-center shadow-md">
+                        <div onClick={showQuestionOne} className="absolute top-10 right-10 rounded-full h-14 w-14 cursor-pointer bg-[#eeeeee] p-4 flex items-center justify-center">
                             <img src="../src/assets/camellia.png"/>
                         </div>
 

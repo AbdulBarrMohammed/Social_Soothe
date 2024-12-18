@@ -59,9 +59,9 @@ export function Journals() {
                             <input
                                     value={searchQuery}
                                     onChange={(event) => setSearchQuery(event.target.value)}
-                                    className="h-10 w-full rounded-3xl p-5 shadow-md" placeholder="Search journal title..."/>
+                                    className="h-10 w-full rounded-3xl p-5" placeholder="Search journal title..."/>
                             </form>
-                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-10 w-10 cursor-pointer p-5 items-center justify-center shadow-md text-white" style={{ backgroundColor: buttonsColor }}>
+                            <Link to={`/createJournal`} className="flex flex-col rounded-full h-10 w-10 cursor-pointer p-5 items-center justify-center text-white" style={{ backgroundColor: buttonsColor }}>
                                     +
                             </Link>
                         </div>

@@ -215,7 +215,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
     return (
         <div className="">
 
-            <div className=" flex justify-between p-7 rounded-2xl text-white shadow-md" style={{ backgroundColor: buttonsColor }}>
+            <div className=" flex justify-between p-7 rounded-2xl text-white" style={{ backgroundColor: buttonsColor }}>
                 <div className="flex gap-4 items-center">
                     <button onClick={playPause}>
                         {isPlaying ? <img src={pausePic} className="h-10"/> : <img src={playPic} className="h-10"/>}

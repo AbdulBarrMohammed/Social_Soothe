@@ -428,9 +428,6 @@ async function insertNewColor(email, name, dark, semiDark, medium, light, lighte
   });
 }
 
-async function getColor(color, email, id) {
-
-}
 
 
 async function deleteColor( id ) {
@@ -490,7 +487,6 @@ module.exports = {
 
     getAllColors,
     insertNewColor,
-    getColor,
     deleteColor,
     updateColor
 

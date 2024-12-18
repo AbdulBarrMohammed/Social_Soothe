@@ -167,7 +167,7 @@ export function Settings() {
                 <h1 className="text-2xl font-bold">Appearance</h1>
                 <hr className="border-[#44423F] border mb-5" />
                 <p className="font-bold text-xl">Choose a background color</p>
-                <select onClick={(e) => handleChangeColor(e)} className="px-10 py-3 rounded-lg text-white shadow-md" style={{ backgroundColor: buttonsColor }}>
+                <select onClick={(e) => handleChangeColor(e)} className="px-10 py-3 rounded-lg text-white" style={{ backgroundColor: buttonsColor }}>
                 <option value="">Background colors</option>
                     {colors.map((color, index) => {
                         return (
@@ -184,7 +184,7 @@ export function Settings() {
                 <h1 className="text-2xl font-bold">Background Sounds</h1>
                 <hr className="border-[#44423F] border mb-5" />
                 <p className="font-bold text-xl">Choose a background sound for breathing exercise</p>
-                <select onClick={(e) => handleChangeSound(e)} className="px-10 py-3 rounded-lg text-white shadow-md" style={{ backgroundColor: buttonsColor }}>
+                <select onClick={(e) => handleChangeSound(e)} className="px-10 py-3 rounded-lg text-white" style={{ backgroundColor: buttonsColor }}>
                 <option value="">background sounds</option>
                     {sounds.map((sound, index) => {
                         return (
@@ -201,13 +201,13 @@ export function Settings() {
                 <h1 className="text-2xl font-bold">Delete account</h1>
                 <hr className="border-[#44423F] border mb-5" />
                 <p>Press button below to delete account</p>
-                <button className="rounded-xl shadow-md text-white px-10 py-3 " style={{ backgroundColor: buttonsColor }}>delete account</button>
+                <button className="rounded-xl text-white px-10 py-3 " style={{ backgroundColor: buttonsColor }}>delete account</button>
 
             </div>
 
             <div className="">
                 <h2 className="text-2xl font-bold">Save changes</h2>
-                <button className="rounded-xl shadow-md text-white px-10 py-3 " onClick={saveChanges} style={{ backgroundColor: buttonsColor }}>Save</button>
+                <button className="rounded-xl text-white px-10 py-3 " onClick={saveChanges} style={{ backgroundColor: buttonsColor }}>Save</button>
             </div>
 
         </div>

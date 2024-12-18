@@ -268,9 +268,9 @@ export function Breathe() {
                     </div>
                     <div className="flex gap-5">
 
-                        <button className=" p-3 rounded-2xl text-white shadow-md" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
-                        <button className=" p-3 rounded-2xl text-white shadow-md" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
-                        <button className=" p-3 rounded-2xl text-white shadow-md"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
+                        <button className=" p-3 rounded-2xl text-white" onClick={clear} style={{ backgroundColor: buttonsColor }}>Restart</button>
+                        <button className=" p-3 rounded-2xl text-white" onClick={start} style={{ backgroundColor: buttonsColor }}>Start</button>
+                        <button className=" p-3 rounded-2xl text-white"  onClick={pause} style={{ backgroundColor: buttonsColor }}>Pause</button>
                     </div>
                 </div>
                 <div>

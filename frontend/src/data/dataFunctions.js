@@ -73,3 +73,14 @@ export async function getCurrentSound(email, setSounds, setDefaultBgSound, setBg
         console.log(err)
     }
 }
+
+
+export async function getLeafCount(email, setCurrLeafs) {
+    try {
+        const res = await fetch(`http://localhost:8000/user/${email}`)
+        const data = await res.json();
+        setCurrLeafs(data.coins)
+    } catch(err) {
+        console.log(err)
+    }
+}

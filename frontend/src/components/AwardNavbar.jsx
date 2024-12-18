@@ -47,10 +47,10 @@ export function AwardNavbar() {
                 <h1 className="text-4xl font-bold">Use your leafs to earn awards</h1>
                 <h2 className="text-2xl font-medium">Choose some of the options below to better your experience in social sooth</h2>
                 <div className="flex gap-5 pt-3 text-white">
-                    <Link to={"/awards/Sounds"} className=" p-4 rounded-xl shadow-md" style={{ backgroundColor: buttonsColor }}>
+                    <Link to={"/awards/Sounds"} className=" p-4 rounded-xl" style={{ backgroundColor: buttonsColor }}>
                         Breathing exercise sounds
                     </Link>
-                    <Link to={"/awards/Colors"} className=" p-4 rounded-xl shadow-md" style={{ backgroundColor: buttonsColor }}>
+                    <Link to={"/awards/Colors"} className=" p-4 rounded-xl" style={{ backgroundColor: buttonsColor }}>
                         Color schemes
                     </Link>
                 </div>

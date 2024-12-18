@@ -1,26 +1,19 @@
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { useCookies } from "react-cookie";
 
+
+//Page that display a sound that a user can play and pause in the awards page
 
 export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, chosenSound, setChosenSound, currSoundSrc, setCurrSoundSrc }) {
-
-    // site cookies for current user
-    const [cookies, setCookie, removeCookie] = useCookies(null)
-
-    //auth token and user email
-    const authToken = cookies.AuthToken
-    const email = cookies.Email
-
 
     const [isPlaying, setIsPlaying] = useState(false);
     const playPic =  "../../src/assets/play.svg"
     const pausePic = "../../src/assets/pause.svg"
 
-
     const audioRef = useRef(null);
 
+    //pause current audio if the current audio index does not equal the current index of sound clicked
     useEffect(() => {
         if (currAudioIndex !== index && isPlaying) {
             pause();
@@ -42,6 +35,11 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
         }
     }
 
+    /**
+     * pauses and plays to where audio was last paused
+     * @param none
+     * @return none
+     */
     function playPause() {
         if (isPlaying) {
             pause();
@@ -52,6 +50,11 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
 
     }
 
+    /**
+     * pauses current audio
+     * @param none
+     * @return none
+     */
     function pause() {
         if (audioRef.current) {
             audioRef.current.pause();
@@ -59,6 +62,12 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
         }
     }
 
+
+    /**
+     * sets the current sound that is clicked
+     * @param none
+     * @return none
+     */
     function handleSoundClick() {
         setChosenSound(audioSrc.name)
         setCurrSoundSrc(audioSrc.src)
@@ -85,6 +94,8 @@ export function SoundItem({audioSrc, index, currAudioIndex, setCurrAudioIndex, c
                     </div>
                 </div>
             </div>
+
+
         </>
     )
 }

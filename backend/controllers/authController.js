@@ -46,16 +46,23 @@ async function signUpPost(req, res, next) {
       }
 }
 
+/**
+     * Checks if user exists in database to allow user to log in
+     * @param request, response
+     * @return none
+     */
 
 async function logInPost(req, res) {
   const { email, password } = req.body;
   try {
+
+    //Get user by email
     const user = await db.getUser(email)
 
-    //check if user is found first
+    //Check if user is found first
     if (!user) return res.json({ detail: 'User does not exist', email: email, user: user})
 
-    // check and compare inputted password to hasedpassword
+    //Check and compare inputted password to hasedpassword
     const success = await bcrypt.compare(password, user.password);
     const token = jwt.sign({ email }, 'secret', {expiresIn: '1hr' })
     if (success) {
@@ -65,62 +72,75 @@ async function logInPost(req, res) {
       res.json({ detail: "Login failed" })
     }
   } catch(err) {
-    console.error(err)
+    res.status(500).json({ message: 'Error authenticating user' });
   }
 
 }
 
 
-
+/**
+     * Gets authenticated user information
+     * @param request, response
+     * @return none
+     */
 async function getUserInfo(req, res) {
     try {
       const email  = req.params.email
       const user = await db.getUser(email);
-      console.log("user info for coins", user)
       res.json(user)
     } catch (err) {
-        console.log("error....", err)
-        res.status(500).json({ message: 'Error fetching flowers' });
+        res.status(500).json({ message: 'Error fetching user information' });
     }
 
 }
 
+
+/**
+     * Update count of user leaf count
+     * @param request, response
+     * @return none
+     */
 async function updateCoin(req, res) {
   try {
     const { coins, email } = req.body
     const updatedCoins = await db.updateCoin(coins, email);
-    console.log("updated coins", updatedCoins)
     res.json(updatedCoins)
   } catch (err) {
-      console.log("error....", err)
-      res.status(500).json({ message: 'Error fetching flowers' });
+      res.status(500).json({ message: 'Error updating leaf count' });
   }
 
 }
 
 
+
+/**
+     * Updates the current background sound for an authenticated user
+     * @param request, response
+     * @return none
+     */
 async function updateSound(req, res) {
   try {
     const { sound, email } = req.body
     const updatedSound = await db.updateSound(sound, email);
-    console.log("updated sound", updateSound)
     res.json(updatedSound)
   } catch (err) {
-      console.log("error....", err)
       res.status(500).json({ message: 'Error fetching sound' });
   }
 
 }
 
 
+/**
+     * Updates the current background color for an authenticated user
+     * @param request, response
+     * @return none
+     */
 async function updateColor(req, res) {
   try {
     const { color, email } = req.body
     const updatedColor = await db.updateColor(color, email);
-    console.log("updated color", updateColor)
     res.json(updatedColor)
   } catch (err) {
-      console.log("error....", err)
       res.status(500).json({ message: 'Error fetching color' });
   }
 
