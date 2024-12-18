@@ -11,6 +11,7 @@ import { deleteFlower } from "../data/questionsData";
 import { addQuestionSeven } from "../data/questionsData";
 import ReactConfetti from 'react-confetti';
 import { LogIn } from "../components/Login";
+import { getUserCurrentColor } from "../data/dataFunctions";
 
 export function SocialTree() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -64,40 +65,10 @@ export function SocialTree() {
     },[])
 
 
-    const setBgColor = async () => {
-        try {
-
-            //Get users current pick for a background color
-            const resColor = await fetch(`http://localhost:8000/user/${email}`)
-            const dataColor = await resColor.json();
-
-            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
-            const dataColors = await resColors.json();
-
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setLightestBg("#ACC8EA")
-                setButtonColor("#6888BE")
-            }
-            else {
-
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setLightestBg(c.lightest)
-                        setButtonColor(c.semiDark)
-                    }
-                })
-            }
-
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
-
     useEffect(() => {
-        setBgColor()
-    },[])
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
+    }, [])
+
 
 
     useEffect(() => {

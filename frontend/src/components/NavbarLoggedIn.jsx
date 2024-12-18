@@ -69,7 +69,7 @@ export function NavbarLoggedIn() {
                                     <Link to={page.path} className='text-lg flex items-center rounded-xl'>
                                         <div className='flex gap-2 px-10 py-1 items-center'>
                                             <img src={page.img} className='h-7'/>
-                                            <li className='hover:font-semibold transition duration-300 ease-in-out'>
+                                            <li className='hover:text-xl transition-all duration-300 ease-in-out'>
                                                 {page.name}
                                             </li>
                                         </div>

@@ -7,6 +7,7 @@ import { Color } from "./Color";
 import { colors } from "../data/awardsData";
 import { sounds as soundsData } from "../data/awardsData";
 import { LogIn } from "../components/Login"
+import { getUserCurrentColor } from "../data/dataFunctions";
 
 export function Awards() {
     const params = useParams()
@@ -17,6 +18,7 @@ export function Awards() {
     const authToken = cookies.AuthToken
 
     const [currSounds, setCurrSounds] = useState([]);
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
 
     const [currAudioIndex, setCurrAudioIndex] = useState(0);
 
@@ -24,33 +26,12 @@ export function Awards() {
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
     const email = cookies.Email
 
-    const setBgColor = async () => {
+    const setSounds = async () => {
         try {
-            //Get users current pick for a background color
-            const resColor = await fetch(`http://localhost:8000/user/${email}`)
-            const dataColor = await resColor.json();
-
-            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
-            const dataColors = await resColors.json();
-
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setLightestBg("#ACC8EA")
-            }
-            else {
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setLightestBg(c.lightest)
-                    }
-                })
-            }
 
             const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
             const dataSounds = await resSounds.json();
-
             setCurrSounds(filterAvailableSound(dataSounds));
-
-
 
         }
         catch(err) {
@@ -59,7 +40,11 @@ export function Awards() {
     }
 
     useEffect(() => {
-        setBgColor()
+        setSounds()
+    },[])
+
+    useEffect(() => {
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
 

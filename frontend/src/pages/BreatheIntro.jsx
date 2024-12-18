@@ -4,43 +4,19 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { LogIn } from "../components/Login";
+import { getUserCurrentColor } from "../data/dataFunctions";
 export function BreatheIntro() {
 
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
+
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
 
-    const setBgColor = async () => {
-        try {
-            //Get users current pick for a background color
-            const resColor = await fetch(`http://localhost:8000/user/${email}`)
-            const dataColor = await resColor.json();
-
-            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
-            const dataColors = await resColors.json();
-
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setLightestBg("#ACC8EA")
-            }
-            else {
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setLightestBg(c.lightest)
-                    }
-                })
-            }
-
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
-
     useEffect(() => {
-        setBgColor()
-    },[])
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
+    }, [])
 
     return (
         <div>

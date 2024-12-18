@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import ReactConfetti from "react-confetti";
 import { LogIn } from "../components/Login";
+import { getUserCurrentColor } from "../data/dataFunctions";
+import { getCurrentSound } from "../data/dataFunctions";
 
 export function Breathe() {
 
@@ -47,39 +49,8 @@ export function Breathe() {
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
 
-
-
-    const setBgColor = async () => {
-        try {
-            //Get users current pick for a background color
-            const resColor = await fetch(`http://localhost:8000/user/${email}`)
-            const dataColor = await resColor.json();
-
-            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
-            const dataColors = await resColors.json();
-
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setLightestBg("#ACC8EA")
-                setButtonColor("#4470AD")
-
-            }
-            else {
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setLightestBg(c.lightest)
-                        setButtonColor(c.semiDark)
-                    }
-                })
-            }
-
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
     useEffect(() => {
-        setBgColor()
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
     useEffect(() => {
@@ -104,45 +75,11 @@ export function Breathe() {
             //user picked regular breathing
         }
 
-
     }, [endNum]);
 
 
-    const getCurrSound = async () => {
-        try {
-            const res = await fetch(`http://localhost:8000/user/${email}`)
-            const data = await res.json();
-            //setBgSound(data.currSound)
-
-            const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
-            const dataSounds = await resSounds.json();
-
-            setSounds(dataSounds)
-
-            //Check if the user just wants to play the defualt breathing bg sounds
-            if (data.currSound == 'Default breathing'){
-                setDefaultBgSound(true)
-            }
-            else {
-
-                dataSounds.map((s) => {
-                    console.log(s);
-                    if (s.name == data.currSound) {
-                        console.log("WE HAVE FOUND A SOUND", s.src)
-                        setBgSound(s.src)
-
-                    }
-
-                })
-            }
-
-        } catch(err) {
-            console.log(err)
-        }
-    }
-
     useEffect(() => {
-        getCurrSound()
+        getCurrentSound(email, setSounds, setDefaultBgSound, setBgSound)
     }, [])
 
 

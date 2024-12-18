@@ -5,6 +5,9 @@ import { Link } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { LogIn } from "../components/Login"
 
+import { getJournalData } from "../data/dataFunctions"
+import { getUserCurrentColor } from "../data/dataFunctions"
+
 
 export function Journals() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -18,45 +21,14 @@ export function Journals() {
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
 
-    const getData = async () => {
+    //Get user current color to set background
+    useEffect(() => {
+        getUserCurrentColor(userEmail, setLightestBg, setButtonColor)
+    }, [])
 
-        try {
-            const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
-            const journalData = await res.json();
-
-            const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
-            const dataColor = await resColor.json();
-
-            const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
-            const dataColors = await resColors.json();
-
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setLightestBg("#ACC8EA")
-                setButtonColor("#4470AD")
-            }
-            else {
-
-                // set colors for background
-                setColors(dataColors)
-
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setLightestBg(c.lightest)
-                        setButtonColor(c.semiDark)
-                    }
-                })
-            }
-
-            //set user journals
-            setJournals(journalData)
-        } catch(err) {
-            console.log(err)
-        }
-    }
 
     useEffect(() => {
-        getData()
+        getJournalData(userEmail, setJournals)
     },[])
 
     // function to query search for journals based on title

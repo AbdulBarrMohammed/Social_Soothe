@@ -91,7 +91,7 @@ export function Navbar() {
                 <ul className="flex gap-5 cursor-pointer text-white">
                         {pageDataLeft.map((page) => {
                         return (
-                            <li key={page.path} className='hover:font-bold transition duration-300 ease-in-out'>
+                            <li key={page.path} className='hover:text-xl transition-all duration-300 ease-in-out'>
                                 <Link to={page.path}>
                                 {page.name}
                                 </Link>
@@ -106,7 +106,7 @@ export function Navbar() {
                 {!authToken &&
                     pageDataRight.map((page) => {
                         return (
-                            <li key={page.path} className='hover:font-bold transition duration-300 ease-in-out'>
+                            <li key={page.path} className='hover:text-xl transition-all duration-300 ease-in-out'>
                                 <Link to={page.path}>
                                     {page.name}
                                 </Link>

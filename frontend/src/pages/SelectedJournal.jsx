@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { LogIn } from "../components/Login"
+import { getUserCurrentColor } from "../data/dataFunctions"
 
 
 export function SelectedJournal() {
@@ -24,6 +25,11 @@ export function SelectedJournal() {
 
 
     useEffect(() => {
+        getUserCurrentColor(userEmail, setLightestBg, setButtonColor)
+    }, [])
+
+
+    useEffect(() => {
 
         /**
          * Gets users current journal entries in the database
@@ -39,31 +45,6 @@ export function SelectedJournal() {
                 //Grabs title and content of journal to be able to change latter
                 setTitle(data.title)
                 setContent(data.content)
-
-                const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
-                const dataColor = await resColor.json();
-
-                const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
-                const dataColors = await resColors.json();
-
-                if (dataColor.currColor.toLowerCase() == 'blue') {
-                    setLightestBg("#ACC8EA")
-                    setButtonColor("#4470AD")
-                }
-                else {
-
-                    // set colors for background
-                    setColors(dataColors)
-
-                    //check for current user color in users purchased colors to set chosen background color
-                    dataColors.map((c) => {
-                        if (c.name === dataColor.currColor) {
-                            setLightestBg(c.lightest)
-                            setButtonColor(c.semiDark)
-
-                        }
-                    })
-                }
 
             } catch(err) {
                 console.log(err)

@@ -2,6 +2,7 @@ import { PieChart } from "./Pie";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { useState } from "react";
+import { getUserCurrentColor } from "../data/dataFunctions";
 
 
 export function Dashboard() {
@@ -15,6 +16,15 @@ export function Dashboard() {
     const [buttonsColor, setButtonColor] = useState("#6888BE");
     const [userEmail, setUserEmail] = useState("");
 
+    const [journalCount, setJournalCount] = useState(0);
+    const [flowerCount, setFlowerCount] = useState(0);
+    const [leafCount, setLeafCount] = useState(0);
+    const [awardCount, setAwardCount] = useState(0);
+
+    const [currTime, setCurrTime] = useState("");
+    const [timeBg, setBgTime] = useState("");
+    const [timeText, setTimeText] = useState("");
+
 
 
     const [socialStanding, setSocialStanding] = useState({
@@ -22,23 +32,26 @@ export function Dashboard() {
         text: 'Seed'
     })
 
-    async function getTree() {
+    //Get user current color to set background
+    useEffect(() => {
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
+    }, [])
+
+    async function getTreeData() {
 
         try {
             const res = await fetch(`http://localhost:8000/tree/flowers/${email}`)
             const data = await res.json();
 
-            console.log('data length',  data.length)
+            setFlowerCount(data.length);
             if (data.length >= 22 && data.length < 100) {
                 const newData = {img : '../../src/assets/green-tea.png', text: 'Social Sprouting Plant'}
                 setSocialStanding(newData)
-                console.log("changing the social data")
 
             }
             else if (data.length >= 100) {
                 const newData = {img : '../../src/assets/rose.png', text: 'Social Sprout Flower'}
                 setSocialStanding(newData)
-                console.log("changing the social data")
             }
             else {
                 const newData = {img : '../../src/assets/seed-bag.png', text: 'Social Seed'}
@@ -50,57 +63,92 @@ export function Dashboard() {
             console.log(err)
         }
 
-
-
     }
 
     useEffect(() => {
-        getTree()
+        getTreeData()
     }, [])
-
-
 
     const getData = async () => {
 
         try {
-
-            const resColor = await fetch(`http://localhost:8000/user/${email}`)
-            const dataColor = await resColor.json();
-
             const resColors = await fetch(`http://localhost:8000/colors/${email}`)
             const dataColors = await resColors.json();
 
+            const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
+            const dataSounds = await resSounds.json();
 
+            //Journal data to get journal entry count
+            const res = await fetch(`http://localhost:8000/journals/${email}`)
+            const journalData = await res.json();
+            setJournalCount(journalData.length)
+
+            //Leaf count
+            const resLeaf = await fetch(`http://localhost:8000/user/${email}`)
+            const dataLeaf = await resLeaf.json();
+            setLeafCount(dataLeaf.coins);
+
+            //Award count
+            const colorCount = dataColors.length;
+            const soundCount = dataSounds.length;
+            const totalAwards = colorCount + soundCount;
+            setAwardCount(totalAwards)
 
             //get index of @ symbol
             const atSymbolIndex = email.indexOf("@");
 
             //remove @ symbol and just include the user email name
             const editEmail = email.substring(0, atSymbolIndex)
-            console.log("edit email", editEmail)
             setUserEmail(editEmail)
 
 
+            //bg-[url('../src/assets/landscape.jpg')]
+            //'url(../src/assets/sunset.jpg)'
+            //
 
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setLightestBg("#ACC8EA")
-                setButtonColor("#4470AD")
-            }
-            else {
-
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setLightestBg(c.lightest)
-                        setButtonColor(c.semiDark)
-                    }
-                })
-            }
 
         } catch(err) {
             console.log(err)
         }
     }
+
+    useEffect(() => {
+
+        const date = new Date();
+            let time = date.toLocaleString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+          });
+          //console.log(n.includes("PM"))
+          //console.log(n > "07:30")
+
+          //Sunrise time
+          if (time > "06:00" && time < "11:00" && time.includes("AM") ) {
+                setBgTime("url(../src/assets/sunrise.jpg)");
+                setTimeText("Good morning");
+          }
+
+          //Afternoon time
+          else if (time >= "12:00" && time < "05:00" && time.includes("PM") ) {
+            setBgTime("url(../src/assets/landscape.jpg)");
+            setTimeText("Good afternoon");
+          }
+
+          //Evening time
+          else if (time > "05:00" && time < "11:00" && time.includes("PM")) {
+            setBgTime("url(../src/assets/sunset.jpg)");
+            setTimeText("Good evening");
+          }
+
+          //Night time
+          else {
+            setBgTime("url(../src/assets/night.jpg)");
+            setTimeText("Good night");
+          }
+
+
+
+    })
 
     useEffect(() => {
         getData()
@@ -120,30 +168,29 @@ export function Dashboard() {
                     </div>
                 </div>
 
-
-
                 <div className="grid gap-4 grid-cols-2 grid-rows-2 mb-10">
-                    <div className="flex flex-col items-start justify-start p-5 rounded-3xl bg-[url('../src/assets/landscape.jpg')] bg-no-repeat bg-cover bg-bottom">
-                       <p className="text-3xl p-3">Dashboard</p>
+
+                    <div className="flex flex-col items-start justify-start p-5 rounded-3xl bg-no-repeat bg-cover bg-bottom" style={{ backgroundImage: timeBg}}>
+                       <p className="text-3xl p-3">{timeText}</p>
                     </div>
                     <div className="grid gap-4 grid-cols-2 grid-rows-2">
                         <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
                             <img className="h-14"src="../src/assets/leaf-2.png"/>
-                            <p className="text-2xl"> 17 <span>Leafs Earned</span></p>
+                            <p className="text-2xl"> {leafCount} <span>Leafs Earned</span></p>
 
                         </div>
                         <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
                             <img className="h-14"src="../src/assets/camellia.png"/>
-                            <p className="text-2xl"> 17 <span>Tree flowers</span></p>
+                            <p className="text-2xl"> {flowerCount} <span>Tree flowers</span></p>
 
                         </div>
                         <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
                             <img className="h-14"src="../src/assets/scrapbook.png"/>
-                            <p className="text-2xl"> 10 <span>Journal Entries</span></p>
+                            <p className="text-2xl"> {journalCount} <span>Journal Entries</span></p>
                         </div>
                         <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
                             <img className="h-14"src="../src/assets/gold-medal.png"/>
-                            <p className="text-2xl"> 17 <span>Awards Earned</span></p>
+                            <p className="text-2xl"> {awardCount} <span>Awards Earned</span></p>
                         </div>
                     </div>
 

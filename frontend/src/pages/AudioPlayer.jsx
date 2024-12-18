@@ -231,7 +231,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
 
                     </div>
                     {showConfetti && <ReactConfetti/>}
-                    <button onClick={buyBtn} className="border border-white px-10 py-2 rounded-3xl" style={{ backgroundColor: buttonsColor }}>
+                    <button onClick={buyBtn} className="border border-white px-10 py-2 rounded-3xl hover:text-xl transition-all duration-300 ease-in-out" style={{ backgroundColor: buttonsColor}}>
                         Buy
                     </button>
 
