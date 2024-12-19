@@ -1,6 +1,10 @@
 
 
-
+/**
+     * Gets all users colors and current color chosen for background
+     * @param email (string), setLightestBg (function), setButtonColor (function)
+     * @return none
+     */
 export async function getUserCurrentColor(email, setLightestBg, setButtonColor) {
     try {
         const resColor = await fetch(`http://localhost:8000/user/${email}`)
@@ -29,7 +33,11 @@ export async function getUserCurrentColor(email, setLightestBg, setButtonColor) 
     }
 }
 
-
+/**
+     * Gets all users journals
+     * @param userEmail (string), setJournals (function)
+     * @return none
+     */
 export async function getJournalData(userEmail, setJournals) {
     try {
         const res = await fetch(`http://localhost:8000/journals/${userEmail}`)
@@ -43,6 +51,11 @@ export async function getJournalData(userEmail, setJournals) {
 }
 
 
+/**
+     * Gets all users sounds and current background sound
+     * @param email (string), setSounds (function), setDefaultBgSound (function), setBgSound (function)
+     * @return none
+     */
 export async function getCurrentSound(email, setSounds, setDefaultBgSound, setBgSound) {
     try {
         const res = await fetch(`http://localhost:8000/user/${email}`)
@@ -58,11 +71,11 @@ export async function getCurrentSound(email, setSounds, setDefaultBgSound, setBg
         if (data.currSound == 'Default breathing'){
             setDefaultBgSound(true)
         }
+
+        //Loop through users purchased sounds to find the sound that the user wants to be their background
         else {
             dataSounds.map((s) => {
-                console.log(s);
                 if (s.name == data.currSound) {
-                    console.log("WE HAVE FOUND A SOUND", s.src)
                     setBgSound(s.src)
 
                 }
@@ -75,6 +88,11 @@ export async function getCurrentSound(email, setSounds, setDefaultBgSound, setBg
 }
 
 
+/**
+     * Returns count of users leafs
+     * @param email (string), setCurrLeafs (function)
+     * @return none
+     */
 export async function getLeafCount(email, setCurrLeafs) {
     try {
         const res = await fetch(`http://localhost:8000/user/${email}`)

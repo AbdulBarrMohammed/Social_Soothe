@@ -13,40 +13,45 @@ export function CreateJournal() {
     const [mood, setMood] = useState('happy')
     const [moodModal, setMoodModal] = useState(true);
     const [formModal, setFormModal] = useState(false);
-    const [currCoins, setCurrCoins] = useState(-1);
+    const [currLeafs, setCurrLeafs] = useState(-1);
 
     const [buttonsColor, setButtonColor] = useState("#6888BE");
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
 
     const navigate = useNavigate()
 
-    // get user coin amount
-    const getCoins = async () => {
+    /**
+         * Get leaf count for user
+         * @param event
+         * @return none
+         */
+    const getLeafs = async () => {
         try {
             const res = await fetch(`http://localhost:8000/user/${email}`)
             const data = await res.json();
-            setCurrCoins(data.coins)
+            setCurrLeafs(data.coins)
         } catch(err) {
             console.log(err)
         }
     }
 
     useEffect(() => {
-        getCoins()
+        getLeafs()
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
-    useEffect(() => {
-        getUserCurrentColor(email, setLightestBg, setButtonColor)
-    }, [])
-
+    /**
+         * Submits journal entry information to user database
+         * @param event
+         * @return none
+         */
     async function handleJournalSubmit(e) {
         e.preventDefault()
 
-
-        //close mood modal
+        //Close mood modal
         setFormModal(false)
 
-        //add journal to database
+        //Add journal to database
         const response = await fetch(`http://localhost:8000/journals/create`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -54,8 +59,8 @@ export function CreateJournal() {
 
          })
 
-          // add two to current coin amount
-          let coins = currCoins + 2
+          //Add two to current coin amount
+          let coins = currLeafs + 2
           try {
               const response = await fetch(`http://localhost:8000/user/update`, {
               method: 'POST',
@@ -66,14 +71,17 @@ export function CreateJournal() {
               console.log(err)
         }
 
-        //navigate back to journals
+        //Navigate back to journals
         navigate('/journals');
         window.location.reload();
     }
 
-
+    /**
+         * Open form modal and close mood modal
+         * @param event
+         * @return none
+         */
     function submitModal() {
-        /*open mood modal and keep form modal closed */
         setFormModal(true)
         setMoodModal(false)
 

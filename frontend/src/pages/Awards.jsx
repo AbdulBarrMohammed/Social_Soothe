@@ -26,6 +26,11 @@ export function Awards() {
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
     const email = cookies.Email
 
+    /**
+         * Set user background sounds
+         * @param event
+         * @return none
+         */
     const setSounds = async () => {
         try {
 
@@ -130,12 +135,6 @@ export function Awards() {
                     </div>
                 </>
             }
-
-
-
-
-
-
         </div>
     )
 

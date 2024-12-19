@@ -1,44 +1,53 @@
 const db = require('../db/queries');
-const bcrypt = require('bcryptjs');
-const passport = require("passport");
 
+
+/**
+     * Gets all users journals
+     * @param request, response
+     * @return none
+     */
 async function displayJournals(req, res) {
     try {
         const { email } = req.params
         const journals = await db.getAllJournals(email);
-        res.json(journals); // Sending the users to the frontend
+        res.json(journals); // Sending the journals to the frontend
     } catch (err) {
-        console.log("error....", err)
-        res.status(500).json({ message: 'Error fetching users' });
+        res.status(500).json({ message: 'Error fetching journals' });
     }
 
 
 }
 
+/**
+     * Creates a journal object and adds it to user database
+     * @param request, response
+     * @return none
+     */
 async function createJournalPost(req, res) {
     const {email, title, content, mood } = req.body
     const dateCreated = new Date()
 
     try {
         await db.insertNewJournal(email, title, content, mood, dateCreated);
-        // Send a success response with any necessary data back to the client
+        // Sends a success response
         res.status(201).json({ message: 'Journal created successfully', email, title, content, mood, dateCreated });
     } catch (error) {
-        console.error("Error creating journal entry:", error);
-        // Send an error response
+        // Sends an error response
         res.status(500).json({ message: 'Failed to create journal entry', error: error.message });
     }
 }
 
+/**
+     * Gets a journal object in user database
+     * @param request, response
+     * @return none
+     */
 async function getSelectedJournal(req, res) {
-    console.log("running selectd")
     try {
         const id  = req.params.id
-        console.log("printing id")
         const journal = await db.getJournal(id);
         res.json(journal)
     } catch (err) {
-        console.log("error....", err)
         res.status(500).json({ message: 'Error fetching users' });
     }
 
@@ -46,18 +55,27 @@ async function getSelectedJournal(req, res) {
 
 }
 
+/**
+     * Deletes a journal from user database
+     * @param request, response
+     * @return none
+     */
 async function deleteJournal(req, res) {
     try {
         const id  = req.params.id
         await db.deleteJournal(id);
         res.json("Succesfully deleted journal")
     } catch (err) {
-        console.log("error....", err)
         res.status(500).json({ message: 'Error deleting journal' });
     }
 
 }
 
+/**
+     * Edits selected journal
+     * @param request, response
+     * @return none
+     */
 async function editJournalPost(req, res) {
 
     try {
@@ -66,20 +84,24 @@ async function editJournalPost(req, res) {
         res.json("successfully updated journal")
 
     } catch (err) {
-        console.log("error....", err)
         res.status(500).json({ message: 'Error updating journal' });
     }
 
 }
 
+
+/**
+     * Query searches for users journals
+     * @param request, response
+     * @return none
+     */
 async function searchGet(req, res) {
     try {
         const { query, email } = req.params
         const journal = await db.getSearchQuery(email, query);
         res.json(journal)
     } catch (err) {
-        console.log("error....", err)
-        res.status(500).json({ message: 'Error searching flower' });
+        res.status(500).json({ message: 'Error searching Journal' });
     }
 }
 

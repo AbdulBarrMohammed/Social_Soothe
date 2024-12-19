@@ -4,10 +4,8 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { LogIn } from "../components/Login";
+import { getUserCurrentColor } from "../data/dataFunctions";
 
-
-//NOTES:
-//if user is not logged in send them to the landing page or log in page
 
 export function Settings() {
 
@@ -20,11 +18,9 @@ export function Settings() {
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
-
-    //current sound, and background color user chose
+    //Current sound, and background color user has chosen
     const [currBgColor, setCurrBgColor] = useState("")
     const [currBgSound, setCurrBgSound] = useState("")
-
 
 
     /**
@@ -84,9 +80,14 @@ export function Settings() {
 
     }
 
+    /**
+     * Saves users choice for background sound and color
+     * @param event
+     * @return none
+     */
     async function saveChanges(){
 
-        //Make sure a sound is picked
+        //Checks if a current background sound is chose
         if (currBgSound) {
             const sound = currBgSound
             try {
@@ -99,6 +100,9 @@ export function Settings() {
                 console.log(err)
             }
 
+        }
+        else {
+            navigate("/dashboard");
         }
 
         //Checks if color is picked and stores the color in the database in the backend
@@ -114,42 +118,17 @@ export function Settings() {
                 console.log(err)
             }
         }
+        else {
+            navigate("/dashboard");
+        }
+
         navigate("/dashboard");
 
     }
 
 
-    const setBgColor = async () => {
-        try {
-            //Get users current pick for a background color
-            const resColor = await fetch(`http://localhost:8000/user/${email}`)
-            const dataColor = await resColor.json();
-
-            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
-            const dataColors = await resColors.json();
-
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setLightestBg("#ACC8EA")
-                setButtonColor("#4470AD")
-
-            }
-            else {
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setLightestBg(c.lightest)
-                        setButtonColor(c.semiDark)
-                    }
-                })
-            }
-
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
     useEffect(() => {
-        setBgColor()
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
     return (

@@ -16,7 +16,6 @@ export function Journals() {
     const [journals, setJournals] = useState([])
     const [searchQuery, setSearchQuery] = useState("");
 
-    const [colors, setColors] = useState([]);
     const [lightestBg, setLightestBg] = useState("");
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 

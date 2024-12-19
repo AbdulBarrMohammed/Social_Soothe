@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import ReactConfetti from 'react-confetti';
-
+import { getUserCurrentColor } from "../data/dataFunctions";
 
 
 export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex }) {
@@ -14,8 +14,6 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
     const [sounds, setSounds] = useState([]);
     const [showConfetti, setShowConfetti] = useState(false);
 
-    const [congrats, setCongrats] = useState(false);
-
     const [isPlaying, setIsPlaying] = useState(false);
     const playPic =  "../../src/assets/play.svg"
     const pausePic = "../../src/assets/pause.svg"
@@ -24,37 +22,10 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
     const audioRef = useRef(null);
 
     const [buttonsColor, setButtonColor] = useState("#6888BE");
-
-    const setBgColor = async () => {
-        try {
-
-            //Get users current pick for a background color
-            const resColor = await fetch(`http://localhost:8000/user/${email}`)
-            const dataColor = await resColor.json();
-
-            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
-            const dataColors = await resColors.json();
-
-            if (dataColor.currColor.toLowerCase() == 'blue') {
-                setButtonColor("#4470AD")
-            }
-            else {
-                //check for current user color in users purchased colors to set chosen background color
-                dataColors.map((c) => {
-                    if (c.name === dataColor.currColor) {
-                        setButtonColor(c.semiDark)
-                    }
-                })
-            }
-
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
+    const [lightestBg, setLightestBg] = useState("#ACC8EA");
 
     useEffect(() => {
-        setBgColor()
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
     useEffect(() => {

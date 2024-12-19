@@ -7,10 +7,10 @@ import { getUserCurrentColor } from "../data/dataFunctions"
 
 export function SelectedJournal() {
     const [journal, setJournal] = useState({})
-    const [stringDate, setStringDate] = useState("")
     const [formModal, setFormModal] = useState(false);
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
+    const [stringDate, setStringDate] = useState("")
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const [lightestBg, setLightestBg] = useState("");
     const [buttonsColor, setButtonColor] = useState("#6888BE");
@@ -32,7 +32,7 @@ export function SelectedJournal() {
     useEffect(() => {
 
         /**
-         * Gets users current journal entries in the database
+         * Gets user's current journal entries in the database
          * @param none
          * @return none
          */
@@ -45,6 +45,10 @@ export function SelectedJournal() {
                 //Grabs title and content of journal to be able to change latter
                 setTitle(data.title)
                 setContent(data.content)
+
+                //Set date of journal entry creation
+                const date = new Date(data.dateCreated);
+                setStringDate(date.toDateString())
 
             } catch(err) {
                 console.log(err)

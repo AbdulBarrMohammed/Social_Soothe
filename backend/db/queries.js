@@ -360,22 +360,6 @@ async function getSound(id) {
 
 }
 
-async function deleteSound( id ) {
-  const deleteSound = await prisma.sounds.delete({
-  where: {
-    id: id
-  },
-})
-
-return deleteSound;
-}
-
-
-
-async function getSearchQuerySound(email, query) {
-
-}
-
 async function updateSound(sound, email) {
   const user = await prisma.user.update({
     where: { email: email
@@ -481,8 +465,6 @@ module.exports = {
     getAllSounds,
     insertNewSound,
     getSound,
-    deleteSound,
-    getSearchQuerySound,
     updateSound,
 
     getAllColors,

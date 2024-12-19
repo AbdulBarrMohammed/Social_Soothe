@@ -3,11 +3,11 @@ import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getUserCurrentColor } from "../data/dataFunctions";
+import { LogIn } from "../components/Login";
 
 
 export function Dashboard() {
 
-    const treeLength = 0;
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
@@ -21,22 +21,19 @@ export function Dashboard() {
     const [leafCount, setLeafCount] = useState(0);
     const [awardCount, setAwardCount] = useState(0);
 
-    const [currTime, setCurrTime] = useState("");
     const [timeBg, setBgTime] = useState("");
     const [timeText, setTimeText] = useState("");
-
-
 
     const [socialStanding, setSocialStanding] = useState({
         img: '../../src/assets/icons8-seed-64.png',
         text: 'Seed'
     })
 
-    //Get user current color to set background
-    useEffect(() => {
-        getUserCurrentColor(email, setLightestBg, setButtonColor)
-    }, [])
-
+    /**
+         * Gets user's tree count data
+         * @param none
+         * @return none
+         */
     async function getTreeData() {
 
         try {
@@ -65,10 +62,11 @@ export function Dashboard() {
 
     }
 
-    useEffect(() => {
-        getTreeData()
-    }, [])
-
+    /**
+         * Gets user's data to display on their dasboard
+         * @param none
+         * @return none
+         */
     const getData = async () => {
 
         try {
@@ -107,47 +105,64 @@ export function Dashboard() {
         }
     }
 
-    useEffect(() => {
-
+     /**
+         * Gets time of day to display different images matching the time of day
+         * @param none
+         * @return none
+         */
+    async function getTimeOfDay() {
         const date = new Date();
             let time = date.toLocaleString([], {
                 hour: "2-digit",
                 minute: "2-digit",
           });
+          console.log(time >= "");
 
-          //Sunrise time
-          if (time > "06:00" && time < "12:00" && time.includes("AM") ) {
+        //Sunrise time
+        if (time > "06:00" && time < "12:00" && time.includes("AM") ) {
                 setBgTime("url(../src/assets/sunrise.jpg)");
                 setTimeText("Good morning");
           }
 
-          //Afternoon time
-          else if (time >= "12:00" && time < "05:00" && time.includes("PM") ) {
+        //Afternoon time
+        else if ( time >= "01:00" && time < "05:00" && time.includes("PM") ) {
             setBgTime("url(../src/assets/landscape.jpg)");
             setTimeText("Good afternoon");
-          }
+        }
 
-          //Evening time
-          else if (time > "05:00" && time < "11:00" && time.includes("PM")) {
+        else if (time >= "12:00" && time < "12:59" && time.includes("PM")) {
+            setBgTime("url(../src/assets/landscape.jpg)");
+            setTimeText("Good afternoon");
+        }
+
+        //Evening time
+        else if (time > "05:00" && time < "11:00" && time.includes("PM")) {
             setBgTime("url(../src/assets/sunset.jpg)");
             setTimeText("Good evening");
           }
 
-          //Night time
-          else {
+        //Night time
+        else {
             setBgTime("url(../src/assets/night.jpg)");
             setTimeText("Good night");
           }
 
-
-    })
+    }
 
     useEffect(() => {
         getData()
+        getTimeOfDay()
+        getTreeData()
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
     return (
         <>
+
+        {!authToken && <LogIn/>}
+
+        {authToken &&
+
             <div className="flex flex-col px-20 gap-10 pt-5 h-full" style={{ backgroundColor: lightestBg }}>
 
                 <div className="flex justify-start items-center gap-5">
@@ -163,7 +178,7 @@ export function Dashboard() {
                 <div className="grid gap-4 grid-cols-2 grid-rows-2 mb-10">
 
                     <div className="flex flex-col items-start justify-start p-5 rounded-3xl bg-no-repeat bg-cover bg-bottom" style={{ backgroundImage: timeBg}}>
-                       <p className="text-3xl p-3">{timeText}</p>
+                    <p className="text-3xl p-3">{timeText}</p>
                     </div>
                     <div className="grid gap-4 grid-cols-2 grid-rows-2">
                         <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
@@ -186,7 +201,7 @@ export function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="bg-white flex gap-5 justify-center rounded-3xl p-5 text-black">
+                    <div className="bg-white flex gap-5 justify-center rounded-3xl p-5 text-white" style={{ backgroundColor: buttonsColor }}>
                         <PieChart />
                         <h1 className="text-3xl font-bold pt-5">Daily Moods</h1>
                     </div>
@@ -206,6 +221,11 @@ export function Dashboard() {
                 </div>
 
             </div>
+
+
+            }
+
+
         </>
     )
 }

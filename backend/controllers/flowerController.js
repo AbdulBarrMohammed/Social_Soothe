@@ -1,7 +1,12 @@
 const db = require('../db/queries');
-const bcrypt = require('bcryptjs');
-const passport = require("passport");
 
+
+
+/**
+     * Gets all users flowers in their flower database
+     * @param request, response
+     * @return none
+     */
 async function displayFlowers(req, res) {
 
     try {
@@ -16,6 +21,11 @@ async function displayFlowers(req, res) {
 
 }
 
+/**
+     * Creates flower object and adds it to users database
+     * @param request, response
+     * @return none
+     */
 async function createFlowerPost(req, res) {
     const {email,
         questionOne,
@@ -42,29 +52,37 @@ async function createFlowerPost(req, res) {
             x,
             y,
             questionSeven, dateCreated, done, isChecked);
-        // Send a success response with any necessary data back to the client
+        // Sends a success response
         res.status(201).json({ message: 'flower created successfully'});
     } catch (error) {
-        console.error("Error creating flower entry:", error);
-        // Send an error response
+        // Sends an error response
         res.status(500).json({ message: 'Failed to create flower entry', error: error.message });
     }
 }
 
+/**
+     * Gets a flower from user database
+     * @param request, response
+     * @return none
+     */
 async function getSelectedFlower(req, res) {
     try {
         const id  = req.params.id
         const flower = await db.getFlower(id);
         res.json(flower)
     } catch (err) {
-        console.log("error....", err)
-        res.status(500).json({ message: 'Error fetching flowers' });
+        res.status(500).json({ message: 'Error fetching flower' });
     }
 
 
 
 }
 
+/**
+     * Removes a flower from users flowers in their database
+     * @param request, response
+     * @return none
+     */
 async function deleteFlower(req, res) {
     try {
         const id  = req.params.id
@@ -77,6 +95,12 @@ async function deleteFlower(req, res) {
 
 }
 
+
+/**
+     * Edits a selected flower in user database
+     * @param request, response
+     * @return none
+     */
 async function editFlowerPost(req, res) {
 
     try {
@@ -97,42 +121,53 @@ async function editFlowerPost(req, res) {
         res.json("successfully updated flower")
 
     } catch (err) {
-        console.log("error....", err)
         res.status(500).json({ message: 'Error updating flower' });
     }
 
 }
 
+/**
+     * Edits flower's color
+     * @param request, response
+     * @return none
+     */
 async function editFlowerPostColor(req, res) {
     try {
         const {currId, color, done} = req.body
         await db.updateFlowerColor(currId, color, done);
         res.json("successfully updated flower done and color")
     } catch (err) {
-        console.log("error....", err)
         res.status(500).json({ message: 'Error updating flower done and color' });
     }
 }
 
+/**
+     * Edits flower's checked attribute
+     * @param request, response
+     * @return none
+     */
 async function editFlowerPostChecked(req, res) {
     try {
         const {currId, checked} = req.body
         await db.updateFlowerChecked(currId, checked);
         res.json("successfully updated flower check")
     } catch (err) {
-        console.log("error....", err)
         res.status(500).json({ message: 'Error updating flower check' });
     }
 
 }
 
+/**
+     * Edits question seven of flower object
+     * @param request, response
+     * @return none
+     */
 async function editFlowerQuestionSeven(req, res) {
     try {
         const {id, questionSeven} = req.body
         await db.updateFlowerQuestionSeven(id, questionSeven);
         res.json("successfully updated flower question seven")
     } catch (err) {
-        console.log("error....", err)
         res.status(500).json({ message: 'Error updating flower check' });
     }
 }

@@ -1,13 +1,18 @@
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { useState } from "react";
+import { getUserCurrentColor } from "../data/dataFunctions";
+
 
 export function Color({color}) {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const email = cookies.Email
-    const [currCoins, setCurrCoins] = useState(0);
+    const [currLeafs, setCurrLeafs] = useState(0);
     const [colors, setColors] = useState([]);
+
+    const [buttonsColor, setButtonColor] = useState("");
+    const [lightestBg, setLightestBg] = useState("");
 
 
     /**
@@ -26,7 +31,7 @@ export function Color({color}) {
             //User coins data
             const resCoins = await fetch(`http://localhost:8000/user/${email}`)
             const dataCoins = await resCoins.json();
-            setCurrCoins(dataCoins.coins)
+            setCurrLeafs(dataCoins.coins)
         } catch(err) {
             console.log(err)
         }
@@ -34,6 +39,7 @@ export function Color({color}) {
 
     useEffect(() => {
         getAllData()
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
     /**
@@ -60,12 +66,12 @@ export function Color({color}) {
             const itemPrice = color.price
 
             //First check if the item price is too expensive for user
-            if (itemPrice > currCoins) {
+            if (itemPrice > currLeafs) {
                 alert("You do not have enough leafs")
             }
             else {
                 //Subract price from current leafs
-                const coins = Number(currCoins) - Number(itemPrice)
+                const coins = Number(currLeafs) - Number(itemPrice)
 
                 //Add new leaf price to database
                 try {
@@ -98,7 +104,7 @@ export function Color({color}) {
 
     return (
         <>
-            <div className="bg-[#6888BE] flex justify-between p-7 rounded-xl text-white">
+            <div className=" flex justify-between p-7 rounded-2xl text-white" style={{ backgroundColor: buttonsColor }}>
                 <div className="flex gap-4 items-center">
                     <p>{color.name}</p>
 
@@ -112,11 +118,11 @@ export function Color({color}) {
                 <div className="flex gap-4 items-center">
                     <div className="flex items-cente gap-2">
                         <p>{color.price}</p>
-                        <img src={'../src/assets/leaf.png'} className="h-5"/>
+                        <img src={'../src/assets/leaf-2.png'} className="h-5"/>
 
                     </div>
 
-                    <button onClick={buyBtn} className="border border-white bg-[#6888BE] px-10 py-2 rounded-3xl">
+                    <button onClick={buyBtn} className="border border-white px-10 py-2 rounded-3xl" style={{ backgroundColor: buttonsColor }}>
                         Buy
                     </button>
 

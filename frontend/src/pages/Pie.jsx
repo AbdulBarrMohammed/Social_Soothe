@@ -10,7 +10,6 @@ ChartJS.register(
 
 export const PieChart = () => {
     const options = {}
-    const data = {}
 
     const [journals, setJournals] = useState([])
 
@@ -20,8 +19,12 @@ export const PieChart = () => {
     const userEmail = cookies.Email
 
     const pieData = [0,0,0,0,0,0]
-    const socialTreeLength = 0
 
+    /**
+         * Gets journals data
+         * @param none
+         * @return none
+         */
     const getData = async () => {
 
         try {
@@ -40,6 +43,7 @@ export const PieChart = () => {
     },[])
 
 
+    //Iterate through journal to get each emotion count
     journals.map((j) => {
         if (j.mood == 'happy') {
             pieData[0] += 1
@@ -87,7 +91,6 @@ export const PieChart = () => {
 
     return (
         <div >
-
             <div className='h-72'>
                 <Pie options={options}
                     data={pieChartData}
@@ -95,10 +98,6 @@ export const PieChart = () => {
                     />
 
             </div>
-
-
-
-
         </div>
 
 

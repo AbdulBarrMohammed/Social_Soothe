@@ -10,8 +10,6 @@ import { LogIn } from "../components/Login";
 export function EditFlower() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
-    const email = cookies.Email
-
 
     //grabbing id from clicked flower
     let params = useParams()
@@ -63,6 +61,11 @@ export function EditFlower() {
     }, [id])
 
 
+    /**
+         * Adds edited answers to each question to database
+         * @param event
+         * @return none
+         */
     async function handleSubmit(e) {
         e.preventDefault();
         try {

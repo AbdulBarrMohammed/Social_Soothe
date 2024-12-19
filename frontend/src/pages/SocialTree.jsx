@@ -20,11 +20,10 @@ export function SocialTree() {
     const email = cookies.Email
     const [flowers, setFlowers] = useState([])
     const [currId, setCurrId] = useState("")
-    const [openModal, setOpenModal] = useState(false)
+    const [openFlowerModal, setOpenFlowerModal] = useState(false)
     const [done, setDone] = useState(false)
     const [flower, setFlower] = useState("");
     const [questionSevenModal, setQuestionSevenModal] = useState(false);
-    const [color, setColor] = useState("");
     const [showConfetti, setShowConfetti] = useState(false);
     const [currLeafs, setCurrLeafs] = useState(-1);
     const [isChecked, setIsChecked] = useState(false);
@@ -36,6 +35,7 @@ export function SocialTree() {
     const [ques, setQues] = useState(questions[index])
     const [input, setInput] = useState("")
 
+    //Flower questions
     const [questionOne, setQuestionOne] = useState("")
     const [titleQuestion, setTitleQuestion] = useState(false);
     const [questionTwo, setQuestionTwo] = useState("")
@@ -45,15 +45,22 @@ export function SocialTree() {
     const [questionSix, setQuestionSix] = useState("")
     const [questionSeven, setQuestionSeven] = useState("")
 
+    //Page color schemes
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
-    const getData = async () => {
+
+     /**
+    * Loads user flowers to their tree
+    * @param none
+    * @return none
+    */
+    async function loadFlowers() {
         try {
-            const res = await fetch(`http://localhost:8000/tree/flowers/${email}`)
-            const data = await res.json();
-            if (data) {
-                setFlowers(data)
+            const resFlowers = await fetch(`http://localhost:8000/tree/flowers/${email}`)
+            const dataFlowers = await resFlowers.json();
+            if (dataFlowers) {
+                setFlowers(dataFlowers)
             }
 
         } catch(err) {
@@ -61,38 +68,54 @@ export function SocialTree() {
         }
     }
 
+    /**
+         * Gets selected flower and sets its information
+         * @param none
+         * @return none
+         */
+    async function loadFlower() {
+        try {
+            const res = await fetch(`http://localhost:8000/flowers/flower/${currId}`)
+            const data = await res.json();
+            setDone(data.done)
+            setFlower(data)
+            setQuestionSeven(data.questionSeven)
+            setShowConfetti(false)
+            setIsChecked(data.isChecked)
+
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
     useEffect(() => {
-        getData()
         getUserCurrentColor(email, setLightestBg, setButtonColor)
         getLeafCount(email, setCurrLeafs)
-
+        loadFlowers()
     }, [])
 
 
     useEffect(() => {
-        async function loadFlower() {
-            try {
-                const res = await fetch(`http://localhost:8000/flowers/flower/${currId}`)
-                const data = await res.json();
-                setDone(data.done)
-                setFlower(data)
-                setQuestionSeven(data.questionSeven)
-                setColor(data.color)
-                setShowConfetti(false)
-                setIsChecked(data.isChecked)
-            } catch(err) {
-                console.log(err)
-            }
-        }
         loadFlower()
     }, [currId])
 
-
-    function handleClick(id) {
+     /**
+    * Sets current id of clicked flower and opens the flowers information modal
+    * @param id (string)
+    * @return none
+    */
+    function handleFlowerClick(id) {
         setCurrId(id)
-        setOpenModal(true)
+        setOpenFlowerModal(true)
     }
 
+
+     /**
+    * Adds more leafs to users leaf count if they have clicked the checkbox
+    * @param event
+    * @return none
+    */
     async function handleComplete(e) {
         setDone(e.target.checked)
 
@@ -136,45 +159,89 @@ export function SocialTree() {
 
     }
 
-    //delete flower
+     /**
+    * Deletes flower from user flowers database
+    * @param none
+    * @return none
+    */
     function removeFlower() {
         deleteFlower(currId)
     }
 
-    //increment each question
+     /**
+    * Increment between each question
+    * @param none
+    * @return none
+    */
     function add() {
         increment(index, input, setQuestionSix, setShowQuestions, setShowSubmit, setIndex, setQues, setQuestionTwo, setQuestionThree, setQuestionFour,
             setQuestionFive, setInput)
     }
 
+
+     /**
+    * Adds users answers to their flower database
+    * @param none
+    * @return none
+    */
     function finish() {
         submitAnswers(email, questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven, setShowSubmit)
     }
 
+     /**
+    * Open question seven modal
+    * @param none
+    * @return none
+    */
     function explainEvent() {
         setQuestionSevenModal(true)
 
     }
 
-    async function handleSubmit(e) {
+     /**
+    * Changes flower color based on if user completed has checked the check box
+    * @param event
+    * @return none
+    */
+    async function handleDoneSubmit(e) {
         e.preventDefault();
-        handleColorChange(done, currId, setOpenModal)
+        handleColorChange(done, currId, setOpenFlowerModal)
     }
 
+     /**
+    * Add question seven to user flower database
+    * @param none
+    * @return none
+    */
     function handleSevenSubmit() {
         addQuestionSeven(currId, questionSeven, setQuestionSevenModal)
     }
 
+     /**
+    * Close questions modal
+    * @param none
+    * @return none
+    */
     function closeQuestions() {
         setShowQuestions(false);
     }
 
+     /**
+    * Close title question modal and opens the rest of the questions modal
+    * @param none
+    * @return none
+    */
     function handleOneSubmit() {
         setTitleQuestion(false);
         setShowQuestions(true)
 
     }
 
+    /**
+    * Open question one modal
+    * @param none
+    * @return none
+    */
     function showQuestionOne() {
         setTitleQuestion(true);
     }
@@ -184,7 +251,7 @@ export function SocialTree() {
         <div>
             {!authToken &&  <LogIn/>}
                 {
-                    openModal &&
+                    openFlowerModal &&
 
                         <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex justify-center items-center h-screen">
                             {showConfetti && <ReactConfetti/>}
@@ -213,7 +280,7 @@ export function SocialTree() {
                                         </div>
                                 </div>
                                 <div className="flex justify-center">
-                                    <button onClick={handleSubmit} className="py-3 px-5 text-white rounded-2xl shadow-md" style={{ backgroundColor: buttonsColor }}>Done</button>
+                                    <button onClick={handleDoneSubmit} className="py-3 px-5 text-white rounded-2xl shadow-md" style={{ backgroundColor: buttonsColor }}>Done</button>
                                 </div>
 
                             </div>
@@ -225,7 +292,7 @@ export function SocialTree() {
                             <div className=" h-96 w-4/5 relative">
                                 {flowers.map((flower) => {
                                             return (
-                                            <div onClick={() => handleClick(flower.id)} className={`flex items-center justify-center absolute rounded-full h-7 w-7 shadow-md`}
+                                            <div onClick={() => handleFlowerClick(flower.id)} className={`flex items-center justify-center absolute rounded-full h-7 w-7 shadow-md`}
                                                 style={{
                                                     backgroundColor: flower.color,
                                                     left: `${flower.x}px`,
@@ -249,7 +316,6 @@ export function SocialTree() {
                     }
 
                     </div>
-
 
                     {titleQuestion  &&
                         <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex flex-col items-center justify-center h-screen">

@@ -37,7 +37,6 @@ export function Breathe() {
     const [showConfetti, setShowConfetti] = useState(false);
 
 
-
     const breatheInAudio = useRef(new Audio("../../src/assets/breathe-in.wav"))
     const exhaleAudio = useRef(new Audio("../../src/assets/exhale.wav"))
     const currBgSound = useRef(null);
@@ -83,10 +82,14 @@ export function Breathe() {
     }, [])
 
 
-
-
     const [key, setKey] = useState(0); // re-render the timer
 
+
+    /**
+         * Restarts timer when current round ends
+         * @param none
+         * @return none
+         */
     const restart = () => {
 
         if (turn == 2 || turn == 5 || turn == 8) {
@@ -148,10 +151,15 @@ export function Breathe() {
 
                 restart();
             }
-            return [false, 0]; // Return false to stop the timer
+            return [false, 0];
 
         };
 
+        /**
+         * Pause background sound
+         * @param none
+         * @return none
+         */
         const pause = () => {
             setIsActive(false)
             if (defaultBgSound) {
@@ -165,6 +173,11 @@ export function Breathe() {
 
         }
 
+        /**
+         * Showes current seconds that has passed
+         * @param event
+         * @return none
+         */
         const renderTime = ({ remainingTime }) => {
             return (
                 <div className="timer flex flex-col items-center justify-center">
@@ -183,14 +196,20 @@ export function Breathe() {
             );
         };
 
+
+        /**
+         * Start background noise and counter
+         * @param none
+         * @return none
+         */
         const start = () => {
             //Checks to see if user wants default background breathing noises
             if (defaultBgSound) {
 
-                //first check if the exercise is the 3-3-3 pattern
+                //First check if the exercise is the 3-3-3 pattern
                 if (startNum == 3) {
                     if (counter == endNum && (turn == 1 || turn == 4 || turn == 7 || turn == 10)) {
-                        console.log("hold")
+                        console.log()
                     }
                     else if (counter == startNum && (turn == 2 || turn == 5 || turn == 8 || turn == 11)) {
                         exhaleAudio.play()
@@ -202,7 +221,7 @@ export function Breathe() {
                 }
                 else {
 
-                    //before checking check if the exercise is in the breathing stage which should have counter of start number
+                    //Before checking check if the exercise is in the breathing stage which should have counter of start number
                     if (counter == startNum) {
                         breatheInAudio.current.play()
                     }

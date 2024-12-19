@@ -34,12 +34,11 @@ export function NavbarLoggedIn() {
 
             else {
                 setColors(dataColors)
-                console.log("Current colors ", dataColors);
 
                     dataColors.map((c) => {
                         console.log("colors ->", c)
                         if (c.name === dataColor.currColor) {
-                            console.log("We have found a bg color ", dataColor.currColor)
+
                             setSemiBg(c.semiDark)
                         }
 
@@ -61,7 +60,7 @@ export function NavbarLoggedIn() {
     return (
         <>
         {authToken &&
-            <nav className='pt-12 sticky top-0 text-white z-40' style={{ backgroundColor: semiBg }}>
+            <nav className='pt-12 sticky top-0 text-white z-40 shadow-md' style={{ backgroundColor: semiBg }}>
                 <ul className='p-3 flex w-full items-center justify-center'>
                         {pageDataLoggedIn.map((page) => {
                             return (

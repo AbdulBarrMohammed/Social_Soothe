@@ -1,7 +1,4 @@
 const db = require('../db/queries');
-const bcrypt = require('bcryptjs');
-const passport = require("passport");
-
 
 
 /**
@@ -39,7 +36,11 @@ async function createColorPost(req, res) {
     }
 }
 
-
+/**
+     * Deletes color from color database
+     * @param request, response
+     * @return none
+     */
 async function deleteColor(req, res) {
     try {
         const id  = req.params.id
