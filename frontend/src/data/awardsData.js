@@ -144,15 +144,6 @@ dark String
         price: 65
     },
     {
-        name: 'Teal',
-        dark: '#236D67',
-        semiDark: '#447DAD',
-        medium: '#68A8BE',
-        light: '#99C9D7',
-        lightest: '#CCEFF1',
-        price: 70
-    },
-    {
         name: 'Brown',
         dark: '#673F23',
         semiDark: '#AD7B44',
@@ -178,6 +169,69 @@ dark String
         light: '#D7CBB3',
         lightest: '#EEE6D6',
         price: 85
+    },
+    {
+        name: 'Cyan',
+        dark: '#236D89',
+        semiDark: '#4491AD',
+        medium: '#68AFBE',
+        light: '#99D0D7',
+        lightest: '#CCEEF1',
+        price: 95
+    },
+    {
+        name: 'Lime',
+        dark: '#4A6723',
+        semiDark: '#72AD44',
+        medium: '#88BE68',
+        light: '#AFD799',
+        lightest: '#DCEECC',
+        price: 100
+    },
+    {
+        name: 'Lavender',
+        dark: '#564267',
+        semiDark: '#8C74AD',
+        medium: '#A48ABE',
+        light: '#C4B4D7',
+        lightest: '#E8E2EE',
+        price: 105
+    },
+    {
+        name: 'Peach',
+        dark: '#A85944',
+        semiDark: '#BE8968',
+        medium: '#D7A799',
+        light: '#EED3CC',
+        lightest: '#F6E8DD',
+        price: 110
+    },
+    {
+        name: 'Turquoise',
+        dark: '#236754',
+        semiDark: '#44AD91',
+        medium: '#68BEA9',
+        light: '#99D7C6',
+        lightest: '#CCF1E8',
+        price: 115
+    },
+    {
+        name: 'Charcoal',
+        dark: '#232323',
+        semiDark: '#444444',
+        medium: '#686868',
+        light: '#999999',
+        lightest: '#CCCCCC',
+        price: 120
+    },
+    {
+        name: 'Sand',
+        dark: '#675B23',
+        semiDark: '#AD9A44',
+        medium: '#BEAF68',
+        light: '#D7CB99',
+        lightest: '#EEE5CC',
+        price: 125
     },
 
 ];

@@ -139,7 +139,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
                     try {
                         //First checks if user wants to buy item
                         if (confirm("Are you sure you want to purchase this?")) {
-                            setItemBrought(true);
+
                             const response = await fetch(`http://localhost:8000/user/update`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -153,16 +153,14 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({email, name, src})
                             })
-                            setShowConfetti(true)
-                            setTimeout(() => {
-                                setShowConfetti(false);
-                            }, 10000);
+
+
+                            window.location.reload()
 
 
                         }
                         else {
                             navigate("/awards");
-                            //setShowConfetti(false);
                         }
 
                     } catch(err) {
@@ -202,7 +200,7 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
 
                     </div>
                     {showConfetti && <ReactConfetti/>}
-                    <button onClick={buyBtn} className="border border-white px-10 py-2 rounded-3xl hover:text-xl transition-all duration-300 ease-in-out" style={{ backgroundColor: buttonsColor}}>
+                    <button onClick={buyBtn} className="px-10 py-2 rounded-3xl hover:underline underline-offset-8 decoration-4 transition-all duration-300 ease-in-out" style={{ backgroundColor: buttonsColor}}>
                         Buy
                     </button>
 

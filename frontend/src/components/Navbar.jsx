@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
-import { pageDataLeft } from "../data/pageData"
+import { pageDataLeft, pageDataLoggedIn } from "../data/pageData"
 import { pageDataRight } from "../data/pageData"
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { useState } from "react"
+import { getUserCurrentColor } from "../data/dataFunctions"
 
 export function Navbar() {
 
@@ -33,12 +34,9 @@ export function Navbar() {
 
             else {
                 setColors(dataColors)
-                console.log("Current colors ", dataColors);
 
                     dataColors.map((c) => {
-                        console.log("colors ->", c)
                         if (c.name === dataColor.currColor) {
-                            console.log("We have found a bg color ", dataColor.currColor)
                             setDarkBg(c.dark)
                         }
 
@@ -127,7 +125,7 @@ export function Navbar() {
                 }
 
                 {authToken &&
-                                <Link to={"/journals"} className='hover:underline underline-offset-8 decoration-4 transition-all duration-300 ease-in-out'>
+                                <Link to={"/dashboard"} className='hover:underline underline-offset-8 decoration-4 transition-all duration-300 ease-in-out'>
                                     Dashboard
                                 </Link>
                 }

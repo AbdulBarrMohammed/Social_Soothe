@@ -65,6 +65,15 @@ export const PieChart = () => {
         }
     })
 
+    const pieChartOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: "white",
+                },
+            },
+        },
+    };
 
     const pieChartData = {
         labels: [
@@ -74,25 +83,25 @@ export const PieChart = () => {
             {
                 label: "Mood",
                 data: pieData,
+                borderWidth: 0,
                 backgroundColor: [
-                    "rgb(249,208,64)",
-                    "#e0474c",
-                    "rgb(87, 156, 149)",
-                    "#6595DA",
-                    "rgb(123, 57, 196)",
-                    "rgb(199,107,152)"
+                    "rgb(246, 197, 85)",
+                    "rgb(235, 81, 108)",
+                    "rgb(99, 204, 205)",
+                    "rgb(69, 153, 247)",
+                    "rgb(158, 130, 237)",
+                    "#FF8DA1"
                 ],
                 hoverOffset: 4,
-
-            }
-        ]
+            },
+        ],
     };
 
 
     return (
         <div >
             <div className='h-72'>
-                <Pie options={options}
+                <Pie options={pieChartOptions}
                     data={pieChartData}
 
                     />

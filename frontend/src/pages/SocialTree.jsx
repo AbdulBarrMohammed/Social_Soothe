@@ -50,6 +50,8 @@ export function SocialTree() {
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
 
+
+
      /**
     * Loads user flowers to their tree
     * @param none
@@ -93,12 +95,16 @@ export function SocialTree() {
         getUserCurrentColor(email, setLightestBg, setButtonColor)
         getLeafCount(email, setCurrLeafs)
         loadFlowers()
+
     }, [])
 
 
     useEffect(() => {
         loadFlower()
     }, [currId])
+
+
+
 
      /**
     * Sets current id of clicked flower and opens the flowers information modal
@@ -246,6 +252,17 @@ export function SocialTree() {
         setTitleQuestion(true);
     }
 
+    /**
+    * Closes title question modal
+    * @param none
+    * @return none
+    */
+    function closeTitleQuestion() {
+        setTitleQuestion(false)
+        setQuestionOne("")
+    }
+
+
 
     return (
         <div>
@@ -321,8 +338,12 @@ export function SocialTree() {
                         <div className="fixed inset-0 bg-modalBg backdrop-blur-sm z-50 flex flex-col items-center justify-center h-screen">
                             <div className="bg-white p-2 rounded-xl  flex flex-col items-center justify-center">
                                 <form className="flex flex-col gap-5 p-5 items-center justify-center">
-                                    <div className="flex flex-col items-center justify-center">
-                                        <p className="font-bold text-center">Title your social event</p>
+                                    <div className="flex flex-col items-center justify-center gap-3">
+                                        <div className="flex gap-10">
+                                            <p className="font-bold text-xl cursor-pointer" onClick={closeTitleQuestion}>&#x2715;</p>
+                                            <p className="font-bold text-center">Title your social event</p>
+                                        </div>
+
                                         <input className="text-xl w-full h-10 border rounded-lg p-2" onChange={(e) => setQuestionOne(e.target.value)} value={questionOne} maxLength={10}/>
                                     </div>
 
@@ -343,7 +364,7 @@ export function SocialTree() {
                                         <h1>{ques}</h1>
                                     </div>
 
-                                    <p onClick={closeQuestions}>&#x2715;</p>
+                                    <p className="cursor-pointer font-bold text-xl"onClick={closeQuestions}>&#x2715;</p>
                                 </div>
                                     <textarea value={input} onChange={(e) => setInput(e.target.value)} className="border h-40" required/>
                                     <div className="flex justify-between">

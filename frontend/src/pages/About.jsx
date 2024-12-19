@@ -3,7 +3,7 @@
 export function About() {
     return (
         <div className="bg-[#CCDBEE] flex flex-col text-[rgb(68,66,63)] h-screen pt-28">
-            <div className="flex flex-wrap gap-20 px-40 pb-64">
+            <div className="flex flex-wrap gap-20 items-center justify-center pb-60 px-20">
                 <div className="w-3/5 flex flex-col gap-5">
                     <h2 className="text-2xl">About us</h2>
                     <h1 className="text-5xl font-bold">Helping those with social anxiety when no one else will</h1>
@@ -20,7 +20,7 @@ export function About() {
                 </div>
             </div>
 
-            <div className="bg-[#ACC8EA] w-screen px-40 py-10 pb-40 flex gap-20 pt-20">
+            <div className="bg-[#ACC8EA] w-screen px-40 pb-40 flex gap-20 py-20 items-center justify-center">
                 <div>
                     <img src={"../src/assets/undraw_The_world_is_mine_re_j5cr.svg"} className="h-80"/>
                 </div>

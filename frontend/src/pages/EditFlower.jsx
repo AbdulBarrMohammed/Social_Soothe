@@ -5,11 +5,13 @@ import { questions } from "../data/questionsData";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogIn } from "../components/Login";
+import { getUserCurrentColor } from "../data/dataFunctions";
 
 
 export function EditFlower() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
+    const email = cookies.Email
 
     //grabbing id from clicked flower
     let params = useParams()
@@ -26,7 +28,14 @@ export function EditFlower() {
     const [done, setDone] = useState(false)
     const [isChecked, setIsChecked] = useState(false);
 
+    const [lightestBg, setLightestBg] = useState("#ACC8EA");
+    const [buttonsColor, setButtonColor] = useState("#6888BE");
+
     const navigate = useNavigate()
+
+    useEffect(() => {
+        getUserCurrentColor(email, setLightestBg, setButtonColor)
+    })
 
     useEffect(() => {
         /**
@@ -85,7 +94,7 @@ export function EditFlower() {
             console.log(err)
         }
 
-        navigate("/socialInteractions")
+        navigate("/socialTree")
     }
 
 
@@ -95,35 +104,36 @@ export function EditFlower() {
 
         {!authToken && <LogIn />}
         {authToken &&
-            <div className="bg-white h-screen px-10">
+            <div className="flex flex-col h-full px-10" style={{ backgroundColor: lightestBg }}>
                 <form className="flex flex-col gap-5 p-10">
                     <div>
                         <p className="font-bold">{"Title your social event"}</p>
-                        <input className="text-xl w-1/2 h-10 rounded-lg p-2" onChange={(e) => setQuestionOne(e.target.value)} value={questionOne} maxLength={500}/>
+                        <input className="text-xl w-1/2 h-10 rounded-lg p-2" onChange={(e) => setQuestionOne(e.target.value)} value={questionOne} maxLength={500} style={{ backgroundColor: lightestBg }}/>
                     </div>
                     <div>
                         <p className="font-bold">{questions[0]}</p>
-                        <textarea className="text-xl w-1/2 h-20 border rounded-lg p-2" onChange={(e) => setQuestionTwo(e.target.value)} value={questionTwo} maxLength={500}/>
+                        <textarea className="text-xl w-1/2 h-20 rounded-lg p-2" onChange={(e) => setQuestionTwo(e.target.value)} value={questionTwo} maxLength={500} style={{ backgroundColor: lightestBg }}/>
                     </div>
                     <div>
                         <p className="font-bold">{questions[1]}</p>
-                        <textarea className="text-xl w-1/2 h-20 border rounded-lg p-2" onChange={(e) => setQuestionThree(e.target.value)} value={questionThree} maxLength={500}/>
+                        <textarea className="text-xl w-1/2 h-20 rounded-lg p-2" onChange={(e) => setQuestionThree(e.target.value)} value={questionThree} maxLength={500} style={{ backgroundColor: lightestBg }}/>
                     </div>
                     <div>
                         <p className="font-bold">{questions[2]}</p>
-                        <textarea className="text-xl w-1/2 h-20 border rounded-lg p-2" onChange={(e) => setQuestionFour(e.target.value)} value={questionFour} maxLength={500}/>
+                        <textarea className="text-xl w-1/2 h-20 rounded-lg p-2" onChange={(e) => setQuestionFour(e.target.value)} value={questionFour} maxLength={500} style={{ backgroundColor: lightestBg }}/>
                     </div>
                     <div>
                         <p className="font-bold">{questions[3]}</p>
-                        <textarea className="text-xl w-1/2 h-20 border rounded-lg p-2" onChange={(e) => setQuestionFive(e.target.value)} value={questionFive} maxLength={500}/>
+                        <textarea className="text-xl w-1/2 h-20 rounded-lg p-2" onChange={(e) => setQuestionFive(e.target.value)} value={questionFive} maxLength={500} style={{ backgroundColor: lightestBg }}/>
                     </div>
                     <div>
                         <p className="font-bold">{questions[4]}</p>
-                        <textarea className="text-xl w-1/2 h-20 border rounded-lg p-2" onChange={(e) => setQuestionSix(e.target.value)} value={questionSix} maxLength={500}/>
+                        <textarea className="text-xl w-1/2 h-20 rounded-lg p-2" onChange={(e) => setQuestionSix(e.target.value)} value={questionSix} maxLength={500} style={{ backgroundColor: lightestBg }}/>
                     </div>
 
-                    <button className="bg-[z3233C67] shadow-md rounded-full p-10" onClick={handleSubmit}>Exit</button>
-
+                    <div>
+                        <button className="rounded-3xl p-5 text-white" onClick={handleSubmit} style={{ backgroundColor: buttonsColor }}>Save</button>
+                    </div>
 
                 </form>
             </div>

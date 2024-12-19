@@ -2,7 +2,6 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { breatheInfo } from "../data/breatheData";
-import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import ReactConfetti from "react-confetti";
 import { LogIn } from "../components/Login";
@@ -42,8 +41,6 @@ export function Breathe() {
     const currBgSound = useRef(null);
 
 
-    const navigate = useNavigate()
-
     const [lightestBg, setLightestBg] = useState("#ACC8EA");
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
@@ -58,6 +55,8 @@ export function Breathe() {
             currBgSound.current = new Audio(bgSound);
         }
     }, [bgSound]);
+
+
 
     useEffect(() => {
         if (endNum === 3) {
@@ -79,6 +78,17 @@ export function Breathe() {
 
     useEffect(() => {
         getCurrentSound(email, setSounds, setDefaultBgSound, setBgSound)
+    }, [])
+
+    //Clean up and pause current background sounds playing when navigating away from page
+      useEffect(() => {
+        return () => {
+            if (currBgSound.current !== null) {
+                currBgSound.current.pause()
+                console.log("in cleanup")
+            }
+
+        }
     }, [])
 
 
@@ -141,6 +151,8 @@ export function Breathe() {
                 setCounter(startNum)
                 setRounds(1)
                 setBreathe("Breathe in...")
+                currBgSound.current.pause()
+                currBgSound.current = new Audio(bgSound)
 
                 setShowConfetti(true)
                 setTimeout(() => {
@@ -180,7 +192,7 @@ export function Breathe() {
          */
         const renderTime = ({ remainingTime }) => {
             return (
-                <div className="timer flex flex-col items-center justify-center">
+                <div className="timer flex flex-col items-center justify-center font-bold">
                     <div className="value">{remainingTime}</div>
                     <div className="text">seconds</div>
                     {isActive &&
@@ -189,7 +201,7 @@ export function Breathe() {
                     }
 
                     {isActive &&
-                        rounds
+                        <p>Rounds: {rounds}</p>
 
                     }
                 </div>

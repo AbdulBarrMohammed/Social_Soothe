@@ -8,6 +8,7 @@ import { colors } from "../data/awardsData";
 import { sounds as soundsData } from "../data/awardsData";
 import { LogIn } from "../components/Login"
 import { getUserCurrentColor } from "../data/dataFunctions";
+import { colors as colorsData } from "../data/awardsData";
 
 export function Awards() {
     const params = useParams()
@@ -18,6 +19,7 @@ export function Awards() {
     const authToken = cookies.AuthToken
 
     const [currSounds, setCurrSounds] = useState([]);
+    const [currColors, setCurrColors] = useState([]);
     const [buttonsColor, setButtonColor] = useState("#6888BE");
 
     const [currAudioIndex, setCurrAudioIndex] = useState(0);
@@ -36,7 +38,8 @@ export function Awards() {
 
             const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
             const dataSounds = await resSounds.json();
-            setCurrSounds(filterAvailableSound(dataSounds));
+
+            setCurrSounds(filterAvailableSound(dataSounds))
 
         }
         catch(err) {
@@ -46,7 +49,22 @@ export function Awards() {
 
     useEffect(() => {
         setSounds()
+        setColors()
     },[])
+
+    const setColors = async () => {
+        try {
+
+            const resColors = await fetch(`http://localhost:8000/colors/${email}`)
+            const dataColors = await resColors.json();
+
+            setCurrColors(filterAvailableColor(dataColors))
+
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
 
     useEffect(() => {
         getUserCurrentColor(email, setLightestBg, setButtonColor)
@@ -81,6 +99,31 @@ export function Awards() {
         return availableSounds;
 
     }
+
+
+    function filterAvailableColor(dataColors) {
+        //Create a list of current sounds in user sound datas to filter the sounds src
+        let currColors = []
+
+        //get users current sounds purchased and add the sound to available sounds
+        dataColors.map((s) => {
+            currColors.push(s.name.toLowerCase())
+        })
+
+        //list for available sounds
+        let availableColors = []
+
+        //loop through sounds that can be brought
+        colorsData.map((s) => {
+            if (!currColors.includes(s.name.toLowerCase())) {
+                availableColors.push(s)
+            }
+        })
+
+        return availableColors;
+
+    }
+
 
     /**
      * Switches views based on which type of item user wants to view
@@ -123,7 +166,7 @@ export function Awards() {
                 isColors &&
                 <>
                     <div className="flex flex-col gap-3 pb-5">
-                        {colors.map((color, index) => {
+                        {currColors.map((color, index) => {
                                 return (
 
                                         <Color color={color}/>

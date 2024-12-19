@@ -48,19 +48,6 @@ export function Color({color}) {
      * @return none
      */
      async function buyBtn() {
-            // Check if colors exists
-            if (colors) {
-
-                //Lopp through the list of current colors already purchased by user
-                colors.map((colorObj) => {
-
-                    // If a color object has the same name as the color user wants to get, alert user that they already brought color
-                    if (colorObj.name == color.name) {
-                        alert("You already brought this color");
-                        return;
-                    }
-                })
-            }
 
             // Grab price of color purchased
             const itemPrice = color.price
@@ -122,7 +109,7 @@ export function Color({color}) {
 
                     </div>
 
-                    <button onClick={buyBtn} className="border border-white px-10 py-2 rounded-3xl" style={{ backgroundColor: buttonsColor }}>
+                    <button onClick={buyBtn} className="px-10 py-2 rounded-3xl hover:underline underline-offset-8 decoration-4 transition-all duration-300 ease-in-out" style={{ backgroundColor: buttonsColor}}>
                         Buy
                     </button>
 

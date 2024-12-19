@@ -171,7 +171,7 @@ export function Dashboard() {
                     </div>
                     <div className="flex flex-col text-[#44423F]">
                         <h1 className="text-3xl">Welcome back <span className="font-bold">{userEmail}</span></h1>
-                        <p>Below is your recent activiy information</p>
+                        <p className="text-lg">Below is your recent activiy information</p>
                     </div>
                 </div>
 
@@ -210,8 +210,8 @@ export function Dashboard() {
 
                         <img src={socialStanding.img} className="h-60 w-60"/>
                         <div className="flex flex-col gap-2 text-white">
-                            <p className="text-xl">{socialStanding.text}</p>
                             <h1 className="text-3xl font-bold">Your social standing</h1>
+                            <p className="text-xl">{socialStanding.text}</p>
 
                         </div>
 
