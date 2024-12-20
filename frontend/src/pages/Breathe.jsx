@@ -85,7 +85,6 @@ export function Breathe() {
         return () => {
             if (currBgSound.current !== null) {
                 currBgSound.current.pause()
-                console.log("in cleanup")
             }
 
         }
@@ -138,8 +137,11 @@ export function Breathe() {
             setBreathe("Breathe in...")
             setRounds(1)
             setKey((prevKey) => prevKey + 1);
-            currBgSound.current.pause()
-            currBgSound.current = new Audio(bgSound)
+            if (currBgSound.current) {
+                currBgSound.current.pause()
+                currBgSound.current = new Audio(bgSound)
+            }
+
         };
 
         const handleComplete = () => {
@@ -151,8 +153,11 @@ export function Breathe() {
                 setCounter(startNum)
                 setRounds(1)
                 setBreathe("Breathe in...")
-                currBgSound.current.pause()
-                currBgSound.current = new Audio(bgSound)
+                if (currBgSound.current) {
+                    currBgSound.current.pause()
+                    currBgSound.current = new Audio(bgSound)
+                }
+
 
                 setShowConfetti(true)
                 setTimeout(() => {
@@ -201,7 +206,7 @@ export function Breathe() {
                     }
 
                     {isActive &&
-                        <p>Rounds: {rounds}</p>
+                        <p>Round: {rounds}</p>
 
                     }
                 </div>

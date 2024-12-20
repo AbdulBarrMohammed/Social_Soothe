@@ -4,7 +4,7 @@ export const sounds = [
     {
         wavSound: "../../src/assets/sounds/calm-mountain-creek-ambience-228231.wav",
         title: "Calm mountain creek",
-        price: 150
+        price: 15
     },
     {
         wavSound: "../../src/assets/sounds/calming-rain-1.wav",
@@ -142,7 +142,7 @@ dark String
         medium: '#BE8868',
         light: '#D7AF99',
         lightest: '#EEDBCC',
-        price: 300
+        price: 3
     },
     {
         name: 'Pink',
@@ -160,7 +160,7 @@ dark String
         medium: '#BE6868',
         light: '#D79999',
         lightest: '#EED3CC',
-        price: 400
+        price: 4
     },
     {
         name: 'Green',
@@ -169,7 +169,7 @@ dark String
         medium: '#68986C',
         light: '#99BF99',
         lightest: '#CCEED4',
-        price: 500
+        price: 2
     },
     {
         name: 'Grey',

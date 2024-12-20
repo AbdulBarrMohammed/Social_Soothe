@@ -60,31 +60,40 @@ export function Color({color}) {
                 //Subract price from current leafs
                 const coins = Number(currLeafs) - Number(itemPrice)
 
-                //Add new leaf price to database
-                try {
-                    const response = await fetch(`http://localhost:8000/user/update`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({coins, email})
-                    })
+                //First checks if user wants to buy item
+                if (confirm("Are you sure you want to purchase this?"))  {
 
-                    // Add purchased color information to backend database
-                    const name = color.name
-                    const dark = color.dark
-                    const semiDark = color.semiDark
-                    const medium = color.medium
-                    const light = color.light
-                    const lightest = color.lightest
+                    //Add new leaf price to database
+                    try {
+                        const response = await fetch(`http://localhost:8000/user/update`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({coins, email})
+                        })
 
-                    const responseColor = await fetch(`http://localhost:8000/colors/create`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({email, name, dark, semiDark, medium, light, lightest})
-                    })
+                        // Add purchased color information to backend database
+                        const name = color.name
+                        const dark = color.dark
+                        const semiDark = color.semiDark
+                        const medium = color.medium
+                        const light = color.light
+                        const lightest = color.lightest
 
-                } catch(err) {
-                    console.log(err)
+                        const responseColor = await fetch(`http://localhost:8000/colors/create`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({email, name, dark, semiDark, medium, light, lightest})
+                        })
+
+                        window.location.reload()
+
+                    } catch(err) {
+                        console.log(err)
+                    }
+
                 }
+
+
             }
 
         }

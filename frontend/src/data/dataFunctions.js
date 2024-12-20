@@ -60,27 +60,36 @@ export async function getCurrentSound(email, setSounds, setDefaultBgSound, setBg
     try {
         const res = await fetch(`http://localhost:8000/user/${email}`)
         const data = await res.json();
-        //setBgSound(data.currSound)
 
         const resSounds = await fetch(`http://localhost:8000/sounds/${email}`)
         const dataSounds = await resSounds.json();
+        let foundSound = false
 
         setSounds(dataSounds)
 
         //Check if the user just wants to play the defualt breathing bg sounds
-        if (data.currSound == 'Default breathing'){
+        if (data.currSound == 'Default breathing' || !data.currSound){
             setDefaultBgSound(true)
         }
 
         //Loop through users purchased sounds to find the sound that the user wants to be their background
+
         else {
+
             dataSounds.map((s) => {
                 if (s.name == data.currSound) {
                     setBgSound(s.src)
+                    foundSound = true
 
                 }
             })
         }
+
+        if (!foundSound) {
+            setDefaultBgSound(true)
+        }
+
+
 
     } catch(err) {
         console.log(err)
