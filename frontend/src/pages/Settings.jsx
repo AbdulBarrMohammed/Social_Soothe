@@ -131,6 +131,21 @@ export function Settings() {
         getUserCurrentColor(email, setLightestBg, setButtonColor)
     },[])
 
+    async function deleteAccount() {
+        const resUser = await fetch(`http://localhost:8000/user/${email}`)
+        const dataUser = await resUser.json();
+
+        const id = dataUser.id
+        const resDelete = await fetch(`http://localhost:8000/user/delete/${id}`)
+        const dataDelete = await resDelete.json();
+        if (dataDelete) {
+            removeCookie("Email");
+            removeCookie("AuthToken")
+        }
+
+
+    }
+
     return (
         <>
         {!authToken &&  <LogIn/>}
@@ -180,7 +195,7 @@ export function Settings() {
                 <h1 className="text-2xl font-bold">Delete account</h1>
                 <hr className="border-[#44423F] border mb-5" />
                 <p>Press button below to delete account</p>
-                <button className="rounded-xl text-white px-10 py-3 " style={{ backgroundColor: buttonsColor }}>delete account</button>
+                <button className="rounded-xl text-white px-10 py-3 " onClick={deleteAccount}style={{ backgroundColor: buttonsColor }}>delete account</button>
 
             </div>
 

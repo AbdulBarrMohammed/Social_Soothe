@@ -142,7 +142,7 @@ export function CreateJournal() {
             <div className="flex flex-col p-10">
                 <div className="py-5 flex flex-col">
                     <form onSubmit={handleJournalSubmit} className="flex flex-col gap-5">
-                        <input className="font-bold text-2xl" onChange={(e) => setTitle(e.target.value)} maxLength={15} required placeholder="Title"/>
+                        <input className="font-bold text-2xl" onChange={(e) => setTitle(e.target.value)} maxLength={20} required placeholder="Title"/>
                         <textarea className="text-xl h-96 border rounded-lg p-2" onChange={(e) => setContent(e.target.value)} maxLength={1000} required placeholder={`Why are you feeling ${mood}...`}/>
                         <div>
                             <button type="submit" className="text-white  p-5 rounded-full text-sm font-bold shadow-md" style={{ backgroundColor: buttonsColor }}>Add entry</button>

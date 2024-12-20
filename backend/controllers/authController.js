@@ -146,13 +146,25 @@ async function updateColor(req, res) {
 
 }
 
+async function deleteUser(req, res) {
+  try {
+      const id  = req.params.id
+      await db.deleteUserAccount(id);
+      res.json("Succesfully deleted user")
+  } catch (err) {
+      console.log("error....", err)
+      res.status(500).json({ message: 'Error deleting user' });
+  }
+}
+
 module.exports = {
   signUpPost,
   logInPost,
   getUserInfo,
   updateCoin,
   updateSound,
-  updateColor
+  updateColor,
+  deleteUser
 
 
 }

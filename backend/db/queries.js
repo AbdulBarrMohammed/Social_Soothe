@@ -295,6 +295,7 @@ async function getSearchQuery(email, query) {
 
 }
 
+//User
 async function getUser(email) {
   const user = await prisma.user.findUnique({
     where: { email: email }
@@ -302,6 +303,18 @@ async function getUser(email) {
   return user;
 
 }
+
+async function deleteUserAccount(id) {
+  const deleteUser = await prisma.user.delete({
+    where: {
+      id: id
+    },
+  })
+
+  return deleteUser;
+}
+
+
 
 async function updateCoin(coins, email) {
   const user = await prisma.user.update({
@@ -458,6 +471,7 @@ module.exports = {
     updateFlowerColor,
     getSearchQuery,
     getUser,
+    deleteUserAccount,
     updateCoin,
     updateFlowerChecked,
     updateFlowerQuestionSeven,

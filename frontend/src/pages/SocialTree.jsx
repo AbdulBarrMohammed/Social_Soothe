@@ -154,13 +154,7 @@ export function SocialTree() {
                     setShowConfetti(false);
                   }, 10000);
             }
-            else {
-                setShowConfetti(false)
-            }
-        }
 
-        else {
-            alert("You have already checked this")
         }
 
     }

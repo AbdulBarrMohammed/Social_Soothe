@@ -10,6 +10,7 @@ export function LogIn() {
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [loginError, setLoginError] = useState(false);
 
     //navigation
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ export function LogIn() {
     const data = await response.json()
 
     if (data.detail == "User does not exist") {
+      setLoginError(true);
       navigate("/login");
     }
     else {
@@ -36,17 +38,6 @@ export function LogIn() {
       setCookie('AuthToken', data.token)
     }
 
-
-
-
-    //setCookie('Email', data.email)
-    //setCookie('AuthToken', data.token)
-
-    //if (!data.detail) {
-
-    //    navigate("/journals")
-        window.location.reload()
-   // }
   }
 
 
@@ -73,7 +64,8 @@ export function LogIn() {
                 </div>
 
                 <div className='text-center'>
-                    <p>Dont have an account? <a className='font-bold cursor-pointer' onClick={() => navigate("/signUp")}>Log in</a></p>
+                  {loginError && <p className="text-red-500">Email or password is wrong</p>}
+                    <p>Dont have an account? <a className='font-bold cursor-pointer' onClick={() => navigate("/signUp")}>Sign up</a></p>
                 </div>
 
 

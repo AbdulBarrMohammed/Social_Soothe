@@ -10,6 +10,20 @@ export const data = [
     "You could be the sweetest peach on the tree, but not everyone likes peaches",
     "You deserve to be heard, and your voice matters.",
     "Care about what other people think and you will always be their prisoner",
-    "Unless someone shows you they don't, assume everyone wants to be your friend because 9 times out of 10 they do wanna be your friend"
+    "Unless someone shows you they don't, assume everyone wants to be your friend because 9 times out of 10 they do wanna be your friend",
+    "Whats the worst that could happen?",
+    "Do it scared",
+    "There is no bear",
+    "You'll feel less anxious by living your life",
+    "Your need for acceptance can make you invisible in this world",
+    "The world is full of lonely people afraid to make the first move",
+    "You are not responsible for the version of you that people created inside their head",
+    "Solitude is dangerous, it's very addictive, it becomes a habit after you realize how calm and peaceful it is",
+    "Your so concerned about how the other people are experiencing it that you are not actually experiencing it yourself",
+    "Your anxiety does not empty tomorrow of its sorrows but only empties today of its strength",
+    "Where your fear is, there your task is",
+    "Do not be too timid and squeamish about your actions. All life is, is an experiment. The more experiments you make, the better",
+    "If you run from what you are afraid of, you are running from what you need to find the most",
+    "This moment shall pass"
 
 ]

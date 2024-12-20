@@ -23,10 +23,8 @@ model User {
   Journals Journal[]
   tree Flower[]
   coins Int
-  fonts Fonts[]
   sounds Sounds[]
   currColor String
-  backgroundImg BackgroundImgs[]
   colorScheme ColorSchemes[]
   currBackgroundImg String
   currSound String
@@ -35,7 +33,6 @@ model User {
 
 }
 
-
 model Journal {
   id String @id @default(uuid())
   title String
@@ -43,7 +40,7 @@ model Journal {
   updatedAt DateTime @default(now())
   mood String
   content String
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
 
 
@@ -51,7 +48,7 @@ model Journal {
 
 model Flower {
   id String @id @default(uuid())
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
   dateCreated DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -75,26 +72,11 @@ model Sounds {
   id String @id @default(uuid())
   name String
   src String
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
 }
 
-model Fonts {
-  id String @id @default(uuid())
-  name String
-  author User @relation(fields: [authorId], references: [id])
-  authorId String
 
-}
-
-model BackgroundImgs {
-  id String @id @default(uuid())
-  name String
-  src String
-  author User @relation(fields: [authorId], references: [id])
-  authorId String
-
-}
 
 model ColorSchemes {
   id String @id @default(uuid())
@@ -104,7 +86,7 @@ model ColorSchemes {
   medium String
   light String
   lightest String
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
 
 }
