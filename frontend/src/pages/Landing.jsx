@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {motion} from 'framer-motion';
 import { fadeIn } from '../variants';
 import Questions from './Questions';
-import  { ArticleCard } from '../components/ArticleCard'
+
 
 //Hard parts
 // * Authenticating different users with passport and crypting their password with brycpt and using jwt tokens
@@ -27,7 +27,7 @@ export function Landing() {
                     when no one else will.
                 </p>
 
-                <Link to={`/journals`}>
+                <Link to={`/login`}>
                     <button className='bg-[#4470AD] text-white  p-5 rounded-full text-[18px] font-bold shadow-md hover:bg-[#5F8CC6] transition-all duration-300 ease-in-out' >Try it now</button>
                 </Link>
 
@@ -114,13 +114,10 @@ export function Landing() {
         </div>
 
 
-        {/* Social Soothe article section*/}
-        <ArticleCard />
-
         <footer className='bg-[#99AFD7] flex flex-col justify-center items-center px-10 py-20 gap-10 w-full'>
           <div className='flex justify-around'>
             <div className='flex flex-col gap-2 w-1/2'>
-              <p className='font-bold text-xl'>Your Mental Health matters</p>
+              <p className='font-bold text-2xl'>Your Mental Health matters</p>
               <p className='text-[#44423F]'>If you are in a crisis or any other person life maybe in danger please don't use this site. Their are available resources that can give
                 you immediate help.
               </p>
@@ -132,13 +129,16 @@ export function Landing() {
           </div>
 
         </footer>
+
+
+
         {/* Footer  bottom links and copyright*/}
         <footer className='bg-[#44423F] flex justify-between items-center text-white w-full px-10 py-10'>
 
           <div className='flex items-center gap-7'>
             <p>&#169; Social Soothe</p>
-            <p>About</p>
-            <p>Privacy policy</p>
+            <Link to={`/about`}><p>About</p></Link>
+            <Link to={'privacyPolicy'}><p>Privacy policy</p></Link>
             <p>Terms & conditions</p>
 
           </div>

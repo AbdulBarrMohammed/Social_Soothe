@@ -26,6 +26,7 @@ import { Resources } from './pages/Resources';
 import { AnimatePresence } from 'framer-motion';
 import { About } from './pages/About';
 import { Dashboard } from './pages/Dashboard';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="/articles" element={<PageWrapper><Articles/></PageWrapper>}/>
             <Route path="/resources" element={<PageWrapper><Resources/></PageWrapper>}/>
             <Route path="/about" element={<PageWrapper><About/></PageWrapper>}/>
+            <Route path="/privacyPolicy" element={<PageWrapper><PrivacyPolicy/></PageWrapper>}/>
             <Route element={<LayoutLoggedIn/>}>
               <Route path="/journals" element={<PageWrapper><Journals/></PageWrapper>}/>
               <Route path="/createJournal" element={<PageWrapper><CreateJournal/></PageWrapper>}/>

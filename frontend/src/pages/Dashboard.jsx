@@ -181,7 +181,7 @@ export function Dashboard() {
                     <p className="text-3xl p-3">{timeText}</p>
                     </div>
                     <div className="grid gap-4 grid-cols-2 grid-rows-2">
-                        <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor }}>
+                        <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor}}>
                             <img className="h-14"src="../src/assets/leaf-2.png"/>
                             <p className="text-2xl"> {leafCount} <span>Leafs Earned</span></p>
 
