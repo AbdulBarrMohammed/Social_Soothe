@@ -1,5 +1,7 @@
 
 
+
+
 export function About() {
     return (
         <div className="bg-[#CCDBEE] flex flex-col text-[rgb(68,66,63)] h-screen pt-28">

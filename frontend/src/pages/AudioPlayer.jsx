@@ -176,9 +176,6 @@ export function AudioPlayer({audioSrc, index, currAudioIndex, setCurrAudioIndex 
 
         }
 
-
-
-
     }
 
     return (

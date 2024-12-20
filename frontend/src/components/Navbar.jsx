@@ -12,7 +12,6 @@ export function Navbar() {
     const [cookies, setCookie, removeCookie] = useCookies(null)
     const authToken = cookies.AuthToken
     const userEmail = cookies.Email
-    const [userInfo, setUserInfo] = useState([]);
     const [coins, setCoins] = useState(0);
 
     //const [bgColor, setBgColor] = useState("");
@@ -28,7 +27,13 @@ export function Navbar() {
             const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
             const dataColors = await resColors.json();
 
-            if (dataColor.currColor.toLowerCase() == 'blue') {
+            if (window.location == 'http://localhost:5173/?#/' || window.location == 'http://localhost:5173/?#/resources' || window.location == 'http://localhost:5173/?#/about') {
+                console.log('we are home')
+                setDarkBg("#233C67")
+                console.log(darkBg)
+            }
+
+            else if (dataColor.currColor.toLowerCase() == 'blue') {
                 setDarkBg("#233C67")
             }
 
@@ -43,6 +48,8 @@ export function Navbar() {
                     })
 
             }
+
+
         } catch(err) {
             console.log(err)
         }
@@ -50,6 +57,7 @@ export function Navbar() {
 
     useEffect(() => {
         getData()
+
     },[])
 
 
