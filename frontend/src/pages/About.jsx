@@ -1,8 +1,17 @@
-
+import { useNavigate } from "react-router-dom"
 
 
 
 export function About() {
+
+    const navigate = useNavigate()
+
+    function handleClick() {
+        navigate('/signUp')
+
+    }
+
+
     return (
         <div className="bg-[#CCDBEE] flex flex-col text-[rgb(68,66,63)] h-screen pt-28">
             <div className="flex flex-wrap gap-20 items-center justify-center pb-60 px-20">
@@ -14,7 +23,7 @@ export function About() {
                         that specifically cater to those with social anxiety and that is fully free, but social soothe is hear to change that.
                     </p>
                     <div>
-                        <button className="bg-[#4470AD] rounded-full font-bold text-[18px] text-white shadow-md p-5">Sign up For free</button>
+                        <button onClick={handleClick} className="bg-[#4470AD] rounded-full font-bold text-[18px] text-white shadow-md p-5">Sign up For free</button>
                     </div>
                 </div>
                 <div>

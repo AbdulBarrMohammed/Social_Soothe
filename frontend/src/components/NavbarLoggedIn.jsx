@@ -12,12 +12,9 @@ export function NavbarLoggedIn() {
     const authToken = cookies.AuthToken
     const userEmail = cookies.Email
 
-
-    //const [bgColor, setBgColor] = useState("");
     const [colors, setColors] = useState([]);
     const [semiBg, setSemiBg] = useState("");
     const [lightestBg, setLightestBg] = useState("");
-    //let darkBg = ''
 
     const getData = async () => {
         try {
@@ -36,14 +33,11 @@ export function NavbarLoggedIn() {
                 setColors(dataColors)
 
                     dataColors.map((c) => {
-                        console.log("colors ->", c)
                         if (c.name === dataColor.currColor) {
-
                             setSemiBg(c.semiDark)
                         }
 
                     })
-
             }
 
 
@@ -65,7 +59,7 @@ export function NavbarLoggedIn() {
                         {pageDataLoggedIn.map((page) => {
                             return (
 
-                                    <Link to={page.path} className='text-lg flex items-center rounded-xl'>
+                                    <Link key={page.path} to={page.path} className='text-lg flex items-center rounded-xl'>
                                         <div className='flex gap-2 px-10 py-1 items-center'>
                                             <img src={page.img} className='h-7'/>
                                             <li className='hover:underline underline-offset-8 decoration-4 transition-all duration-300 ease-in-out'>

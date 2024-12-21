@@ -70,7 +70,7 @@ export function Journals() {
 
                                 {journals.map((journal) => {
                                         return (
-                                            <JournalCard journal={journal}/>
+                                            <JournalCard key={journal.id} journal={journal}/>
                                         )
                                     })
                                 }

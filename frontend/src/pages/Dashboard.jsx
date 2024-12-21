@@ -24,6 +24,8 @@ export function Dashboard() {
     const [timeBg, setBgTime] = useState("");
     const [timeText, setTimeText] = useState("");
 
+    const [fontColor, setFontColor] = useState("black");
+
     const [socialStanding, setSocialStanding] = useState({
         img: '../../src/assets/icons8-seed-64.png',
         text: 'Seed'
@@ -51,7 +53,7 @@ export function Dashboard() {
                 setSocialStanding(newData)
             }
             else {
-                const newData = {img : '../../src/assets/seed-bag.png', text: 'Social Seed'}
+                const newData = {img : '../../src/assets/seeds.png', text: 'Social Seed'}
                 setSocialStanding(newData)
             }
 
@@ -116,7 +118,6 @@ export function Dashboard() {
                 hour: "2-digit",
                 minute: "2-digit",
           });
-          console.log(time >= "");
 
         //Sunrise time
         if (time > "06:00" && time < "12:00" && time.includes("AM") ) {
@@ -145,6 +146,7 @@ export function Dashboard() {
         else {
             setBgTime("url(../src/assets/night.jpg)");
             setTimeText("Good night");
+            setFontColor("white")
           }
 
     }
@@ -178,7 +180,7 @@ export function Dashboard() {
                 <div className="grid gap-4 grid-cols-2 grid-rows-2 mb-10">
 
                     <div className="flex flex-col items-start justify-start p-5 rounded-3xl bg-no-repeat bg-cover bg-bottom" style={{ backgroundImage: timeBg}}>
-                    <p className="text-3xl p-3">{timeText}</p>
+                    <p className="text-3xl p-3" style={{ color: fontColor}}>{timeText}</p>
                     </div>
                     <div className="grid gap-4 grid-cols-2 grid-rows-2">
                         <div className="flex flex-col gap-2 items-start justify-center rounded-3xl pl-5 text-white" style={{ backgroundColor: buttonsColor}}>

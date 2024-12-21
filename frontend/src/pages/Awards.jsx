@@ -4,7 +4,6 @@ import { AudioPlayer } from "./AudioPlayer";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { Color } from "./Color";
-import { colors } from "../data/awardsData";
 import { sounds as soundsData } from "../data/awardsData";
 import { LogIn } from "../components/Login"
 import { getUserCurrentColor } from "../data/dataFunctions";
@@ -90,7 +89,6 @@ export function Awards() {
 
         //loop through sounds that can be brought
         soundsData.map((s) => {
-            console.log(s.wavSound)
             if (!currSounds.includes(s.wavSound)) {
                 availableSounds.push(s)
             }
@@ -143,7 +141,13 @@ export function Awards() {
     }, [type]);
 
     return (
-        <div className="flex-col pt-10 bg-[#ACC8EA] min-h-screen px-10 text-[#44423F]" style={{ backgroundColor: lightestBg }}>
+
+        <>
+
+        {!authToken && <LogIn/>}
+        {authToken &&
+
+            <div className="flex-col pt-10 bg-[#ACC8EA] min-h-screen px-10 text-[#44423F]" style={{ backgroundColor: lightestBg }}>
 
             {isSounds &&
                 <>
@@ -160,7 +164,6 @@ export function Awards() {
 
                     </div>
                 </>
-
             }
             {
                 isColors &&
@@ -178,7 +181,13 @@ export function Awards() {
                     </div>
                 </>
             }
-        </div>
+            </div>
+
+
+        }
+
+        </>
+
     )
 
 }

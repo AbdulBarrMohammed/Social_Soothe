@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AOS from "aos";
 import "aos/dist/aos.css"
 import { saFacts } from '../data/factsData';
+import { useNavigate } from 'react-router-dom';
 
 const Questions = () => {
   // Used to state to open social anxiety question drop down button
@@ -11,11 +12,18 @@ const Questions = () => {
   const [isDropdownSix, setIsDropdownSix] = useState(false);
   const [isDropdownSeven, setIsDropdownSeven] = useState(false);
 
+  const navigate = useNavigate()
+
   //scroll animations
   useEffect(() => {
     AOS.init({duration:1200})
   })
 
+
+  function handleClick() {
+    navigate('/login')
+
+  }
 
 
     return (
@@ -167,7 +175,7 @@ const Questions = () => {
               )}
           </div>
 
-          <button className='mt-16 bg-[#4470AD] text-white p-5 rounded-full text-[18px] font-bold shadow-md hover:bg-[#5F8CC6] transition-all duration-300 ease-in-out'>Get started</button>
+          <button onClick={handleClick}className='mt-16 bg-[#4470AD] text-white p-5 rounded-full text-[18px] font-bold shadow-md hover:bg-[#5F8CC6] transition-all duration-300 ease-in-out'>Get started</button>
 
 
         </div>

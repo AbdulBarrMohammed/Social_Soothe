@@ -76,18 +76,24 @@ export function SocialTree() {
          * @return none
          */
     async function loadFlower() {
-        try {
-            const res = await fetch(`http://localhost:8000/flowers/flower/${currId}`)
-            const data = await res.json();
-            setDone(data.done)
-            setFlower(data)
-            setQuestionSeven(data.questionSeven)
-            setShowConfetti(false)
-            setIsChecked(data.isChecked)
 
-        } catch(err) {
-            console.log(err)
+        if (currId) {
+
+            try {
+                const res = await fetch(`http://localhost:8000/flowers/flower/${currId}`)
+                const data = await res.json();
+                setDone(data.done)
+                setFlower(data)
+                setQuestionSeven(data.questionSeven)
+                setShowConfetti(false)
+                setIsChecked(data.isChecked)
+
+            } catch(err) {
+                console.log(err)
+            }
+
         }
+
     }
 
 
@@ -303,7 +309,7 @@ export function SocialTree() {
                             <div className=" h-96 w-4/5 relative">
                                 {flowers.map((flower) => {
                                             return (
-                                            <div onClick={() => handleFlowerClick(flower.id)} className={`flex items-center justify-center absolute rounded-full h-7 w-7 shadow-md`}
+                                            <div key={flower.id} onClick={() => handleFlowerClick(flower.id)} className={`flex items-center justify-center absolute rounded-full h-7 w-7 shadow-md`}
                                                 style={{
                                                     backgroundColor: flower.color,
                                                     left: `${flower.x}px`,

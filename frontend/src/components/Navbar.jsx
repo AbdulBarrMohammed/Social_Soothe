@@ -17,42 +17,50 @@ export function Navbar() {
     //const [bgColor, setBgColor] = useState("");
     const [colors, setColors] = useState([]);
     const [darkBg, setDarkBg] = useState("#233C67");
-    //let darkBg = ''
+
+
+
+
 
     const getData = async () => {
-        try {
-            const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
-            const dataColor = await resColor.json();
+        if (userEmail) {
 
-            const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
-            const dataColors = await resColors.json();
+            try {
+                const resColor = await fetch(`http://localhost:8000/user/${userEmail}`)
+                const dataColor = await resColor.json();
 
-            if (window.location == 'http://localhost:5173/?#/' || window.location == 'http://localhost:5173/?#/resources' || window.location == 'http://localhost:5173/?#/about') {
-                console.log('we are home')
-                setDarkBg("#233C67")
-                console.log(darkBg)
+                const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
+                const dataColors = await resColors.json();
+
+                if (window.location == 'http://localhost:5173/?#/' || window.location == 'http://localhost:5173/?#/resources' || window.location == 'http://localhost:5173/?#/about' || window.location == 'http://localhost:5173/?#/privacyPolicy' ||
+                window.location == 'http://localhost:5173/?#/logIn' || window.location == 'http://localhost:5173/?#/signUp') {
+                    setDarkBg("#233C67")
+
+                }
+
+                else if (dataColor.currColor.toLowerCase() == 'blue') {
+                    setDarkBg("#233C67")
+                }
+
+                else {
+                    setColors(dataColors)
+
+                        dataColors.map((c) => {
+                            if (c.name === dataColor.currColor) {
+                                setDarkBg(c.dark)
+                            }
+
+                        })
+
+                }
+
+
+            } catch(err) {
+                console.log(err)
             }
 
-            else if (dataColor.currColor.toLowerCase() == 'blue') {
-                setDarkBg("#233C67")
-            }
-
-            else {
-                setColors(dataColors)
-
-                    dataColors.map((c) => {
-                        if (c.name === dataColor.currColor) {
-                            setDarkBg(c.dark)
-                        }
-
-                    })
-
-            }
-
-
-        } catch(err) {
-            console.log(err)
         }
+
     }
 
     useEffect(() => {
@@ -62,24 +70,30 @@ export function Navbar() {
 
 
     const getCoins = async () => {
-        try {
-            const res = await fetch(`http://localhost:8000/user/${userEmail}`)
-            const data = await res.json();
-            setCoins(data.coins)
-        } catch(err) {
-            console.log(err)
+        if (userEmail) {
+            try {
+                const res = await fetch(`http://localhost:8000/user/${userEmail}`)
+                const data = await res.json();
+                setCoins(data.coins)
+            } catch(err) {
+                console.log(err)
+            }
         }
+
     }
 
     useEffect(() => {
         getCoins()
     },[])
 
+    const navigate = useNavigate()
     function handleLogout() {
+
+        navigate("/login")
         removeCookie("Email");
         removeCookie("AuthToken")
         window.location.reload(false);
-        naviagte("/login")
+
     }
 
     //text-[#44423F]
