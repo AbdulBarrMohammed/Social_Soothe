@@ -142,7 +142,7 @@ dark String
         medium: '#BE8868',
         light: '#D7AF99',
         lightest: '#EEDBCC',
-        price: 3
+        price: 300
     },
     {
         name: 'Pink',
@@ -160,7 +160,7 @@ dark String
         medium: '#BE6868',
         light: '#D79999',
         lightest: '#EED3CC',
-        price: 4
+        price: 450
     },
     {
         name: 'Green',
@@ -169,7 +169,7 @@ dark String
         medium: '#68986C',
         light: '#99BF99',
         lightest: '#CCEED4',
-        price: 2
+        price: 500
     },
     {
         name: 'Grey',
