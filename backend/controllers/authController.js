@@ -25,12 +25,10 @@ async function signUpPost(req, res, next) {
               //Sets new user with original data first
               const coins = 0;
               const currColor = 'blue'
-              const currFont = 'Roboto'
-              const currSound = 'none' //IN THE FUTURE GIVE THEM A SOUND ROUTE FIRST
-              const currBackgroundImg = 'none' //REMOVE THIS IN THE FUTURE
+              const currSound = 'Default breathing'
 
               //Inserts new user information in the database
-              const signUp = await db.insertNewUser(email, hashedPassword, gender, coins, currColor, currFont, currSound, currBackgroundImg);
+              const signUp = await db.insertNewUser(email, hashedPassword, gender, coins, currColor, currSound);
 
               //Setting user token
               const token = jwt.sign({ email }, 'secret', {expiresIn: '1hr' })

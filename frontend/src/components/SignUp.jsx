@@ -9,10 +9,7 @@ export function SignUp() {
   const [password, setPassword] = useState("")
   const [gender, setGender] = useState("")
 
-  console.log(cookies)
-
-
-    //navigation
+  //navigation
   const navigate = useNavigate()
 
   async function handleSubmit(e) {
@@ -33,14 +30,7 @@ export function SignUp() {
 
     navigate("/journals")
 
-
-
-
   }
-
-
-
-  //handle submit of sign up form
 
   return (
    <div className= "flex items-center justify-center h-screen bg-[#ACC8EA]">
@@ -58,7 +48,7 @@ export function SignUp() {
              name="password"
              type="password"
              placeholder="Password"
-             onChange={(e) => setPassword(e.target.value)} required maxLength={20}/>
+             onChange={(e) => setPassword(e.target.value)} required maxLength={20} minLength={10}/>
 
             <select className="p-2 rounded-sm" onChange={(e) => setGender(e.target.value)} name="gender" required>
                 <option value="">Select Gender</option>

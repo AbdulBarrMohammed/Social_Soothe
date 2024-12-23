@@ -20,7 +20,7 @@ async function getAllJournals(email) {
 
 
 // USERS
-async function insertNewUser(email, hashedPassword, gender, coins, currColor, currFont, currSound, currBackgroundImg) {
+async function insertNewUser(email, hashedPassword, gender, coins, currColor, currSound) {
     return prisma.user.create({
       data: {
         email,
@@ -28,9 +28,7 @@ async function insertNewUser(email, hashedPassword, gender, coins, currColor, cu
         gender,
         coins,
         currColor,
-        currFont,
         currSound,
-        currBackgroundImg
       },
   });
 

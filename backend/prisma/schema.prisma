@@ -26,9 +26,7 @@ model User {
   sounds Sounds[]
   currColor String
   colorScheme ColorSchemes[]
-  currBackgroundImg String
   currSound String
-  currFont String
 
 
 }
