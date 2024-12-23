@@ -263,16 +263,6 @@ async function updateFlowerQuestionSeven(id, questionSeven) {
 }
 
 
-async function getAllPositions(req, res) {
-  const pos = await prisma.flower.findMany({
-    select: {
-      x: true,
-      y: true
-    }
-  });
-  return pos;
-}
-
 async function getSearchQuery(email, query) {
   const user = await prisma.user.findUnique({
     where: {
@@ -425,17 +415,6 @@ async function insertNewColor(email, name, dark, semiDark, medium, light, lighte
 
 
 
-async function deleteColor( id ) {
-  const deleteColor = await prisma.colorSchemes.delete({
-  where: {
-    id: id
-  },
-})
-
-return deleteColor;
-}
-
-
 async function updateColor(color, email) {
   const user = await prisma.user.update({
     where: { email: email
@@ -465,7 +444,6 @@ module.exports = {
     deleteFlower,
     updateFlower,
     getAllFlowers,
-    getAllPositions,
     updateFlowerColor,
     getSearchQuery,
     getUser,
@@ -481,9 +459,6 @@ module.exports = {
 
     getAllColors,
     insertNewColor,
-    deleteColor,
     updateColor
 
-
-    // other database functions
   };

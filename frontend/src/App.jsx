@@ -21,7 +21,6 @@ import { Affirmations } from './pages/Affirmations';
 import { Awards } from './pages/Awards';
 import { LayoutAwards } from './components/LayoutAwards';
 import { Settings } from './pages/Settings';
-import { Articles } from './pages/Articles';
 import { Resources } from './pages/Resources';
 import { AnimatePresence } from 'framer-motion';
 import { About } from './pages/About';
@@ -40,7 +39,6 @@ function App() {
             <Route path="/" element={<PageWrapper><Landing/></PageWrapper>}/>
             <Route path="/signUp" element={<PageWrapper><SignUp/></PageWrapper>}/>
             <Route path="/login" element={<PageWrapper><LogIn/></PageWrapper>}/>
-            <Route path="/articles" element={<PageWrapper><Articles/></PageWrapper>}/>
             <Route path="/resources" element={<PageWrapper><Resources/></PageWrapper>}/>
             <Route path="/about" element={<PageWrapper><About/></PageWrapper>}/>
             <Route path="/privacyPolicy" element={<PageWrapper><PrivacyPolicy/></PageWrapper>}/>

@@ -36,30 +36,10 @@ async function createColorPost(req, res) {
     }
 }
 
-/**
-     * Deletes color from color database
-     * @param request, response
-     * @return none
-     */
-async function deleteColor(req, res) {
-    try {
-        const id  = req.params.id
-        await db.deleteColor(id);
-        res.json("Succesfully deleted sound")
-    } catch (err) {
-        console.log("error....", err)
-        res.status(500).json({ message: 'Error deleting journal' });
-    }
-
-}
-
-
-
 
 module.exports = {
     displayColors,
     createColorPost,
-    deleteColor
 
 
 }

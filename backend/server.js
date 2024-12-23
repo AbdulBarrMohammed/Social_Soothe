@@ -10,6 +10,7 @@ const colorRouter = require("./routes/colorRouter")
 
 app.use(cors())
 app.use(express.json());
+
 // Middleware to parse URL-encoded bodies (for form submissions)
 app.use(express.urlencoded({ extended: true }));
 

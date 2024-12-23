@@ -30,12 +30,18 @@ export function Navbar() {
                 const dataColor = await resColor.json();
 
                 const resColors = await fetch(`http://localhost:8000/colors/${userEmail}`)
+
                 const dataColors = await resColors.json();
 
-                if (window.location == 'http://localhost:5173/?#/' || window.location == 'http://localhost:5173/?#/resources' || window.location == 'http://localhost:5173/?#/about' || window.location == 'http://localhost:5173/?#/privacyPolicy' ||
-                window.location == 'http://localhost:5173/?#/logIn' || window.location == 'http://localhost:5173/?#/signUp') {
-                    setDarkBg("#233C67")
+                const text = window.location.toString()
+                const pathArray = text.split("/");
 
+                //Get last path of current page
+                const path = pathArray[pathArray.length -1]
+
+                //If user is in any of the below paths then change the navbar background to original blue color
+                if (path == '' || path == 'resources' || path == 'about' || path == 'privacyPolicy' || path == 'logIn' || path == 'signUp')  {
+                    setDarkBg("#233C67")
                 }
 
                 else if (dataColor.currColor.toLowerCase() == 'blue') {
@@ -96,7 +102,6 @@ export function Navbar() {
 
     }
 
-    //text-[#44423F]
 
     return (
 

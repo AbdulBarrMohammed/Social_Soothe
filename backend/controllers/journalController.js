@@ -81,7 +81,7 @@ async function editJournalPost(req, res) {
     try {
         const {id, title, content} = req.body
         await db.updateJournal(id, title, content);
-        res.json("successfully updated journal")
+        res.json("Successfully updated journal")
 
     } catch (err) {
         res.status(500).json({ message: 'Error updating journal' });
